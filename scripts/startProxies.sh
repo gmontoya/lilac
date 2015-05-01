@@ -6,7 +6,7 @@ firstProxyPort=$3
 pePort=$4
 peProxyPort=$5
 proxyFolder=$6
-address=$7
+addressA=$7
 peGraph="${8}"
 graphPrefix="${9}"
 graphIndex="${10}"
@@ -28,7 +28,7 @@ for i in `seq 0 $last`; do
     else 
         graph=""
     fi
-    java -cp .:$httpcomponentsClientPath/lib/* SingleEndpointProxy2 ${address} ${localPort} ${localProxyPort} $graph > ${tmpFile}_$i &
+    java -cp .:/home/montoya/proxy/httpcomponents-client-4.3.5/lib/* SingleEndpointProxy2 ${addressA} ${localPort} ${localProxyPort} $graph > ${tmpFile}_$i &
     pidProxy=$!
     echo "$pidProxy"
 done
@@ -39,7 +39,7 @@ else
     graph=""
 fi
 
-java -cp .:$httpcomponentsClientPath/lib/* SingleEndpointProxy2 ${address} ${pePort} ${peProxyPort} $graph > ${tmpFile}_pe &
+java -cp .:/home/montoya/proxy/httpcomponents-client-4.3.5/lib/* SingleEndpointProxy2 ${addressA} ${pePort} ${peProxyPort} $graph > ${tmpFile}_pe &
 pidProxy=$!
 echo "$pidProxy"
 

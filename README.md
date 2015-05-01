@@ -14,8 +14,10 @@ Requirements:
 * Java HDT library, available at http://www.rdfhdt.org/manual-of-the-java-hdt-library/#download
 * HDT Fuseki, available at https://github.com/rdfhdt/hdt-java/tree/master/hdt-fuseki
 * Apache HttpComponents Client library, used version 4.3.5, available at https://hc.apache.org/
+* RDFLib python Library, available at https://github.com/RDFLib/rdflib
+* sparqlwrapper, available at https://github.com/rdflib/sparqlwrapper
 
-Complete the file scripts/setVariables.sh with the path to each of the requirements, and variables fedrahome and host with the values of fedra folder absolute path and the address of the machine to host the endpoints (including 'http://')
+Complete the file scripts/setVariables.sh with the path to each of the requirements, and variables fedrahome and host with the values of fedra folder absolute path and the address of the machine to host the endpoints (including 'http://').
 
 * Use the HDT library to uncompress the hdt files endpointX.nt in each federation folder at $fedrahome/data/
 
