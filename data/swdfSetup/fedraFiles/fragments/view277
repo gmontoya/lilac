@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x3 <http://swrc.ontoware.org/ontology#isbn> ?x4 .}
+WHERE
+  { ?x3 <http://swrc.ontoware.org/ontology#isbn> ?x4 }

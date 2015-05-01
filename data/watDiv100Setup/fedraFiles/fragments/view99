@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://db.uwaterloo.ca/~galuc/wsdbm/Product24374> <http://schema.org/publisher> ?v1 .}
+WHERE
+  { <http://db.uwaterloo.ca/~galuc/wsdbm/Product24374> <http://schema.org/publisher> ?v1 }

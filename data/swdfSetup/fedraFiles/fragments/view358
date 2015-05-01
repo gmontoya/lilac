@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/conference/iswc/2011/paper/doctoral-consortium/30> <http://purl.org/dc/terms/title> ?x2 .}
+WHERE
+  { <http://data.semanticweb.org/conference/iswc/2011/paper/doctoral-consortium/30> <http://purl.org/dc/terms/title> ?x2 }

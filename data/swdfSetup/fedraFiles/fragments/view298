@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://swrc.ontoware.org/ontology#address> " Berlin, Heidelberg " .}
+WHERE
+  { ?x1 <http://swrc.ontoware.org/ontology#address> " Berlin, Heidelberg " }

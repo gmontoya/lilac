@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://swrc.ontoware.org/ontology#keywords> " ratings " .}
+WHERE
+  { ?x1 <http://swrc.ontoware.org/ontology#keywords> " ratings " }

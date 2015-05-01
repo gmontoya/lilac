@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/conference/lrec/2008/papers/419> <http://purl.org/dc/elements/1.1/subject> ?x2 .}
+WHERE
+  { <http://data.semanticweb.org/conference/lrec/2008/papers/419> <http://purl.org/dc/elements/1.1/subject> ?x2 }

@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://db.uwaterloo.ca/~galuc/wsdbm/Retailer153> <http://schema.org/employee> ?v0 .}
+WHERE
+  { <http://db.uwaterloo.ca/~galuc/wsdbm/Retailer153> <http://schema.org/employee> ?v0 }

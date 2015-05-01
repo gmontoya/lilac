@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x6 <http://www.w3.org/2002/12/cal/ical#date> ?x7 .}
+WHERE
+  { ?x6 <http://www.w3.org/2002/12/cal/ical#date> ?x7 }

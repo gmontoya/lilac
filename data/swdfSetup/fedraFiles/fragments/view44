@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://data.semanticweb.org/ns/swc/ontology#hasRole> <http://data.semanticweb.org/conference/fis/2010/chair/technical-program-committee-co-semantic-technologi> .}
+WHERE
+  { ?x1 <http://data.semanticweb.org/ns/swc/ontology#hasRole> <http://data.semanticweb.org/conference/fis/2010/chair/technical-program-committee-co-semantic-technologi> }

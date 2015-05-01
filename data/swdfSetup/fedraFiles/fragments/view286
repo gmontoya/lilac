@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#_6> <http://data.semanticweb.org/person/ulrich-buegel> .}
+WHERE
+  { ?x1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#_6> <http://data.semanticweb.org/person/ulrich-buegel> }

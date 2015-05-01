@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x4 <http://www.cs.vu.nl/~mcaklein/onto/swrc_ext/2005/05#editorList> <http://data.semanticweb.org/workshop/ores/2010/proceedings/editor_list> .}
+WHERE
+  { ?x4 <http://www.cs.vu.nl/~mcaklein/onto/swrc_ext/2005/05#editorList> <http://data.semanticweb.org/workshop/ores/2010/proceedings/editor_list> }

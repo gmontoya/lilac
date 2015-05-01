@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://data.semanticweb.org/ns/swc/ontology#isSubEventOf> <http://data.semanticweb.org/conference/iswc/2010/session-research-15> .}
+WHERE
+  { ?x1 <http://data.semanticweb.org/ns/swc/ontology#isSubEventOf> <http://data.semanticweb.org/conference/iswc/2010/session-research-15> }

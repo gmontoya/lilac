@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://purl.org/NET/c4dm/event.owl#agent> <http://data.semanticweb.org/person/yunjia-li> .}
+WHERE
+  { ?x1 <http://purl.org/NET/c4dm/event.owl#agent> <http://data.semanticweb.org/person/yunjia-li> }

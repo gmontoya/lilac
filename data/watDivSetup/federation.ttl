@@ -1,0 +1,34 @@
+@prefix fluid: <http://fluidops.org/config#>.
+
+<HOST:3100> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "HOST:3100/sparql".
+
+<HOST:3137/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "HOST:3137/ds/sparql".
+
+<HOST:3136/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "HOST:3136/ds/sparql".
+
+<HOST:3130/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "HOST:3130/ds/sparql".
+
+<HOST:3131/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "HOST:3131/ds/sparql".
+
+<HOST:3133/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "HOST:3133/ds/sparql".
+
+<HOST:3135/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "HOST:3135/ds/sparql".
+
+<HOST:3139/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "HOST:3139/ds/sparql".
+
+<HOST:3132/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "HOST:3132/ds/sparql".
+
+<HOST:3134/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "HOST:3134/ds/sparql".
+
+<HOST:3138/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "HOST:3138/ds/sparql".

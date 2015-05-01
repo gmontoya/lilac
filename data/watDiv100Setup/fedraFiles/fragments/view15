@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?v0 <http://ogp.me/ns#tag> ?v1 .}
+WHERE
+  { ?v0 <http://ogp.me/ns#tag> ?v1 }

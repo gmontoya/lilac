@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://db.uwaterloo.ca/~galuc/wsdbm/SubGenre138> <http://ogp.me/ns#tag> ?v1 .}
+WHERE
+  { <http://db.uwaterloo.ca/~galuc/wsdbm/SubGenre138> <http://ogp.me/ns#tag> ?v1 }

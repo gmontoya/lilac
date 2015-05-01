@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?v0 <http://schema.org/url> ?v1 .}
+WHERE
+  { ?v0 <http://schema.org/url> ?v1 }

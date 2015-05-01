@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://purl.org/NET/c4dm/event.owl#time> ?x2 .}
+WHERE
+  { ?x1 <http://purl.org/NET/c4dm/event.owl#time> ?x2 }

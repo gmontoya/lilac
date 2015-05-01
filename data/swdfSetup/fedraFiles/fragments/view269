@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x2 <http://www.w3.org/2002/12/cal/ical#dtstart> ?x3 .}
+WHERE
+  { ?x2 <http://www.w3.org/2002/12/cal/ical#dtstart> ?x3 }

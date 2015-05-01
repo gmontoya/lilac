@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://db.uwaterloo.ca/~galuc/wsdbm/Product48> <http://purl.org/ontology/mo/opus> ?v1 .}
+WHERE
+  { <http://db.uwaterloo.ca/~galuc/wsdbm/Product48> <http://purl.org/ontology/mo/opus> ?v1 }

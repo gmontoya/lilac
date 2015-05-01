@@ -1,0 +1,8 @@
+debugQueryPlan=true
+EndpointsFile=$fedrahome/data/linkedMDBSetup/fedraFiles/endpoints
+FragmentsSources=$fedrahome/data/linkedMDBSetup/fedraFiles/fragmentsSources
+FragmentsDefinitionFolder=$fedrahome/data/linkedMDBSetup/fedraFiles/fragments
+Random=false
+SourceSelectionStrategy=engine
+Threshold=0
+DawIndex=$fedrahome/data/linkedMDBSetup/dawIndex.ttl

@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://www.w3.org/2002/12/cal/icaltzid#dtend> " 2011-03-31T10:00:00+05:30 " .}
+WHERE
+  { ?x1 <http://www.w3.org/2002/12/cal/icaltzid#dtend> " 2011-03-31T10:00:00+05:30 " }

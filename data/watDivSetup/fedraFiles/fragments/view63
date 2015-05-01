@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?v0 <http://schema.org/nationality> ?v3 .}
+WHERE
+  { ?v0 <http://schema.org/nationality> ?v3 }

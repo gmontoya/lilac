@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?v0 <http://schema.org/eligibleQuantity> ?v10 .}
+WHERE
+  { ?v0 <http://schema.org/eligibleQuantity> ?v10 }

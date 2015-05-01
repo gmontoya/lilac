@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/person/michael-meier> <http://xmlns.com/foaf/0.1/givenName> ?x2 .}
+WHERE
+  { <http://data.semanticweb.org/person/michael-meier> <http://xmlns.com/foaf/0.1/givenName> ?x2 }

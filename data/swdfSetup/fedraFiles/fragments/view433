@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/conference/www/2011/event/ps-03> <http://www.w3.org/2002/12/cal/icaltzid#summary> ?x2 .}
+WHERE
+  { <http://data.semanticweb.org/conference/www/2011/event/ps-03> <http://www.w3.org/2002/12/cal/icaltzid#summary> ?x2 }

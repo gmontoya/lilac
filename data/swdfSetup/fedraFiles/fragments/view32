@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://swrc.ontoware.org/ontology#editor> ?x2 .}
+WHERE
+  { ?x1 <http://swrc.ontoware.org/ontology#editor> ?x2 }

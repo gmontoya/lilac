@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/workshop/lile/2012> <http://purl.org/dc/elements/1.1/subject> ?x5 .}
+WHERE
+  { <http://data.semanticweb.org/workshop/lile/2012> <http://purl.org/dc/elements/1.1/subject> ?x5 }

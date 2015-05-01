@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/conference/www/2011/paper/inverted-index-compression-via-online-document-rou> <http://swrc.ontoware.org/ontology#author> ?x3 .}
+WHERE
+  { <http://data.semanticweb.org/conference/www/2011/paper/inverted-index-compression-via-online-document-rou> <http://swrc.ontoware.org/ontology#author> ?x3 }

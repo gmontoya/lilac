@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/workshop/semwebdesign/2007/papers/536> <http://swrc.ontoware.org/ontology#title> ?x5 .}
+WHERE
+  { <http://data.semanticweb.org/workshop/semwebdesign/2007/papers/536> <http://swrc.ontoware.org/ontology#title> ?x5 }

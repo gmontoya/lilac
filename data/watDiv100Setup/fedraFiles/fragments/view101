@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?v2 <http://purl.org/ontology/mo/performer> ?v3 .}
+WHERE
+  { ?v2 <http://purl.org/ontology/mo/performer> ?v3 }

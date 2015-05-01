@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?v0 <http://schema.org/priceValidUntil> ?v14 .}
+WHERE
+  { ?v0 <http://schema.org/priceValidUntil> ?v14 }

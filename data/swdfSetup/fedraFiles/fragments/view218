@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://data.semanticweb.org/ns/swc/ontology#affiliation> <http://data.semanticweb.org/organization/lalic> .}
+WHERE
+  { ?x1 <http://data.semanticweb.org/ns/swc/ontology#affiliation> <http://data.semanticweb.org/organization/lalic> }

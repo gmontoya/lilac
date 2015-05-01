@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?v0 <http://schema.org/birthDate> ?v2 .}
+WHERE
+  { ?v0 <http://schema.org/birthDate> ?v2 }

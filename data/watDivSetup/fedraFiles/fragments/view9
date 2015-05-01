@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://db.uwaterloo.ca/~galuc/wsdbm/User366> <http://xmlns.com/foaf/givenName> ?v1 .}
+WHERE
+  { <http://db.uwaterloo.ca/~galuc/wsdbm/User366> <http://xmlns.com/foaf/givenName> ?v1 }

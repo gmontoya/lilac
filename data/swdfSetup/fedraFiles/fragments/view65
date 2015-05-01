@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x6 <http://xmlns.com/foaf/0.1/status> ?x7 .}
+WHERE
+  { ?x6 <http://xmlns.com/foaf/0.1/status> ?x7 }

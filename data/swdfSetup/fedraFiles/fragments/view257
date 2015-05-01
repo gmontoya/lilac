@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/conference/eswc/2006/paper/udrea-recupero> <http://xmlns.com/foaf/0.1/topic> ?x2 .}
+WHERE
+  { <http://data.semanticweb.org/conference/eswc/2006/paper/udrea-recupero> <http://xmlns.com/foaf/0.1/topic> ?x2 }

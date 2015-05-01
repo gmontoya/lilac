@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://purl.org/dc/terms/creator> <http://data.semanticweb.org/person/guus-schreiber> .}
+WHERE
+  { ?x1 <http://purl.org/dc/terms/creator> <http://data.semanticweb.org/person/guus-schreiber> }

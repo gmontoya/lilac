@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x2 <http://www.cs.vu.nl/~mcaklein/onto/swrc_ext/2005/05#authorList> ?x3 .}
+WHERE
+  { ?x2 <http://www.cs.vu.nl/~mcaklein/onto/swrc_ext/2005/05#authorList> ?x3 }

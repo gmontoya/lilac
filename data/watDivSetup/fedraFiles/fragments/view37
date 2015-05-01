@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?v0 <http://www.geonames.org/ontology#parentCountry> <http://db.uwaterloo.ca/~galuc/wsdbm/Country24> .}
+WHERE
+  { ?v0 <http://www.geonames.org/ontology#parentCountry> <http://db.uwaterloo.ca/~galuc/wsdbm/Country24> }

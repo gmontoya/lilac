@@ -1,0 +1,8 @@
+debugQueryPlan=true
+EndpointsFile=$fedrahome/data/watDivSetup/fedraFiles/endpoints
+FragmentsSources=$fedrahome/data/watDivSetup/fedraFiles/fragmentsSources
+FragmentsDefinitionFolder=$fedrahome/data/watDivSetup/fedraFiles/fragments
+Random=false
+SourceSelectionStrategy=engine
+Threshold=0
+DawIndex=$fedrahome/data/watDivSetup/dawIndex.ttl

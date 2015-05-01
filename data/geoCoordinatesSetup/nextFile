@@ -1,0 +1,4 @@
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> 
+<http://www.w3.org/2003/01/geo/wgs84_pos#long> 
+<http://www.georss.org/georss/point> 
+<http://www.w3.org/2003/01/geo/wgs84_pos#lat> 

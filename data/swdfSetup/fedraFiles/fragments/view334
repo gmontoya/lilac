@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://purl.org/dc/terms/subject> " NCI Thesaurus " .}
+WHERE
+  { ?x1 <http://purl.org/dc/terms/subject> " NCI Thesaurus " }

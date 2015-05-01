@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/conference/www/2008/proceedings> <http://swrc.ontoware.org/ontology#booktitle> ?x6 .}
+WHERE
+  { <http://data.semanticweb.org/conference/www/2008/proceedings> <http://swrc.ontoware.org/ontology#booktitle> ?x6 }

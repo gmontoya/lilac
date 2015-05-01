@@ -1,0 +1,8 @@
+debugQueryPlan=true
+EndpointsFile=$fedrahome/data/diseasomeSetup/fedraFiles/endpoints
+FragmentsSources=$fedrahome/data/diseasomeSetup/fedraFiles/fragmentsSources
+FragmentsDefinitionFolder=$fedrahome/data/diseasomeSetup/fedraFiles/fragments
+Random=false
+SourceSelectionStrategy=engine
+Threshold=0
+DawIndex=$fedrahome/data/diseasomeSetup/dawIndex.ttl

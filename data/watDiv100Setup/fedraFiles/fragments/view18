@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?v0 <http://schema.org/contentRating> ?v7 .}
+WHERE
+  { ?v0 <http://schema.org/contentRating> ?v7 }

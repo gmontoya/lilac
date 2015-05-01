@@ -1,0 +1,19 @@
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> 
+<http://www.w3.org/2002/07/owl#equivalentProperty> 
+<http://www.w3.org/2000/01/rdf-schema#label> 
+<http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/associatedGene> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#label> <http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/bio2rdfSymbol> <http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/hgncIdPage> <http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/hgncId> <http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/geneId> <http://www.w3.org/2002/07/owl#sameAs> 
+<http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/classDegree> 
+<http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/class> 
+<http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/degree> 
+<http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/possibleDrug> 
+<http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/size> 
+<http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/name> 
+<http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/bio2rdfSymbol> 
+<http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/hgncIdPage> 
+<http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/hgncId> 
+<http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/geneId> 
+<http://www.w3.org/2002/07/owl#sameAs> 
+<http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/omim> 
+<http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/diseaseSubtypeOf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#label> <http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/associatedGene> <http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/classDegree> <http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/class> <http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/degree> <http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/possibleDrug> <http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/size> <http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/name> <http://www.w3.org/2002/07/owl#sameAs> 
+<http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/chromosomalLocation> 
+<http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/omimPage> 

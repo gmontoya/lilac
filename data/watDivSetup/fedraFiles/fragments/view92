@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://db.uwaterloo.ca/~galuc/wsdbm/Product69> <http://schema.org/author> ?v0 .}
+WHERE
+  { <http://db.uwaterloo.ca/~galuc/wsdbm/Product69> <http://schema.org/author> ?v0 }

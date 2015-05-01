@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://www.w3.org/2002/12/cal/icaltzd#url> <http://ws-rest.org/2012/> .}
+WHERE
+  { ?x1 <http://www.w3.org/2002/12/cal/icaltzd#url> <http://ws-rest.org/2012/> }

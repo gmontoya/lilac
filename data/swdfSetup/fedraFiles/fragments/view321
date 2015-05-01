@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/person/tuvshintur-tserendorj> <http://xmlns.com/foaf/0.1/firstName> ?x3 .}
+WHERE
+  { <http://data.semanticweb.org/person/tuvshintur-tserendorj> <http://xmlns.com/foaf/0.1/firstName> ?x3 }

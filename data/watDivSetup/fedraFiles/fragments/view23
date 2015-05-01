@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://db.uwaterloo.ca/~galuc/wsdbm/Product186> <http://purl.org/ontology/mo/performed_in> ?v1 .}
+WHERE
+  { <http://db.uwaterloo.ca/~galuc/wsdbm/Product186> <http://purl.org/ontology/mo/performed_in> ?v1 }

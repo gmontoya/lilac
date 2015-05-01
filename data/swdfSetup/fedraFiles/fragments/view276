@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/conference/www/2008/paper/840> <http://data.semanticweb.org/ns/swc/ontology#isPartOf> ?x3 .}
+WHERE
+  { <http://data.semanticweb.org/conference/www/2008/paper/840> <http://data.semanticweb.org/ns/swc/ontology#isPartOf> ?x3 }

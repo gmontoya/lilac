@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://swrc.ontoware.org/ontology#month> ?x3 .}
+WHERE
+  { ?x1 <http://swrc.ontoware.org/ontology#month> ?x3 }

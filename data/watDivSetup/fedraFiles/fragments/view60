@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://db.uwaterloo.ca/~galuc/wsdbm/User21> <http://purl.org/dc/terms/Location> ?v1 .}
+WHERE
+  { <http://db.uwaterloo.ca/~galuc/wsdbm/User21> <http://purl.org/dc/terms/Location> ?v1 }

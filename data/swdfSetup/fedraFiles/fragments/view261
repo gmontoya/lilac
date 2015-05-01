@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/workshop/wsrest/2012> <http://purl.org/NET/c4dm/event.owl#time> ?x2 .}
+WHERE
+  { <http://data.semanticweb.org/workshop/wsrest/2012> <http://purl.org/NET/c4dm/event.owl#time> ?x2 }

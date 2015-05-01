@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://data.semanticweb.org/ns/swc/ontology#url> <http://www.eswc2006.org/poster-papers/FP07-Markscheffel.pdf> .}
+WHERE
+  { ?x1 <http://data.semanticweb.org/ns/swc/ontology#url> <http://www.eswc2006.org/poster-papers/FP07-Markscheffel.pdf> }

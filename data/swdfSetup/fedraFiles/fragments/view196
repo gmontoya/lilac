@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/conference/eswc/2012/paper/demonstation/363/authorlist> <http://www.w3.org/1999/02/22-rdf-syntax-ns#_21> ?x6 .}
+WHERE
+  { <http://data.semanticweb.org/conference/eswc/2012/paper/demonstation/363/authorlist> <http://www.w3.org/1999/02/22-rdf-syntax-ns#_21> ?x6 }

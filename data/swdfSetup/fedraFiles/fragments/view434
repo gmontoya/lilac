@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/conference/iswc/2010/time/2010-11-09T11-30-00> <http://www.w3.org/2002/12/cal/ical#tzid> ?x3 .}
+WHERE
+  { <http://data.semanticweb.org/conference/iswc/2010/time/2010-11-09T11-30-00> <http://www.w3.org/2002/12/cal/ical#tzid> ?x3 }

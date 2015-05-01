@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?v1 <http://purl.org/stuff/rev#totalVotes> ?v5 .}
+WHERE
+  { ?v1 <http://purl.org/stuff/rev#totalVotes> ?v5 }

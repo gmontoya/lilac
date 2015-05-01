@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/organization/dept-of-mathematics-university-of-messina-italy> <http://xmlns.com/foaf/0.1/member> ?x2 .}
+WHERE
+  { <http://data.semanticweb.org/organization/dept-of-mathematics-university-of-messina-italy> <http://xmlns.com/foaf/0.1/member> ?x2 }

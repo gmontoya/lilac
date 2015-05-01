@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/workshop/esoe/2007> <http://data.semanticweb.org/ns/swc/ontology#hasAcronym> ?x5 .}
+WHERE
+  { <http://data.semanticweb.org/workshop/esoe/2007> <http://data.semanticweb.org/ns/swc/ontology#hasAcronym> ?x5 }

@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://db.uwaterloo.ca/~galuc/wsdbm/Offer148> <http://schema.org/eligibleRegion> ?v3 .}
+WHERE
+  { <http://db.uwaterloo.ca/~galuc/wsdbm/Offer148> <http://schema.org/eligibleRegion> ?v3 }

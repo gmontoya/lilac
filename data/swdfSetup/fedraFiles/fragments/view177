@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://purl.org/ontology/bibo/authorList> ?x2 .}
+WHERE
+  { ?x1 <http://purl.org/ontology/bibo/authorList> ?x2 }

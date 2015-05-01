@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?v2 <http://schema.org/contentSize> ?v5 .}
+WHERE
+  { ?v2 <http://schema.org/contentSize> ?v5 }

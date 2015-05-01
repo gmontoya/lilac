@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?v0 <http://db.uwaterloo.ca/~galuc/wsdbm/userId> ?v5 .}
+WHERE
+  { ?v0 <http://db.uwaterloo.ca/~galuc/wsdbm/userId> ?v5 }

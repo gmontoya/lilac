@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://purl.org/ontology/bibo/authorList> <http://data.semanticweb.org/conference/dh/2010/abstracts/session/ab-709/authors> .}
+WHERE
+  { ?x1 <http://purl.org/ontology/bibo/authorList> <http://data.semanticweb.org/conference/dh/2010/abstracts/session/ab-709/authors> }

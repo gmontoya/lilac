@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://db.uwaterloo.ca/~galuc/wsdbm/Product180> <http://schema.org/award> ?v1 .}
+WHERE
+  { <http://db.uwaterloo.ca/~galuc/wsdbm/Product180> <http://schema.org/award> ?v1 }

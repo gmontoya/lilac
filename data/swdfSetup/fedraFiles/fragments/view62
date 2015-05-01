@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x6 <http://data.semanticweb.org/ns/swc/ontology#heldBy> <http://data.semanticweb.org/person/martin-hepp> .}
+WHERE
+  { ?x6 <http://data.semanticweb.org/ns/swc/ontology#heldBy> <http://data.semanticweb.org/person/martin-hepp> }

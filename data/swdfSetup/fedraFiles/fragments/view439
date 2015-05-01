@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://purl.org/dc/terms/subject> " Analytics " .}
+WHERE
+  { ?x1 <http://purl.org/dc/terms/subject> " Analytics " }

@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?v0 <http://schema.org/language> <http://db.uwaterloo.ca/~galuc/wsdbm/Language27> .}
+WHERE
+  { ?v0 <http://schema.org/language> <http://db.uwaterloo.ca/~galuc/wsdbm/Language27> }

@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/workshop/evodyn/2011/paper/5> <http://xmlns.com/foaf/0.1/maker> ?x4 .}
+WHERE
+  { <http://data.semanticweb.org/workshop/evodyn/2011/paper/5> <http://xmlns.com/foaf/0.1/maker> ?x4 }

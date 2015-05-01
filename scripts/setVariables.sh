@@ -1,0 +1,10 @@
+fedrahome=
+fusekiPath=
+dawIndexGeneratorPath=
+host=
+fusekiHDTPath=
+httpcomponentsClientPath=
+watdivPath=
+fedXPath=
+jenaPath=
+anapsidPath=

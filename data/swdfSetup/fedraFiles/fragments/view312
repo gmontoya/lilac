@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://purl.org/dc/terms/creator> <http://data.semanticweb.org/person/nathalie-hernandez> .}
+WHERE
+  { ?x1 <http://purl.org/dc/terms/creator> <http://data.semanticweb.org/person/nathalie-hernandez> }

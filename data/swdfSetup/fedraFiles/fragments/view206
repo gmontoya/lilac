@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://purl.org/dc/elements/1.1/description> " Use @www2012 and #MobWebPerf " .}
+WHERE
+  { ?x1 <http://purl.org/dc/elements/1.1/description> " Use @www2012 and #MobWebPerf " }

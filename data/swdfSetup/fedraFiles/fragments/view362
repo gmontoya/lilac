@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x4 <http://data.semanticweb.org/ns/swc/ontology#homepage> ?x5 .}
+WHERE
+  { ?x4 <http://data.semanticweb.org/ns/swc/ontology#homepage> ?x5 }

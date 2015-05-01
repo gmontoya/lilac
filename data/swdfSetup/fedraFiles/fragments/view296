@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x3 <http://xmlns.com/foaf/0.1/family_name> ?x4 .}
+WHERE
+  { ?x3 <http://xmlns.com/foaf/0.1/family_name> ?x4 }

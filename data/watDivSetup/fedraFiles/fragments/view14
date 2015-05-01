@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?v0 <http://db.uwaterloo.ca/~galuc/wsdbm/makesPurchase> ?v2 .}
+WHERE
+  { ?v0 <http://db.uwaterloo.ca/~galuc/wsdbm/makesPurchase> ?v2 }

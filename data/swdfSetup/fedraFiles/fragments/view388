@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/conference/eswc/2008/proceedings> <http://www.cs.vu.nl/~mcaklein/onto/swrc_ext/2005/05#editorList> ?x3 .}
+WHERE
+  { <http://data.semanticweb.org/conference/eswc/2008/proceedings> <http://www.cs.vu.nl/~mcaklein/onto/swrc_ext/2005/05#editorList> ?x3 }

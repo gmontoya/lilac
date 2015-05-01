@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x5 <http://xmlns.com/foaf/0.1/member> <http://data.semanticweb.org/person/michael-conover> .}
+WHERE
+  { ?x5 <http://xmlns.com/foaf/0.1/member> <http://data.semanticweb.org/person/michael-conover> }

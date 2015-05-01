@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/conference/dh/2010/abstracts/poster/ab-739> <http://data.semanticweb.org/ns/swc/ontology#isPartOf> ?x3 .}
+WHERE
+  { <http://data.semanticweb.org/conference/dh/2010/abstracts/poster/ab-739> <http://data.semanticweb.org/ns/swc/ontology#isPartOf> ?x3 }

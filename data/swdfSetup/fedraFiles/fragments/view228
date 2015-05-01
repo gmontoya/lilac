@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x5 <http://data.semanticweb.org/ns/swc/ontology#hasProgramme> ?x6 .}
+WHERE
+  { ?x5 <http://data.semanticweb.org/ns/swc/ontology#hasProgramme> ?x6 }

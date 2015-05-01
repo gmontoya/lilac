@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/conference/lrec/2008/papers/419> <http://swrc.ontoware.org/ontology#url> ?x3 .}
+WHERE
+  { <http://data.semanticweb.org/conference/lrec/2008/papers/419> <http://swrc.ontoware.org/ontology#url> ?x3 }

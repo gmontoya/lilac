@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://www.eswc2006.org/topics/#topic1.3.4> <http://www.w3.org/2004/02/skos/core#broader> ?x3 .}
+WHERE
+  { <http://www.eswc2006.org/topics/#topic1.3.4> <http://www.w3.org/2004/02/skos/core#broader> ?x3 }

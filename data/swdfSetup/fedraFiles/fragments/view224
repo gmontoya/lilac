@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://sw.deri.org/2005/08/conf/cfp.owl#involved> ?x2 .}
+WHERE
+  { ?x1 <http://sw.deri.org/2005/08/conf/cfp.owl#involved> ?x2 }

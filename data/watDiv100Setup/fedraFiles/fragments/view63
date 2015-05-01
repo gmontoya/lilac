@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://db.uwaterloo.ca/~galuc/wsdbm/Review140601> <http://purl.org/stuff/rev#reviewer> ?v1 .}
+WHERE
+  { <http://db.uwaterloo.ca/~galuc/wsdbm/Review140601> <http://purl.org/stuff/rev#reviewer> ?v1 }

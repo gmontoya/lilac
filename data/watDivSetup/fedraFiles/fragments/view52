@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?v6 <http://db.uwaterloo.ca/~galuc/wsdbm/likes> ?v2 .}
+WHERE
+  { ?v6 <http://db.uwaterloo.ca/~galuc/wsdbm/likes> ?v2 }

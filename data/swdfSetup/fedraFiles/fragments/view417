@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://purl.org/NET/c4dm/timeline.owl#end> " 2012-04-20T15:30:00+02:00^^<http://www.w3.org/2001/XMLSchema#dateTime" .}
+WHERE
+  { ?x1 <http://purl.org/NET/c4dm/timeline.owl#end> " 2012-04-20T15:30:00+02:00^^<http://www.w3.org/2001/XMLSchema#dateTime" }

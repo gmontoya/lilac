@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x5 <http://swrc.ontoware.org/ontology#affiliation> ?x6 .}
+WHERE
+  { ?x5 <http://swrc.ontoware.org/ontology#affiliation> ?x6 }

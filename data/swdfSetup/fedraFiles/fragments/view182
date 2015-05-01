@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x4 <http://xmlns.com/foaf/0.1/maker> <http://data.semanticweb.org/person/bhuvan-bamba> .}
+WHERE
+  { ?x4 <http://xmlns.com/foaf/0.1/maker> <http://data.semanticweb.org/person/bhuvan-bamba> }

@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/person/boris-villazon-terrazas> <http://xmlns.com/foaf/0.1/lastName> ?x3 .}
+WHERE
+  { <http://data.semanticweb.org/person/boris-villazon-terrazas> <http://xmlns.com/foaf/0.1/lastName> ?x3 }

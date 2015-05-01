@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://www.cs.vu.nl/~mcaklein/onto/swrc_ext/2005/05#editorList> ?x2 .}
+WHERE
+  { ?x1 <http://www.cs.vu.nl/~mcaklein/onto/swrc_ext/2005/05#editorList> ?x2 }

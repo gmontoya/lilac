@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/conference/www/2008/keynote/berners-Lee> <http://www.w3.org/2002/12/cal/ical#dtstart> ?x5 .}
+WHERE
+  { <http://data.semanticweb.org/conference/www/2008/keynote/berners-Lee> <http://www.w3.org/2002/12/cal/ical#dtstart> ?x5 }

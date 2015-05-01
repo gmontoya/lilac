@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?v7 <http://purl.org/stuff/rev#reviewer> ?v8 .}
+WHERE
+  { ?v7 <http://purl.org/stuff/rev#reviewer> ?v8 }

@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://data.semanticweb.org/ns/swc/ontology#isPartOf> <http://data.semanticweb.org/workshop/om/2008/proceedings> .}
+WHERE
+  { ?x1 <http://data.semanticweb.org/ns/swc/ontology#isPartOf> <http://data.semanticweb.org/workshop/om/2008/proceedings> }

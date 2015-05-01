@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/person/alexandre-passant> <http://www.w3.org/2000/01/rdf-schema#seeAlso> ?x2 .}
+WHERE
+  { <http://data.semanticweb.org/person/alexandre-passant> <http://www.w3.org/2000/01/rdf-schema#seeAlso> ?x2 }

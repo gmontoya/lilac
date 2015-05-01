@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?v3 <http://schema.org/employee> ?v0 .}
+WHERE
+  { ?v3 <http://schema.org/employee> ?v0 }

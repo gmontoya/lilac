@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/conference/fis/2010/tutorial/introduction-to-planetlab-europe-and-related-measu> <http://www.w3.org/2002/12/cal/ical#description> ?x3 .}
+WHERE
+  { <http://data.semanticweb.org/conference/fis/2010/tutorial/introduction-to-planetlab-europe-and-related-measu> <http://www.w3.org/2002/12/cal/ical#description> ?x3 }

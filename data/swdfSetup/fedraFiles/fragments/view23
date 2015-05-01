@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/conference/eswc/2008/paper/281> <http://xmlns.com/foaf/0.1/maker> ?x4 .}
+WHERE
+  { <http://data.semanticweb.org/conference/eswc/2008/paper/281> <http://xmlns.com/foaf/0.1/maker> ?x4 }

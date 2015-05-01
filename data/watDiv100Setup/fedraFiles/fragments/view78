@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?v0 <http://purl.org/ontology/mo/opus> ?v1 .}
+WHERE
+  { ?v0 <http://purl.org/ontology/mo/opus> ?v1 }

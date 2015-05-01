@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://data.semanticweb.org/ns/swc/ontology#hasAcronym> ?x3 .}
+WHERE
+  { ?x1 <http://data.semanticweb.org/ns/swc/ontology#hasAcronym> ?x3 }

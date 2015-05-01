@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x4 <http://www.cs.vu.nl/~mcaklein/onto/swrc_ext/2005/05#editorList> " _:node17art6jrqx30 " .}
+WHERE
+  { ?x4 <http://www.cs.vu.nl/~mcaklein/onto/swrc_ext/2005/05#editorList> " _:node17art6jrqx30 " }

@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://vocab.deri.ie/rooms#contains> <http://data.semanticweb.org/conference/www/2012/location/26> .}
+WHERE
+  { ?x1 <http://vocab.deri.ie/rooms#contains> <http://data.semanticweb.org/conference/www/2012/location/26> }

@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x4 <http://purl.org/NET/c4dm/event.owl#agent> ?x5 .}
+WHERE
+  { ?x4 <http://purl.org/NET/c4dm/event.owl#agent> ?x5 }

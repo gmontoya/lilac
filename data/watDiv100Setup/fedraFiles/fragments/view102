@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?v0 <http://schema.org/actor> <http://db.uwaterloo.ca/~galuc/wsdbm/User29085> .}
+WHERE
+  { ?v0 <http://schema.org/actor> <http://db.uwaterloo.ca/~galuc/wsdbm/User29085> }

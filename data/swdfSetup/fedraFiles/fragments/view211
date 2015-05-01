@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x5 <http://www.w3.org/2002/12/cal/ical#summary> ?x6 .}
+WHERE
+  { ?x5 <http://www.w3.org/2002/12/cal/ical#summary> ?x6 }

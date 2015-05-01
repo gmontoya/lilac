@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://xmlns.com/foaf/0.1/mbox_sha1sum> " b5f98ddc1e405353cb5a3f895085f15a72105668 " .}
+WHERE
+  { ?x1 <http://xmlns.com/foaf/0.1/mbox_sha1sum> " b5f98ddc1e405353cb5a3f895085f15a72105668 " }

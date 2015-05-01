@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://db.uwaterloo.ca/~galuc/wsdbm/Website3663> <http://db.uwaterloo.ca/~galuc/wsdbm/hits> ?v1 .}
+WHERE
+  { <http://db.uwaterloo.ca/~galuc/wsdbm/Website3663> <http://db.uwaterloo.ca/~galuc/wsdbm/hits> ?v1 }

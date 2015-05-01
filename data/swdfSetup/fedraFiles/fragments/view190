@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/conference/www/2011/paper/on-the-informativeness-of-cascade-and-intent-aware> <http://swrc.ontoware.org/ontology#abstract> ?x3 .}
+WHERE
+  { <http://data.semanticweb.org/conference/www/2011/paper/on-the-informativeness-of-cascade-and-intent-aware> <http://swrc.ontoware.org/ontology#abstract> ?x3 }

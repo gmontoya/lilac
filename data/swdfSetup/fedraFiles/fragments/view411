@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?x1 <http://purl.org/dc/terms/subject> " reasoning with noisy data " .}
+WHERE
+  { ?x1 <http://purl.org/dc/terms/subject> " reasoning with noisy data " }

@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?v2 <http://schema.org/contactPoint> ?v6 .}
+WHERE
+  { ?v2 <http://schema.org/contactPoint> ?v6 }

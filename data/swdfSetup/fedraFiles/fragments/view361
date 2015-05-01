@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/conference/www/2008/track/data-mining/talk/153> <http://www.w3.org/2002/12/cal/ical#duration> ?x2 .}
+WHERE
+  { <http://data.semanticweb.org/conference/www/2008/track/data-mining/talk/153> <http://www.w3.org/2002/12/cal/ical#duration> ?x2 }

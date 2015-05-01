@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/conference/eswc/2006/demo-papers/FD17-kaljurand> <http://xmlns.com/foaf/0.1/maker> ?x2 .}
+WHERE
+  { <http://data.semanticweb.org/conference/eswc/2006/demo-papers/FD17-kaljurand> <http://xmlns.com/foaf/0.1/maker> ?x2 }

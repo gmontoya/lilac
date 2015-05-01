@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/person/diego-calvanese> <http://xmlns.com/foaf/0.1/familyName> ?x2 .}
+WHERE
+  { <http://data.semanticweb.org/person/diego-calvanese> <http://xmlns.com/foaf/0.1/familyName> ?x2 }

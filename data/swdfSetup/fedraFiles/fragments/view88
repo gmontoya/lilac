@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/person/alexandre-passant> <http://data.semanticweb.org/ns/swc/ontology#isPanelistAt> ?x4 .}
+WHERE
+  { <http://data.semanticweb.org/person/alexandre-passant> <http://data.semanticweb.org/ns/swc/ontology#isPanelistAt> ?x4 }

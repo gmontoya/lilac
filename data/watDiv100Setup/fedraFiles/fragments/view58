@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?v1 <http://schema.org/producer> ?v6 .}
+WHERE
+  { ?v1 <http://schema.org/producer> ?v6 }

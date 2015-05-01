@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?v1 <http://schema.org/datePublished> ?v4 .}
+WHERE
+  { ?v1 <http://schema.org/datePublished> ?v4 }

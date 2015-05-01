@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { ?v4 <http://purl.org/goodrelations/offers> ?v2 .}
+WHERE
+  { ?v4 <http://purl.org/goodrelations/offers> ?v2 }

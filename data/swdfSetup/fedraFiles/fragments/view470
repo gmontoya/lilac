@@ -1,0 +1,4 @@
+CONSTRUCT 
+  { <http://data.semanticweb.org/workshop/ores/2010/keynote/> <http://www.w3.org/2002/12/cal/ical#description> ?x3 .}
+WHERE
+  { <http://data.semanticweb.org/workshop/ores/2010/keynote/> <http://www.w3.org/2002/12/cal/ical#description> ?x3 }
