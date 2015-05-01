@@ -1,93 +1,93 @@
-view2 HOST:3135/ds/sparql http://172.16.9.3:3100/sparql
-view4 HOST:3134/ds/sparql http://172.16.9.3:3100/sparql
-view6 HOST:3131/ds/sparql http://172.16.9.3:3100/sparql
-view7 HOST:3131/ds/sparql http://172.16.9.3:3100/sparql
-view8 HOST:3131/ds/sparql http://172.16.9.3:3100/sparql
-view9 HOST:3134/ds/sparql http://172.16.9.3:3100/sparql
-view10 HOST:3134/ds/sparql http://172.16.9.3:3100/sparql
-view11 HOST:3133/ds/sparql http://172.16.9.3:3100/sparql
-view5 HOST:3134/ds/sparql http://172.16.9.3:3100/sparql http://172.16.9.3:3133/ds/sparql
-view12 HOST:3131/ds/sparql http://172.16.9.3:3100/sparql
-view13 HOST:3131/ds/sparql http://172.16.9.3:3100/sparql
-view14 HOST:3132/ds/sparql http://172.16.9.3:3100/sparql
-view15 HOST:3132/ds/sparql http://172.16.9.3:3100/sparql
-view16 HOST:3132/ds/sparql http://172.16.9.3:3100/sparql
-view17 HOST:3136/ds/sparql http://172.16.9.3:3100/sparql
-view18 HOST:3136/ds/sparql http://172.16.9.3:3100/sparql
-view19 HOST:3136/ds/sparql http://172.16.9.3:3100/sparql
-view3 HOST:3134/ds/sparql http://172.16.9.3:3100/sparql http://172.16.9.3:3135/ds/sparql
-view20 HOST:3135/ds/sparql http://172.16.9.3:3100/sparql
-view21 HOST:3137/ds/sparql http://172.16.9.3:3100/sparql
-view22 HOST:3137/ds/sparql http://172.16.9.3:3100/sparql
-view23 HOST:3133/ds/sparql http://172.16.9.3:3100/sparql
-view24 HOST:3133/ds/sparql http://172.16.9.3:3100/sparql
-view25 HOST:3133/ds/sparql http://172.16.9.3:3100/sparql
-view26 HOST:3131/ds/sparql http://172.16.9.3:3100/sparql
-view27 HOST:3131/ds/sparql http://172.16.9.3:3100/sparql
-view28 HOST:3131/ds/sparql http://172.16.9.3:3100/sparql
-view29 HOST:3137/ds/sparql http://172.16.9.3:3100/sparql
-view30 HOST:3134/ds/sparql http://172.16.9.3:3100/sparql
-view31 HOST:3134/ds/sparql http://172.16.9.3:3100/sparql
-view32 HOST:3134/ds/sparql http://172.16.9.3:3100/sparql
-view33 HOST:3139/ds/sparql http://172.16.9.3:3100/sparql
-view34 HOST:3139/ds/sparql http://172.16.9.3:3100/sparql
-view35 HOST:3139/ds/sparql http://172.16.9.3:3100/sparql
-view37 HOST:3133/ds/sparql http://172.16.9.3:3100/sparql
-view1 HOST:3135/ds/sparql http://172.16.9.3:3100/sparql http://172.16.9.3:3133/ds/sparql
-view39 HOST:3136/ds/sparql http://172.16.9.3:3100/sparql
-view40 HOST:3136/ds/sparql http://172.16.9.3:3100/sparql
-view41 HOST:3136/ds/sparql http://172.16.9.3:3100/sparql
-view43 HOST:3139/ds/sparql http://172.16.9.3:3100/sparql
-view36 HOST:3133/ds/sparql http://172.16.9.3:3100/sparql http://172.16.9.3:3134/ds/sparql
-view45 HOST:3134/ds/sparql http://172.16.9.3:3100/sparql
-view46 HOST:3132/ds/sparql http://172.16.9.3:3100/sparql
-view38 HOST:3133/ds/sparql http://172.16.9.3:3100/sparql http://172.16.9.3:3135/ds/sparql
-view48 HOST:3135/ds/sparql http://172.16.9.3:3100/sparql
-view44 HOST:3134/ds/sparql http://172.16.9.3:3100/sparql http://172.16.9.3:3135/ds/sparql
-view42 HOST:3139/ds/sparql http://172.16.9.3:3100/sparql http://172.16.9.3:3138/ds/sparql
-view47 HOST:3135/ds/sparql http://172.16.9.3:3100/sparql http://172.16.9.3:3138/ds/sparql
-view49 HOST:3132/ds/sparql http://172.16.9.3:3100/sparql
-view50 HOST:3130/ds/sparql http://172.16.9.3:3100/sparql
-view51 HOST:3133/ds/sparql http://172.16.9.3:3100/sparql
-view52 HOST:3137/ds/sparql http://172.16.9.3:3100/sparql
-view53 HOST:3134/ds/sparql http://172.16.9.3:3100/sparql
-view54 HOST:3131/ds/sparql http://172.16.9.3:3100/sparql
-view55 HOST:3130/ds/sparql http://172.16.9.3:3100/sparql
-view56 HOST:3130/ds/sparql http://172.16.9.3:3100/sparql
-view57 HOST:3135/ds/sparql http://172.16.9.3:3100/sparql
-view59 HOST:3136/ds/sparql http://172.16.9.3:3100/sparql
-view60 HOST:3134/ds/sparql http://172.16.9.3:3100/sparql
-view61 HOST:3130/ds/sparql http://172.16.9.3:3100/sparql
-view62 HOST:3135/ds/sparql http://172.16.9.3:3100/sparql
-view63 HOST:3137/ds/sparql http://172.16.9.3:3100/sparql
-view64 HOST:3132/ds/sparql http://172.16.9.3:3100/sparql
-view65 HOST:3130/ds/sparql http://172.16.9.3:3100/sparql
-view66 HOST:3131/ds/sparql http://172.16.9.3:3100/sparql
-view67 HOST:3137/ds/sparql http://172.16.9.3:3100/sparql
-view58 HOST:3136/ds/sparql http://172.16.9.3:3100/sparql http://172.16.9.3:3132/ds/sparql
-view68 HOST:3130/ds/sparql http://172.16.9.3:3100/sparql
-view69 HOST:3138/ds/sparql http://172.16.9.3:3100/sparql
-view70 HOST:3132/ds/sparql http://172.16.9.3:3100/sparql
-view71 HOST:3137/ds/sparql http://172.16.9.3:3100/sparql
-view72 HOST:3130/ds/sparql http://172.16.9.3:3100/sparql
-view73 HOST:3137/ds/sparql http://172.16.9.3:3100/sparql
-view74 HOST:3136/ds/sparql http://172.16.9.3:3100/sparql
-view75 HOST:3137/ds/sparql http://172.16.9.3:3100/sparql
-view77 HOST:3137/ds/sparql http://172.16.9.3:3100/sparql
-view78 HOST:3134/ds/sparql http://172.16.9.3:3100/sparql
-view76 HOST:3132/ds/sparql http://172.16.9.3:3100/sparql http://172.16.9.3:3131/ds/sparql
-view79 HOST:3130/ds/sparql http://172.16.9.3:3100/sparql
-view80 HOST:3139/ds/sparql http://172.16.9.3:3100/sparql
-view81 HOST:3132/ds/sparql http://172.16.9.3:3100/sparql
-view82 HOST:3131/ds/sparql http://172.16.9.3:3100/sparql
-view83 HOST:3131/ds/sparql http://172.16.9.3:3100/sparql
-view84 HOST:3137/ds/sparql http://172.16.9.3:3100/sparql
-view86 HOST:3135/ds/sparql http://172.16.9.3:3100/sparql
-view87 HOST:3131/ds/sparql http://172.16.9.3:3100/sparql
-view88 HOST:3133/ds/sparql http://172.16.9.3:3100/sparql
-view89 HOST:3131/ds/sparql http://172.16.9.3:3100/sparql
-view90 HOST:3130/ds/sparql http://172.16.9.3:3100/sparql
-view91 HOST:3135/ds/sparql http://172.16.9.3:3100/sparql
-view92 HOST:3136/ds/sparql http://172.16.9.3:3100/sparql
-view93 HOST:3131/ds/sparql http://172.16.9.3:3100/sparql
-view85 HOST:3133/ds/sparql http://172.16.9.3:3100/sparql http://172.16.9.3:3132/ds/sparql
+view2 HOST:3135/ds/sparql HOST:3100/sparql
+view4 HOST:3134/ds/sparql HOST:3100/sparql
+view6 HOST:3131/ds/sparql HOST:3100/sparql
+view7 HOST:3131/ds/sparql HOST:3100/sparql
+view8 HOST:3131/ds/sparql HOST:3100/sparql
+view9 HOST:3134/ds/sparql HOST:3100/sparql
+view10 HOST:3134/ds/sparql HOST:3100/sparql
+view11 HOST:3133/ds/sparql HOST:3100/sparql
+view5 HOST:3134/ds/sparql HOST:3100/sparql HOST:3133/ds/sparql
+view12 HOST:3131/ds/sparql HOST:3100/sparql
+view13 HOST:3131/ds/sparql HOST:3100/sparql
+view14 HOST:3132/ds/sparql HOST:3100/sparql
+view15 HOST:3132/ds/sparql HOST:3100/sparql
+view16 HOST:3132/ds/sparql HOST:3100/sparql
+view17 HOST:3136/ds/sparql HOST:3100/sparql
+view18 HOST:3136/ds/sparql HOST:3100/sparql
+view19 HOST:3136/ds/sparql HOST:3100/sparql
+view3 HOST:3134/ds/sparql HOST:3100/sparql HOST:3135/ds/sparql
+view20 HOST:3135/ds/sparql HOST:3100/sparql
+view21 HOST:3137/ds/sparql HOST:3100/sparql
+view22 HOST:3137/ds/sparql HOST:3100/sparql
+view23 HOST:3133/ds/sparql HOST:3100/sparql
+view24 HOST:3133/ds/sparql HOST:3100/sparql
+view25 HOST:3133/ds/sparql HOST:3100/sparql
+view26 HOST:3131/ds/sparql HOST:3100/sparql
+view27 HOST:3131/ds/sparql HOST:3100/sparql
+view28 HOST:3131/ds/sparql HOST:3100/sparql
+view29 HOST:3137/ds/sparql HOST:3100/sparql
+view30 HOST:3134/ds/sparql HOST:3100/sparql
+view31 HOST:3134/ds/sparql HOST:3100/sparql
+view32 HOST:3134/ds/sparql HOST:3100/sparql
+view33 HOST:3139/ds/sparql HOST:3100/sparql
+view34 HOST:3139/ds/sparql HOST:3100/sparql
+view35 HOST:3139/ds/sparql HOST:3100/sparql
+view37 HOST:3133/ds/sparql HOST:3100/sparql
+view1 HOST:3135/ds/sparql HOST:3100/sparql HOST:3133/ds/sparql
+view39 HOST:3136/ds/sparql HOST:3100/sparql
+view40 HOST:3136/ds/sparql HOST:3100/sparql
+view41 HOST:3136/ds/sparql HOST:3100/sparql
+view43 HOST:3139/ds/sparql HOST:3100/sparql
+view36 HOST:3133/ds/sparql HOST:3100/sparql HOST:3134/ds/sparql
+view45 HOST:3134/ds/sparql HOST:3100/sparql
+view46 HOST:3132/ds/sparql HOST:3100/sparql
+view38 HOST:3133/ds/sparql HOST:3100/sparql HOST:3135/ds/sparql
+view48 HOST:3135/ds/sparql HOST:3100/sparql
+view44 HOST:3134/ds/sparql HOST:3100/sparql HOST:3135/ds/sparql
+view42 HOST:3139/ds/sparql HOST:3100/sparql HOST:3138/ds/sparql
+view47 HOST:3135/ds/sparql HOST:3100/sparql HOST:3138/ds/sparql
+view49 HOST:3132/ds/sparql HOST:3100/sparql
+view50 HOST:3130/ds/sparql HOST:3100/sparql
+view51 HOST:3133/ds/sparql HOST:3100/sparql
+view52 HOST:3137/ds/sparql HOST:3100/sparql
+view53 HOST:3134/ds/sparql HOST:3100/sparql
+view54 HOST:3131/ds/sparql HOST:3100/sparql
+view55 HOST:3130/ds/sparql HOST:3100/sparql
+view56 HOST:3130/ds/sparql HOST:3100/sparql
+view57 HOST:3135/ds/sparql HOST:3100/sparql
+view59 HOST:3136/ds/sparql HOST:3100/sparql
+view60 HOST:3134/ds/sparql HOST:3100/sparql
+view61 HOST:3130/ds/sparql HOST:3100/sparql
+view62 HOST:3135/ds/sparql HOST:3100/sparql
+view63 HOST:3137/ds/sparql HOST:3100/sparql
+view64 HOST:3132/ds/sparql HOST:3100/sparql
+view65 HOST:3130/ds/sparql HOST:3100/sparql
+view66 HOST:3131/ds/sparql HOST:3100/sparql
+view67 HOST:3137/ds/sparql HOST:3100/sparql
+view58 HOST:3136/ds/sparql HOST:3100/sparql HOST:3132/ds/sparql
+view68 HOST:3130/ds/sparql HOST:3100/sparql
+view69 HOST:3138/ds/sparql HOST:3100/sparql
+view70 HOST:3132/ds/sparql HOST:3100/sparql
+view71 HOST:3137/ds/sparql HOST:3100/sparql
+view72 HOST:3130/ds/sparql HOST:3100/sparql
+view73 HOST:3137/ds/sparql HOST:3100/sparql
+view74 HOST:3136/ds/sparql HOST:3100/sparql
+view75 HOST:3137/ds/sparql HOST:3100/sparql
+view77 HOST:3137/ds/sparql HOST:3100/sparql
+view78 HOST:3134/ds/sparql HOST:3100/sparql
+view76 HOST:3132/ds/sparql HOST:3100/sparql HOST:3131/ds/sparql
+view79 HOST:3130/ds/sparql HOST:3100/sparql
+view80 HOST:3139/ds/sparql HOST:3100/sparql
+view81 HOST:3132/ds/sparql HOST:3100/sparql
+view82 HOST:3131/ds/sparql HOST:3100/sparql
+view83 HOST:3131/ds/sparql HOST:3100/sparql
+view84 HOST:3137/ds/sparql HOST:3100/sparql
+view86 HOST:3135/ds/sparql HOST:3100/sparql
+view87 HOST:3131/ds/sparql HOST:3100/sparql
+view88 HOST:3133/ds/sparql HOST:3100/sparql
+view89 HOST:3131/ds/sparql HOST:3100/sparql
+view90 HOST:3130/ds/sparql HOST:3100/sparql
+view91 HOST:3135/ds/sparql HOST:3100/sparql
+view92 HOST:3136/ds/sparql HOST:3100/sparql
+view93 HOST:3131/ds/sparql HOST:3100/sparql
+view85 HOST:3133/ds/sparql HOST:3100/sparql HOST:3132/ds/sparql
