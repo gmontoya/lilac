@@ -23,7 +23,7 @@ Complete the file scripts/setVariables.sh with the path to each of the requireme
 
 * Include FedX files:
 ```
-mv $fedrahome/engines/FedXFiles/\*.java $fedXPath/src/com/fluidops/fedx/optimizer/
+mv $fedrahome/engines/FedXFiles/*.java $fedXPath/src/com/fluidops/fedx/optimizer/
 mv $fedrahome/engines/build.xml $fedXPath/
 cd $fedXPath
 ant jar
@@ -31,8 +31,8 @@ ant jar
 
 * Include ANAPSID files:
 ```
-mv $fedrahome/engines/AnapsidFiles/\*.py $anapsidPath/ANAPSID/Decomposer/
-mv $fedrahome/engines/AnapsidFiles/run\_anapsid $anapsidPath/scripts/
+mv $fedrahome/engines/AnapsidFiles/*.py $anapsidPath/ANAPSID/Decomposer/
+mv $fedrahome/engines/AnapsidFiles/run_anapsid $anapsidPath/scripts/
 ```
 
 Experiments reported at https://sites.google.com/site/fedrasourceselection can be reproduced using $fedrahome/scripts/script.sh
