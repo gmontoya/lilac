@@ -19,5 +19,15 @@ Complete the file scripts/setVariables.sh with the path to each of the requireme
 
 * Use the HDT library to uncompress the hdt files endpointX.nt in each federation folder at $fedrahome/data/
 
+* Include FedX files:
+$ mv $fedrahome/engines/FedXFiles/\*.java $fedXPath/src/com/fluidops/fedx/optimizer/
+$ mv $fedrahome/engines/build.xml $fedXPath/
+$ cd $fedXPath
+$ ant jar
+
+* Include ANAPSID files:
+$ mv $fedrahome/engines/AnapsidFiles/\*.py $anapsidPath/ANAPSID/Decomposer/
+$ mv $fedrahome/engines/AnapsidFiles/run\_anapsid $anapsidPath/scripts/
+
 Experiments reported at https://sites.google.com/site/fedrasourceselection can be reproduced using $fedrahome/scripts/script.sh
 
