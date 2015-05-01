@@ -34,7 +34,7 @@ done
 l=`cat ${queriesToExecute}_0_bkp`
 ./produceAnswer.sh "$l" "$queriesFile" "$hdtFile" "${firstProxyPort}" "$answersFolder"
 
-sed -i".bkp" "s,queriesToExecute=[0-9a-zA-Z_/\.]*,queriesToExecute=${queriesToExecute}," test${federation}.sh
+sed -i".bkp" "s,queriesToExecute=[0-9a-zA-Z_/\.\$]*,queriesToExecute=${queriesToExecute}," test${federation}.sh
 
 n=0
 while [ "$n" -lt "$numberQueries" ]; do
