@@ -14,10 +14,10 @@ cd $fedrahome/scripts
 l="watDiv watDiv100 diseasome swdf geoCoordinates linkedMDB"
 
 for f in $l; do
-    sed -i "s,HOST,${host}," $fedrahome/data/${f}Setup/endpointsDescription
-    sed -i "s,HOST,${host}," $fedrahome/data/${f}Setup/federation.ttl
-    sed -i "s,HOST,${host}," $fedrahome/data/${f}Setup/dawIndex.ttl
-    sed -i "s,HOST,${host}," $fedrahome/data/${f}Setup/fedraFiles/endpoints
+    sed -i "s,HOST,${host},g" $fedrahome/data/${f}Setup/endpointsDescription
+    sed -i "s,HOST,${host},g" $fedrahome/data/${f}Setup/federation.ttl
+    sed -i "s,HOST,${host},g" $fedrahome/data/${f}Setup/dawIndex.ttl
+    sed -i "s,HOST,${host},g" $fedrahome/data/${f}Setup/fedraFiles/endpoints
 done
 
 ./restoreFederation.sh 3030 3039 watDivSetup
