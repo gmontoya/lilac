@@ -1,3 +1,5 @@
+//package semLAV;
+
 import java.util.*;
 import java.io.*;
 import com.hp.hpl.jena.query.QueryFactory;
@@ -9,7 +11,6 @@ import com.hp.hpl.jena.graph.Node;
 import com.hp.hpl.jena.sparql.core.Var;
 import com.hp.hpl.jena.shared.PrefixMapping;
 
-/* Class that provides access to a query triple patterns */
 public class ConjunctiveQuery {
 
     Head head;
@@ -42,7 +43,7 @@ public class ConjunctiveQuery {
         List<? extends Node> projectedVars = query.getProjectVars();
         this.head = new Head(fn, projectedVars);
         Op op = Algebra.compile(query);
-        TriplesVisitor mv = new TriplesVisitor();
+        myVisitor123 mv = new myVisitor123();
         OpWalker ow = new OpWalker();
         ow.walk(op, mv);
         this.body = mv.getTriples();

@@ -17,7 +17,7 @@ for qn in $l; do
     if [ ! -f $answersFolder/query${qn} ]; then
         (head -n "$qn" "$queriesFile" | tail -n 1) > $queryFile
         cd $fusekiPath
-        s-query --service http://127.0.0.1:${localPort}/ds/query --file=${queryFile} --output=json > "$answersFolder/query${qn}"
+        ./s-query --service http://127.0.0.1:${localPort}/ds/query --file=${queryFile} --output=json > "$answersFolder/query${qn}"
         cd $fedrahome/scripts
         python formatJSONFile.py "$answersFolder/query${qn}" > "$tmpFile"
         LANG=En_US sort "$tmpFile" > "$answersFolder/query${qn}"

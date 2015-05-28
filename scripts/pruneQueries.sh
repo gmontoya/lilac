@@ -19,7 +19,7 @@ for qn in `seq 1 $N`; do
         (echo "$query") > $queryFile
         echo "LIMIT 1" >> $queryFile
         cd $fusekiPath
-        s-query --service http://127.0.0.1:${localPort}/ds/query --file=${queryFile} --output=json > "$answer"
+        ./s-query --service http://127.0.0.1:${localPort}/ds/query --file=${queryFile} --output=json > "$answer"
         cd $fedrahome/scripts
         python formatJSONFile.py "$answer" > "$tmpFile"
         x=`wc -l $tmpFile | sed 's/^[ ^t]*//' | cut -d' ' -f1`
