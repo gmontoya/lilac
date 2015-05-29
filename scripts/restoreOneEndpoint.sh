@@ -9,4 +9,4 @@ cd $fusekiPath
 pidFE=$!
 sleep 10
 ./s-put ${host}:${port}/ds/data default $folder/endpoint${port}.nt
-echo $pidFE
+echo "$host $pidFE"
