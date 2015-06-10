@@ -411,7 +411,8 @@ class TransformInOneDotOneSPARQL2 extends TransformCopy {
                     continue;
                 }
                 Node n = NodeFactory.createURI(endpoint);
-                ArrayList<Triple> tl = new ArrayList<Triple>(triples);
+                List<Triple> tl = new ArrayList<Triple>(triples);
+                tl = fixOrder(tl);
                 List<String> lv = new ArrayList<String>();
                 for (Triple t : tl) {
                     lv.addAll(getVars(t));
@@ -465,6 +466,19 @@ class TransformInOneDotOneSPARQL2 extends TransformCopy {
             joinvars.addAll(vars(arg));
             result.add(arg);
             left.remove(arg);
+        }
+        return result;
+    }
+
+    public static List<Triple> fixOrder(List<Triple> list) {
+        List<Op> listOp = new ArrayList<Op>();
+        for (Triple t : list) {
+            listOp.add(new OpTriple(t));
+        }
+        List<Op> resultOp = fixJoinOrder(listOp);
+        List<Triple> result = new ArrayList<Triple>();
+        for (Op opTriple : resultOp) {
+            result.add(((OpTriple) opTriple).getTriple());
         }
         return result;
     }
@@ -623,7 +637,7 @@ class TransformInOneDotOneSPARQL2 extends TransformCopy {
                 }
                 alreadyIncludedSources.add(s);
                 Node n = NodeFactory.createURI(s);
-                ArrayList<Triple> tl = new ArrayList<Triple>(endpoints.get(s));
+                List<Triple> tl = new ArrayList<Triple>(endpoints.get(s));
                 //prune(tl, t);
                 if (ts == null) {
                     ts = new HashSet<Triple>(tl);
@@ -631,6 +645,7 @@ class TransformInOneDotOneSPARQL2 extends TransformCopy {
                     ts.retainAll(tl);
                 }
                 tl.add(t);
+                tl = fixOrder(tl);
                 List<String> lv = new ArrayList<String>();
                 for (Triple t2 : tl) {
                    lv.addAll(getVars(t2));

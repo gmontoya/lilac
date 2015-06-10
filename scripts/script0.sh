@@ -1,7 +1,7 @@
 #!/bin/bash
 
-address=`$fedrahome/scripts/getHost.sh 3040`
+address=`${fedrahome}/scripts/getHost.sh 3040`
 
-oarsh $address "$fedrahome/scripts/script.sh"
+oarsh $address "${fedrahome}/scripts/script.sh"
 
 

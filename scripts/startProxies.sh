@@ -6,6 +6,7 @@ firstProxyPort=$3
 pePort=$4
 peProxyPort=$5
 proxyFolder=$6
+federation=$7
 peGraph="${8}"
 graphPrefix="${9}"
 graphIndex="${10}"
@@ -25,12 +26,9 @@ for i in `seq 0 $last`; do
     else 
         graph=""
     fi
-    cd $fedrahome/scripts
-    address=`./getHost.sh $localPort`
-    cd $proxyFolder
-    java -cp .:/home/montoya/proxy/httpcomponents-client-4.3.5/lib/* SingleEndpointProxy2 ${address} ${localPort} ${localProxyPort} $graph > ${tmpFile}_$i &
-    pidProxy=$!
-    echo "$pidProxy"
+    cd ${fedrahome}/scripts
+    address=`./getHost.sh ${fedrahome}/data/${federation}Setup/hosts $localPort`
+    oarsh $address "${fedrahome}/scripts/startOneProxy.sh ${address} ${localPort} ${localProxyPort} ${tmpFile}_$i" 
 done
 
 if [ -n "${peGraph}" ]; then
@@ -39,10 +37,8 @@ else
     graph=""
 fi
 
-cd $fedrahome/scripts
-address=`./getHost.sh 3040`
-java -cp .:/home/montoya/proxy/httpcomponents-client-4.3.5/lib/* SingleEndpointProxy2 ${address} ${pePort} ${peProxyPort} $graph > ${tmpFile}_pe &
-pidProxy=$!
-echo "$pidProxy"
+cd ${fedrahome}/scripts
+address=`./getHost.sh ${fedrahome}/data/${federation}Setup/hosts 3040`
+oarsh $address "${fedrahome}/scripts/startOneProxy.sh ${address} ${pePort} ${peProxyPort} ${tmpFile}_pe"
 
 cd $p

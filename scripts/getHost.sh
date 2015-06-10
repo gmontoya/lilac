@@ -1,8 +1,10 @@
 #!/bin/bash
-port=$1
-uniq $OAR_NODEFILE > /home/gmontoya/aux
-sort /home/gmontoya/aux > /home/gmontoya/machines
-rm /home/gmontoya/aux
-mapfile -O 3030 -t dict < /home/gmontoya/machines
-host=${dict[${port}]:-${dict[3040]}}
+hosts=$1
+port=$2
+
+mapfile -O 3030 -t dict < $hosts
+
+defaultValue=${dict[-1]}
+
+host=${dict[${port}]:-${defaultValue}}
 echo $host

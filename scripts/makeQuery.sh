@@ -6,7 +6,7 @@ answer=$3
 
 echo "inside makeQuery: server: $server . query: $query . answer: $answer ."
 
-cd /home/gmontoya/logiciels/jena-fuseki-1.1.1
+cd ${fusekiPath}
 ./s-query --service $server/ds/query --file=${query} --output=json > $answer
 
 

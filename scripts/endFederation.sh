@@ -5,5 +5,5 @@ while read line; do
   host=${line%% *}
   pid=${line##* }
   address=${host#http://}
-  oarsh $address "$fedrahome/scripts/endProxy.sh $pid"
+  oarsh $address "${fedrahome}/scripts/endProxy.sh $pid"
 done < "$file"

@@ -45,8 +45,8 @@ parse() {
 
 action() {
   ldf-client $ldfServer $constructQuery > ${fragment}.n3
-  cd $fedrahome/code
-  java -cp .:$jenaPath/lib/* LoadFragment2 ${fragment}.n3 ${fusekiEndpoint}/update > $tmpFile
+  cd ${fedrahome}/code
+  java -cp .:${jenaPath}/lib/* LoadFragment2 ${fragment}.n3 ${fusekiEndpoint}/update > $tmpFile
   #cat $tmpFile
   #echo "n: $n"
   #echo "configFile: $configFile"
@@ -105,15 +105,15 @@ n=`grep "fluid:SPARQLEndpoint" ${newFederationFile} | wc -l | sed 's/^[ ^t]*//' 
 
 source $configFile
 p=`pwd`
-cd $fedrahome/code
-java -cp .:$jenaPath/lib/* obtainTriples $queryFile > $planFile
+cd ${fedrahome}/code
+java -cp .:${jenaPath}/lib/* obtainTriples $queryFile > $planFile
 while read line; do 
     triple="${line}"
     query="CONSTRUCT WHERE { $triple }"
     #echo "$query"
     (echo "$query") > $constructQuery
-    cd $fedrahome/code
-    numReplicas=`java -cp .:$jenaPath/lib/* countRelevantFragments $constructQuery ${FragmentsDefinitionFolder} ${EndpointsFile}`
+    cd ${fedrahome}/code
+    numReplicas=`java -cp .:${jenaPath}/lib/* countRelevantFragments $constructQuery ${FragmentsDefinitionFolder} ${EndpointsFile}`
     #echo "numReplicas: ${numReplicas}"
     if [ "${numReplicas}" -lt "$threshold" ]; then
         action

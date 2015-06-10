@@ -2,14 +2,14 @@
 
 strategies="FEDERATION"
 numClients=10
-queriesFile=$fedrahome/data/watDivSetup/queries15_500_100_b
+queriesFile=${fedrahome}/data/watDivSetup/queries15_500_100_b
 numQueries=100
 firstPort=3030
-answersFile=$fedrahome/data/watDivSetup/answers
-engines="ANAPSID FedX"
+answersFile=${fedrahome}/data/watDivSetup/answers
+engines="FedX11 ANAPSID11"
 firstProxyPort=3130
-sourceSelectionStrategy="Fedra DAW engine"
-setupFolder=$fedrahome/data/watDivSetup
+sourceSelectionStrategy="Fedra"
+setupFolder=${fedrahome}/data/watDivSetup
 hdtFile=$setupFolder/federationData.hdt
 federation=WatDiv
 queriesToExecute=$setupFolder/queriesToExecute

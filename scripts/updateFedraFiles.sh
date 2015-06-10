@@ -9,8 +9,8 @@ pe=$5
 source $configFile
 tmpFile=`mktemp`
 
-cd $fedrahome/code
-viewName=`java -cp ".:$jenaPath/lib/*" updateFedraFiles $constructQuery  ${FragmentsDefinitionFolder} ${FragmentsSources} ${endpoint} ${pe} $updatesFile` 
+cd ${fedrahome}/code
+viewName=`java -cp ".:${jenaPath}/lib/*" updateFedraFiles $constructQuery  ${FragmentsDefinitionFolder} ${FragmentsSources} ${endpoint} ${pe} $updatesFile` 
 x=`grep -w "^${viewName}" "$EndpointsFile"`
 if [ -z "$x" ]; then
     x=`echo ${viewName}`

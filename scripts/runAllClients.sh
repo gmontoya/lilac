@@ -65,10 +65,10 @@ for strategy in $strategies; do
         if [ "$strategy" = "FEDERATION" ] || [ "$strategy" = "PUBLIC" ]; then
           if [ "$action" != "justReplicate" ]; then
             p=`pwd`
-            cd $fedrahome/scripts
-            address=`./getHost.sh 3040`
-            cd $fedrahome/proxy
-            java -cp .:$httpcomponentsClientPath/lib/* SingleEndpointProxy2 $address ${publicEndpointPort} ${publicEndpointProxyPort} > $tmpFilePEP &
+            cd ${fedrahome}/scripts
+            address=`./getHost.sh $setupFolder/hosts 3040`
+            cd ${fedrahome}/proxy
+            java -cp .:${httpcomponentsClientPath}/lib/* SingleEndpointProxy2 $address ${publicEndpointPort} ${publicEndpointProxyPort} > $tmpFilePEP &
             pidPEProxy=$!
             cd $p
           fi
@@ -79,20 +79,37 @@ for strategy in $strategies; do
             port=$(($firstPort+$i))
             proxyPort=$(($firstProxyPort+$i))
             p=`pwd`
-            cd $fedrahome/scripts
-            address=`./getHost.sh $port`
+            cd ${fedrahome}/scripts
+            address=`./getHost.sh $setupFolder/hosts $port`
             host=http://$address
             cd $p 
             oarsh $address "${fedrahome}/scripts/runClient.sh $strategy $queriesFile \"${l[i]}\" $port $ldfServer ${federationFile} $availability $answersFolder $publicEndpoint $engine $configFile $hdtFile $anapsidFederationFile ${updatesFile}${port} ${proxyPort} ${action} ${address} ${setupFolder}/output${label}${numberClients}Client$port > ${tmpFile}" 
             pid=`cat $tmpFile`
             spids="$spids $pid"
         done
-        for e in $spids; do
-            wait $e
+        echo "clients started with pids $spids"
+        while true; do
+            ready=0
+            for i in `seq 0 $last`; do
+                port=$(($firstPort+$i))
+                output=${setupFolder}/output${label}${numberClients}Client$port
+                line=`tail -n 1 $output`
+                if [ "$line" = "END" ]; then
+                    ready=$(($ready+1))
+                fi
+            done
+            if [ "$ready" = "$numberClients" ]; then
+                break
+            else
+                sleep 10s
+            fi
         done
+        echo "clients finished"
         if [ "$strategy" = "FEDERATION" ] || [ "$strategy" = "PUBLIC" ]; then                                                                                                       
           if [ "$action" != "justReplicate" ]; then
+            echo "pidPEProxy: $pidPEProxy"
             kill $pidPEProxy
+            echo "pidPEProxy killed"
             sleep 1
             cat $tmpFilePEP >> ${setupFolder}/output${label}${numberClients}ClientPublicEndpoint
           fi
@@ -102,20 +119,20 @@ for strategy in $strategies; do
             port=$(($firstPort+$i))
             file=${setupFolder}/output${label}${numberClients}Client$port
             n=`wc -l $file | sed 's/^[ ^t]*//' | cut -d' ' -f1`
+            n=$(($n-1))
             pidProxy=`head -n $n $file | tail -n 1`
             n=$(($n-1))
             pidFE=`head -n $n $file | tail -n 1`
             n=$(($n-1))
             tmpFileNR=`head -n $n $file | tail -n 1`
-            proxyAddress=`$fedrahome/scripts/getHost.sh $port`
+            proxyAddress=`${fedrahome}/scripts/getHost.sh $setupFolder/hosts $port`
             if [ "$action" != "justReplicate" ]; then
-                oarsh $proxyAddress "$fedrahome/scripts/endProxy.sh $pidProxy"
+                oarsh $proxyAddress "${fedrahome}/scripts/endProxy.sh $pidProxy"
                 sleep 1
                 cat $tmpFileNR >> $file
-                rm $tmpFileNR
             fi
             if [ "$action" = "all" ]; then
-                oarsh $proxyAddress "$fedrahome/scripts/endProxy.sh $pidFE"
+                oarsh $proxyAddress "${fedrahome}/scripts/endProxy.sh $pidFE"
                 rm ${setupFolder}/fedraFiles/views/view*
                 cp ${setupFolder}/fedraFilesBkp/* ${setupFolder}/fedraFiles/
                 cp ${setupFolder}/federation.ttl.bkp ${setupFolder}/federation.ttl

@@ -1,8 +1,9 @@
 #!/bin/bash
 
-source setVariables.sh
+source ${fedrahome}/setVariables.sh
 
-source compile.sh
+source ${fedrahome}/scripts/compile.sh
 
+cd ${fedrahome}/scripts/
 ./execute.sh
 
