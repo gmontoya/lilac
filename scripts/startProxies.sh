@@ -12,10 +12,10 @@ graphPrefix="${9}"
 graphIndex="${10}"
 
 last=$(($lastPort-$firstPort))
-tmpFile=`mktemp`
+tmpFile=`mktemp --tmpdir=/home/gmontoya/tmp`
 
 p=`pwd`
-# echo "tmpFile: $tmpFile"
+echo "tmpFile: $tmpFile"
 
 for i in `seq 0 $last`; do
     localPort=$(($firstPort+$i))

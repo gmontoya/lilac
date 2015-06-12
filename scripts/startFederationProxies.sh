@@ -1,5 +1,5 @@
-firstPort=3030
-lastPort=3039
+firstPort=8890
+lastPort=8899
 firstProxyPort=3130
 pePort=8890
 peProxyPort=3100

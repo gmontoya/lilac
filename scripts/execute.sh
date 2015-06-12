@@ -6,10 +6,13 @@ outputRestore=`mktemp`
 
 cd ${fedrahome}/scripts
 
+#./useVirtuosoEndpoints.sh
 ./restore.sh $federation
 ./setHosts.sh $federation
 
-./restoreFederation.sh 3030 3039 ${federation}Setup > $outputRestore
+#./restoreFederation.sh 3030 3039 ${federation}Setup > $outputRestore
+./startFederation.sh ${federation} > $outputRestore
+
 ./testWithIndividualMeasures${Federation}.sh > outputTestWithIndividualMeasures${Federation}
 
 sed -i".bkp" 's/sourceSelectionStrategy="[0-9A-Za-z ]*"/sourceSelectionStrategy="Fedra"/' test${Federation}.sh

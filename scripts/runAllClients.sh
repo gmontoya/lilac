@@ -128,7 +128,7 @@ for strategy in $strategies; do
             proxyAddress=`${fedrahome}/scripts/getHost.sh $setupFolder/hosts $port`
             if [ "$action" != "justReplicate" ]; then
                 oarsh $proxyAddress "${fedrahome}/scripts/endProxy.sh $pidProxy"
-                sleep 1
+                sleep 5
                 cat $tmpFileNR >> $file
             fi
             if [ "$action" = "all" ]; then

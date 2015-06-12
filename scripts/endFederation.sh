@@ -1,9 +1,12 @@
 #!/bin/bash
 file=$1
 
-while read line; do
-  host=${line%% *}
-  pid=${line##* }
+while read -u 3 host pid; do
+  #echo "line: $line"
+  #host=${line%% *}
+  #pid=${line##* }
   address=${host#http://}
-  oarsh $address "${fedrahome}/scripts/endProxy.sh $pid"
-done < "$file"
+  #echo "address: $address"
+  #echo "pid: $pid"
+  oarsh $address "${fedrahome}/scripts/endProxy.sh ${pid}"
+done 3< "$file"
