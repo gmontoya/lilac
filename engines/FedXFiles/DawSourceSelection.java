@@ -200,6 +200,9 @@ class DawSourceSelection {
 
         for (StatementPattern sp : stmtToSources.keySet()) {
             List<StatementSource> capableDatasources = stmtToSources.get(sp);
+            // Next statement is unnecessary to execute DAW once, but useful to avoid no deterministic behavior
+            Collections.sort(capableDatasources, new StatementSourceComparator());
+            //System.out.println("triple: "+sp);
             //System.out.println("the capable sources are: "+capableDatasources);
             List<StatementSource> bestSources = new ArrayList<StatementSource>();
             if (capableDatasources.size()>0) {

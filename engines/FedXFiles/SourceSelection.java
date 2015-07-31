@@ -21,6 +21,7 @@ import info.aduna.iteration.CloseableIteration;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.TreeSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -57,6 +58,15 @@ import com.fluidops.fedx.structures.SubQuery;
 import com.fluidops.fedx.util.QueryStringUtil;
 import com.fluidops.fedx.Config;
 
+import com.fluidops.fedx.algebra.SkipStatementPattern;
+import java.util.Iterator;
+import com.fluidops.fedx.algebra.ExclusiveGroup;
+import java.util.HashMap;
+
+import org.openrdf.query.parser.QueryParser;
+import org.openrdf.query.parser.sparql.SPARQLParserFactory;
+import org.openrdf.query.parser.ParsedQuery;
+import org.openrdf.query.algebra.TupleExpr;
 /**
  * Perform source selection during optimization 
  * 
@@ -70,12 +80,15 @@ public class SourceSelection {
 	protected final List<Endpoint> endpoints;
 	protected final Cache cache;
 	protected final QueryInfo queryInfo;
-	
-	
-	public SourceSelection(List<Endpoint> endpoints, Cache cache, QueryInfo queryInfo) {
+	protected final String sourceSelectionStrategy;
+	protected TupleExpr query;
+
+	public SourceSelection(TupleExpr query, List<Endpoint> endpoints, Cache cache, QueryInfo queryInfo) {
+                this.query = query;
 		this.endpoints = endpoints;
 		this.cache = cache;
 		this.queryInfo = queryInfo;
+                this.sourceSelectionStrategy = Config.getConfig().getProperty("SourceSelectionStrategy", "FedX");
 	}
 
 
@@ -95,33 +108,14 @@ public class SourceSelection {
 	 * 
 	 * @param stmts
 	 */
-	public void doSourceSelection(List<StatementPattern> stmts) {
-		
+	public void doSourceSelectionFedX(List<StatementPattern> stmts) {
 		List<CheckTaskPair> remoteCheckTasks = new ArrayList<CheckTaskPair>();
-                String sourceSelectionStrategy = Config.getConfig().getProperty("SourceSelectionStrategy", "FedX");
-                Map<StatementPattern, Set<Endpoint>> selectedSources = null;
-
-                if (sourceSelectionStrategy.startsWith("Fedra")) {
-                    FedraSourceSelection fss = new FedraSourceSelection(queryInfo.getQuery(), stmts, endpoints);
-                    fss.performSourceSelection();
-                    selectedSources = fss.getSelectedSources();
-                }
 		
 		// for each statement determine the relevant sources
 		for (StatementPattern stmt : stmts) {
-			
-			stmtToSources.put(stmt, new ArrayList<StatementSource>());
-			
+                        stmtToSources.put(stmt, new ArrayList<StatementSource>());
+
 			SubQuery q = new SubQuery(stmt);
-		        if (sourceSelectionStrategy.startsWith("Fedra")) {
-                            Set<Endpoint> selectedEndpoints = selectedSources.get(stmt);
-                            if (selectedEndpoints != null && selectedEndpoints.size() > 0) {
-                                for (Endpoint e : selectedEndpoints) {
-                                    addSource(stmt, new StatementSource(e.getId(), StatementSourceType.REMOTE));
-                                }
-                                continue;
-                            }
-                        }		
 			// check for each current federation member (cache or remote ASK)
 			for (Endpoint e : endpoints) {
 				StatementSourceAssurance a = cache.canProvideStatements(q, e);
@@ -140,12 +134,84 @@ public class SourceSelection {
 		if (remoteCheckTasks.size()>0) {
 			SourceSelectionExecutorWithLatch.run(this, remoteCheckTasks, cache);
 		}
-                if (sourceSelectionStrategy.endsWith("DAW")) {
-                    DawSourceSelection dss = new DawSourceSelection(stmtToSources, endpoints);
-                    dss.performSourceSelection();
-                    stmtToSources = dss.getSelectedSources();
+        }
+
+        public void doSourceSelectionDAW(List<StatementPattern> stmts) {
+            doSourceSelectionFedX(stmts);
+            DawSourceSelection dss = new DawSourceSelection(stmtToSources, endpoints);
+            dss.performSourceSelection();
+            stmtToSources = dss.getSelectedSources();
+        }
+
+        public void doSourceSelectionFedra(List<StatementPattern> stmts) {
+
+            FedraSourceSelection fss = new FedraSourceSelection(queryInfo.getQuery(), stmts, endpoints);
+            fss.performSourceSelection();
+            Map<StatementPattern, Set<Endpoint>> selectedSources = fss.getSelectedSources();
+            for (StatementPattern stmt : stmts) {
+                stmtToSources.put(stmt, new ArrayList<StatementSource>());
+                Set<Endpoint> selectedEndpoints = selectedSources.get(stmt);
+                if (selectedEndpoints != null && selectedEndpoints.size() > 0) {
+                    for (Endpoint e : selectedEndpoints) {
+                        addSource(stmt, new StatementSource(e.getId(), StatementSourceType.REMOTE));
+                    }
                 }
-				
+            }
+        }
+
+        public void doFedraQueryRewriting(List<StatementPattern> stmts) {
+            /*String queryStr = queryInfo.getQuery();
+            QueryParser qp = (new SPARQLParserFactory()).getParser();
+            String baseURI = null;
+            TupleExpr query = null;
+            try {
+                ParsedQuery pq = qp.parseQuery(queryStr, baseURI);
+                query = pq.getTupleExpr();
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.exit(1);
+            }*/
+            //Query query = queryInfo.getQuery();
+            FedraQueryRewriter fqr = new FedraQueryRewriter(query, stmts, endpoints);
+            fqr.performSourceSelection();
+            HashMap<StatementPattern, HashSet<TreeSet<Endpoint>>> selectedSources = fqr.getSelectedSources();
+            //System.out.println("selected sources: "+selectedSources);
+            HashMap<Endpoint, Set<StatementPattern>> options = fqr.getOptions();
+            //System.out.println("options: "+options);
+            AddStatementSourceVisitor assv = new AddStatementSourceVisitor(queryInfo, selectedSources, options);
+            try {
+                query.visit(assv);
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.exit(1);
+            }
+            assv.addStatementSource();
+            //System.out.println(query);
+        }
+
+        /**
+         * Perform source selection for the provided statements using cache or remote ASK queries.
+         * 
+         * Remote ASK queries are evaluated in parallel using the concurrency infrastructure of FedX. Note,
+         * that this method is blocking until every source is resolved.
+         * 
+         * The statement patterns are replaced by appropriate annotations in this optimization.
+         * 
+         * @param stmts
+         */
+        public void doSourceSelection(List<StatementPattern> stmts) {
+
+                if (this.sourceSelectionStrategy.equals("FedraQR")) {
+                    doFedraQueryRewriting(stmts);
+                    return;
+                }	
+                if (this.sourceSelectionStrategy.equals("Fedra")) {
+                    doSourceSelectionFedra(stmts);
+                } else if (this.sourceSelectionStrategy.equals("DAW")) {
+                    doSourceSelectionDAW(stmts);
+                } else {
+                    doSourceSelectionFedX(stmts);
+                }			
 		for (StatementPattern stmt : stmtToSources.keySet()) {
 			
 			List<StatementSource> sources = stmtToSources.get(stmt);
@@ -153,7 +219,7 @@ public class SourceSelection {
 			// if more than one source -> StatementSourcePattern
 			// exactly one source -> OwnedStatementSourcePattern
 			// otherwise: No resource seems to provide results
-			
+			//System.out.println("replacing:"+stmt.getClass());
 			if (sources.size()>1) {
 				StatementSourcePattern stmtNode = new StatementSourcePattern(stmt, queryInfo);
 				for (StatementSource s : sources)
@@ -162,6 +228,7 @@ public class SourceSelection {
 			}
 		
 			else if (sources.size()==1) {
+                                //System.out.println("replacing:"+stmt.getClass());
 				stmt.replaceWith( new ExclusiveStatement(stmt, sources.get(0), queryInfo));
 			}
 			
@@ -170,7 +237,7 @@ public class SourceSelection {
 					log.debug("Statement " + QueryStringUtil.toString(stmt) + " does not produce any results at the provided sources, replacing node with EmptyStatementPattern." );
 				stmt.replaceWith( new EmptyStatementPattern(stmt));
 			}
-		}		
+		}
 	}
 	
 	/**
