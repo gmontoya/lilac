@@ -105,6 +105,7 @@ for strategy in $strategies; do
             fi
         done
         echo "clients finished"
+        #sleep 1d
         if [ "$strategy" = "FEDERATION" ] || [ "$strategy" = "PUBLIC" ]; then                                                                                                       
           if [ "$action" != "justReplicate" ]; then
             echo "pidPEProxy: $pidPEProxy"
@@ -127,8 +128,11 @@ for strategy in $strategies; do
             tmpFileNR=`head -n $n $file | tail -n 1`
             proxyAddress=`${fedrahome}/scripts/getHost.sh $setupFolder/hosts $port`
             if [ "$action" != "justReplicate" ]; then
+                #echo "killing proxy with pid: $pidProxy in machine $proxyAddress"
                 oarsh $proxyAddress "${fedrahome}/scripts/endProxy.sh $pidProxy"
-                sleep 5
+                sleep 2s
+                #cat $tmpFileNR  
+                #echo "end of tmpFileNR: $tmpFileNR"              
                 cat $tmpFileNR >> $file
             fi
             if [ "$action" = "all" ]; then
@@ -149,6 +153,7 @@ for strategy in $strategies; do
               echo "$dawIndexGenerationTime"
           fi
         fi
+        #sleep 1d
       done
     done
 done
