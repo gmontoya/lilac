@@ -11,8 +11,11 @@ import org.openrdf.query.algebra.TupleExpr;
 import org.openrdf.query.algebra.Union;
 import org.openrdf.query.algebra.helpers.QueryModelVisitorBase;
 import org.openrdf.query.algebra.Reduced;
+import org.openrdf.query.algebra.QueryModelNode;
+import com.fluidops.fedx.algebra.NJoin;
+import com.fluidops.fedx.exception.OptimizationException;
 
-public class BGPVisitor extends QueryModelVisitorBase<Exception> {
+public class BGPVisitor extends QueryModelVisitorBase<OptimizationException> {
 
 	protected ArrayList<ArrayList<StatementPattern>> bgps = new ArrayList<ArrayList<StatementPattern>>();
 		
@@ -23,34 +26,34 @@ public class BGPVisitor extends QueryModelVisitorBase<Exception> {
 	public ArrayList<ArrayList<StatementPattern>> getBGPs() {
 		return bgps;
 	}
-	
+
 	@Override
-	public void meet(Union union) throws Exception {
+	public void meet(Union union) {
 		super.meet(union);
 	}
 
         @Override
-        public void meet(LeftJoin leftjoin) throws Exception {
+        public void meet(LeftJoin leftjoin) {
                 super.meet(leftjoin);
         }
 	
 	@Override
-	public void meet(Filter filter)  throws Exception {
+	public void meet(Filter filter) {
 		super.meet(filter);
 	}
 	
 	@Override
-	public void meet(Service service) throws Exception {
+	public void meet(Service service) {
                 super.meet(service);
 	}
 
         @Override
-        public void meet(Reduced reduced) throws Exception {
+        public void meet(Reduced reduced) {
                 super.meet(reduced);
         }
 	
 	@Override
-	public void meet(Join node) throws Exception {
+	public void meet(Join node) {
                 ArrayList<StatementPattern> bgp = new ArrayList<StatementPattern>();
                 ArrayList<TupleExpr> rest = extractBGP(node, bgp);
                 if (!bgp.isEmpty()) {
@@ -60,6 +63,27 @@ public class BGPVisitor extends QueryModelVisitorBase<Exception> {
                     te.visit(this);
                 }	
 	}
+
+        @Override
+        public void meetOther(QueryModelNode node) {
+                if (node instanceof NJoin) {
+                        super.meetOther(node);          // depth first
+                        meetNJoin((NJoin) node);
+                } else {
+                        super.meetOther(node);
+                }
+        }
+
+        public void meetNJoin(NJoin node) {
+                ArrayList<StatementPattern> bgp = new ArrayList<StatementPattern>();
+                ArrayList<TupleExpr> rest = extractBGP(node, bgp);
+                if (!bgp.isEmpty()) {
+                    bgps.add(bgp);
+                }
+                for (TupleExpr te : rest) {
+                    te.visit(this);
+                }
+        }
 
         private static ArrayList<TupleExpr> extractBGP(Join join, ArrayList<StatementPattern> bgp) {
             ArrayList<TupleExpr> rest = new ArrayList<TupleExpr>();
@@ -78,6 +102,21 @@ public class BGPVisitor extends QueryModelVisitorBase<Exception> {
                 extractBGP((Join) right, bgp);                                   
             } else {                                                            
                 rest.add(right);
+            }
+            return rest;
+        }
+
+        private static ArrayList<TupleExpr> extractBGP(NJoin join, ArrayList<StatementPattern> bgp) {
+            ArrayList<TupleExpr> rest = new ArrayList<TupleExpr>();
+            for (int i = 0; i < join.getNumberOfArguments(); i++) {
+                TupleExpr arg = join.getArg(i);
+                if (arg instanceof StatementPattern) {
+                    bgp.add((StatementPattern) arg);
+                } else if (arg instanceof NJoin) {
+                    extractBGP((NJoin) arg, bgp);
+                } else {
+                    rest.add(arg);
+                }
             }
             return rest;
         }
