@@ -106,6 +106,7 @@ public class AddStatementSourceVisitor extends QueryModelVisitorBase<Optimizatio
                 for (Endpoint endpoint : endpoints.keySet()) {
                     HashSet<StatementPattern> triples0 = endpoints.get(endpoint);
                     ArrayList<HashSet<StatementPattern>> connectedTriples = getConnectedTriples(triples0);
+                    //System.out.println("connected: "+connectedTriples);
                     for (HashSet<StatementPattern> triples : connectedTriples) {
                         if (covered.containsAll(triples)) {
                             continue;
@@ -116,13 +117,14 @@ public class AddStatementSourceVisitor extends QueryModelVisitorBase<Optimizatio
                             list.add(new ExclusiveStatement(t, n, queryInfo));
                         }
                         TupleExpr aux = null;
-                        if (list.size()>1) {
+                        if (list.size()>=1) {
                             aux = new ExclusiveGroup(list, n, queryInfo);
-                        } else if (list.size()==1) {
+                        } /*else if (list.size()==1) {
                             aux = list.get(0);
-                        } else {
+                        }*/ else {
                             continue;
                         }
+                        //System.out.println("adding "+aux);
                         listOperators.add(aux);
                     }
                 }
@@ -182,11 +184,11 @@ public class AddStatementSourceVisitor extends QueryModelVisitorBase<Optimizatio
                 tl.add(new ExclusiveStatement(sp, n, queryInfo));
 
                 TupleExpr aux = null;
-                if (tl.size()>1) {
+                if (tl.size()>=1) {
                     aux = new ExclusiveGroup(tl, n, queryInfo);
-                } else if (tl.size()==1) {
+                } /*else if (tl.size()==1) {
                     aux = tl.get(0);
-                } else {
+                }*/ else {
                     continue;
                 }
                 
@@ -209,6 +211,7 @@ public class AddStatementSourceVisitor extends QueryModelVisitorBase<Optimizatio
         ArrayList<HashSet<StatementPattern>> connected = new ArrayList<HashSet<StatementPattern>>();
         for (StatementPattern t : triples) {
             HashSet<StatementPattern> c = FedraQueryRewriter.getConnected(t, triples);
+            //System.out.println("connected: "+c);
             ArrayList<HashSet<StatementPattern>> toRemove = new ArrayList<HashSet<StatementPattern>>();
             boolean add = true;
             for (HashSet<StatementPattern> d : connected) {

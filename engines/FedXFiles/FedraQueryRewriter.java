@@ -49,6 +49,7 @@ class FedraQueryRewriter {
     private TreeMap<String, TriplePatternFragment> fragments;
     private boolean random;
     private HashMap<Endpoint, Set<StatementPattern>> options;
+    private HashMap<String, Set<String>> predicateIndex;
 
     public FedraQueryRewriter(TupleExpr query, List<StatementPattern> stmts, List<Endpoint> endpoints) {
         this.query = query;
@@ -59,14 +60,63 @@ class FedraQueryRewriter {
         }
         //System.out.println("endpoints: "+endpoints);
         this.selectedSources = new HashMap<StatementPattern, HashSet<TreeSet<Endpoint>>>();
+        //long start = System.currentTimeMillis();
         this.bgps = getBGPs(query);
+        //System.out.println("getBGPs: "+(System.currentTimeMillis()-start));
+        //start = System.currentTimeMillis();
+        loadIndex(Config.getConfig().getProperty("PredicateIndex"));
         loadFragments(Config.getConfig().getProperty("FragmentsDefinitionFolder"), Config.getConfig().getProperty("FragmentsSources"));
+        //System.out.println("loadfragments: "+(System.currentTimeMillis()-start));
+        //start = System.currentTimeMillis();
         loadEndpoints(Config.getConfig().getProperty("EndpointsFile"));
+        //System.out.println("loadendpoints: "+(System.currentTimeMillis()-start));
         this.random = Boolean.parseBoolean(Config.getConfig().getProperty("Random"));
         this.options = new HashMap<Endpoint, Set<StatementPattern>>();
         //System.out.println("endpoints: "+endpoints);
         //System.out.println("fragments: "+fragments);
         //System.out.println("endpoints: "+endpoints);
+    }
+
+    public void loadIndex(String file) {
+
+        predicateIndex = new HashMap<String, Set<String>>();
+        HashSet<String> predicates = new HashSet<String>();
+        
+        for (StatementPattern sp : stmts) {
+            Var v = sp.getPredicateVar();
+            if (v.hasValue()) {
+                predicates.add(v.getValue().stringValue());
+            } else {
+                predicates = null;
+                break;
+            }
+        }
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String l = br.readLine();
+            while (l!=null) {
+                StringTokenizer st = new StringTokenizer(l);
+                if (st.hasMoreTokens()) {
+                    String predicate = st.nextToken();
+                    //
+                    Set<String> fs = new HashSet<String>();
+                    if (predicates != null && !predicates.contains(predicate)) {
+                        l = br.readLine();
+                        continue;
+                    }
+                    while (st.hasMoreTokens()) {
+                        String f = st.nextToken();
+                        fs.add(f);
+                    }
+                    predicateIndex.put(predicate, fs);
+                }
+                l = br.readLine();
+            }
+            br.close();
+        } catch (IOException e) {
+            System.err.println("Problems reading file: "+file);
+            System.exit(1);
+        }
     }
 
     private static ArrayList<ArrayList<StatementPattern>> getBGPs(TupleExpr query) {
@@ -120,7 +170,16 @@ class FedraQueryRewriter {
         for (StatementPattern sp : this.stmts) {
             HashSet<List<TriplePatternFragment>> selectedFragments = new HashSet<List<TriplePatternFragment>>();
             //System.out.println("considering sp: "+sp);
-            for (String fn : this.fragments.keySet()) {
+            // PREDICATE INDEX
+            Set<String> frags = null;
+            if (sp.getPredicateVar().hasValue()) {
+                frags = predicateIndex.get(sp.getPredicateVar().getValue().stringValue());
+            } else {
+                frags = this.fragments.keySet();
+            }
+            for (String fn : frags) {
+
+            //for (String fn : this.fragments.keySet()) {
                 TriplePatternFragment f = this.fragments.get(fn);
                 if (f.canAnswer(sp)) {
                     HashSet<List<TriplePatternFragment>> redundantFragments = new HashSet<List<TriplePatternFragment>>();
@@ -447,7 +506,7 @@ class FedraQueryRewriter {
                     String fragment = st.nextToken();
                     //endpoints.add(endpoint);
                     TriplePatternFragment f = this.fragments.get(fragment);
-                    while (st.hasMoreTokens()) {
+                    while (st.hasMoreTokens() && f != null) {
                         String endpoint = st.nextToken();
                         f.addSource(endpoint);
                     }
@@ -515,16 +574,24 @@ class FedraQueryRewriter {
 
     public void loadFragments(String folder, String file) {
 
+        HashSet<String> fs = new HashSet<String>();
+        for (Set<String> frags : predicateIndex.values()) {
+            fs.addAll(frags);
+        }
         HashMap<String, String> sources = loadSources(file);
-        File f = new File(folder);
-        File[] content = f.listFiles();
+        //File f = new File(folder);
+        //File[] content = f.listFiles();
         this.fragments = new TreeMap<String, TriplePatternFragment>();
         //System.out.println("folder: "+folder);
         QueryParser qp = (new SPARQLParserFactory()).getParser();
-        if (content != null) {
-            for (File g : content) {
+        // PREDICATE INDEX
+        for (String f : fs) {
+            String path = folder+"/"+f;
+
+        //if (content != null) {
+        //    for (File g : content) {
                 try {
-                    String path = g.getAbsolutePath();
+        //            String path = g.getAbsolutePath();
                     //System.out.println("path: "+path);
                     String query = getQuery(path);
                     String baseURI = null;
@@ -540,7 +607,7 @@ class FedraQueryRewriter {
                     e.printStackTrace();
                     System.exit(1);
                 }
-            }
+            //}
         }
     }
 } 
