@@ -65,8 +65,12 @@ public class AddStatementSourceVisitor extends QueryModelVisitorBase<Optimizatio
                             Iterator<Endpoint> it2 = ss.iterator();
                             while (it2.hasNext()) {
                                 Endpoint s = it2.next();
-                                HashSet<StatementPattern> set2 = new HashSet<StatementPattern>(options.get(s));
-                                set2.retainAll(bgp);
+                                //System.out.println("s: "+s);
+                                HashSet<StatementPattern> set2 = null;
+                                if (options.get(s) != null) {
+                                    set2 = new HashSet<StatementPattern>(options.get(s));
+                                    set2.retainAll(bgp);
+                                }
                                 if (set2 == null) {
                                     set2 = new HashSet<StatementPattern>();
                                 }
@@ -126,11 +130,14 @@ public class AddStatementSourceVisitor extends QueryModelVisitorBase<Optimizatio
                         }
                         //System.out.println("adding "+aux);
                         listOperators.add(aux);
+                        covered.addAll(triples);
                     }
                 }
+//System.out.println("bgp before remove "+bgp);
                 remove(bgp, 1, bgp.size());
+//System.out.println("bgp after remove "+bgp);
                 StatementPattern toReplace = bgp.get(0);
-
+//System.out.println("listOperators: "+listOperators);
                 if (listOperators.size()>1) {
                     NJoin tmp = new NJoin(listOperators, queryInfo);
                     tmp.setParentNode(toReplace.getParentNode());
@@ -287,7 +294,7 @@ public class AddStatementSourceVisitor extends QueryModelVisitorBase<Optimizatio
         @Override
         public void meetOther(QueryModelNode node) {
                 if (node instanceof NJoin) {
-                        super.meetOther(node);          // depth first
+                        //super.meetOther(node);          // depth first
                         meetNJoin((NJoin) node);
                 } else {
                         super.meetOther(node);
@@ -345,5 +352,8 @@ public class AddStatementSourceVisitor extends QueryModelVisitorBase<Optimizatio
     @Override
     public void meet(StatementPattern node) {
         //stmts.add(node);
+        ArrayList<StatementPattern> bgp = new ArrayList<StatementPattern>();
+        bgp.add(node);
+        bgps.add(bgp);
     }
 }

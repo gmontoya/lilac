@@ -332,7 +332,19 @@ public class QueryStringUtil {
 
                 return res.toString();
         }
-	
+
+        public static String selectQueryStringBoundJoinVALUES(StatementPattern stmt, List<BindingSet> unionBindings, FilterValueExpr filterExpr, Boolean evaluated) {                
+            Set<String> varNames = new LinkedHashSet<String>();
+            String stmtPattern = constructStatement(stmt, varNames, new EmptyBindingSet());	
+            return selectQueryStringBoundJoinVALUESAux(varNames, stmtPattern, unionBindings, filterExpr, evaluated);
+        }
+
+        public static String selectQueryStringBoundJoinVALUES(List<ExclusiveStatement> stmts, List<BindingSet> unionBindings, FilterValueExpr filterExpr, Boolean evaluated) {
+            Set<String> varNames = new LinkedHashSet<String>();
+            String stmtPattern = constructStatement(stmts, varNames, new EmptyBindingSet());
+            return selectQueryStringBoundJoinVALUESAux(varNames, stmtPattern, unionBindings, filterExpr, evaluated);
+        }
+
 	/**
 	 * Creates a bound join subquery using the SPARQL 1.1 VALUES operator.
 	 * 
@@ -355,12 +367,12 @@ public class QueryStringUtil {
 	 * @see BoundJoinVALUESConversionIteration
 	 * @since 3.0
 	 */
-	public static String selectQueryStringBoundJoinVALUES(StatementPattern stmt, List<BindingSet> unionBindings, FilterValueExpr filterExpr, Boolean evaluated) {
+	public static String selectQueryStringBoundJoinVALUESAux(Set<String> varNames, String stmtPattern, List<BindingSet> unionBindings, FilterValueExpr filterExpr, Boolean evaluated) {
 		
-		Set<String> varNames = new LinkedHashSet<String>();	
+		//Set<String> varNames = new LinkedHashSet<String>();	
 		StringBuilder res = new StringBuilder();
 		
-		String stmtPattern = constructStatement(stmt, varNames, new EmptyBindingSet());
+		//String stmtPattern = constructStatement(stmt, varNames, new EmptyBindingSet());
 		res.append("SELECT ");
 		
 		for (String var : varNames)
@@ -658,6 +670,16 @@ public class QueryStringUtil {
 		
 		return sb.toString();
 	}
+
+        protected static String constructStatement(List<ExclusiveStatement> stmts, Set<String> varNames, BindingSet bindings) {
+                StringBuilder sb = new StringBuilder();
+                for (StatementPattern stmt : stmts) {
+                    sb = appendVar(sb, stmt.getSubjectVar(), varNames, bindings).append(" ");
+                    sb = appendVar(sb, stmt.getPredicateVar(), varNames, bindings).append(" ");
+                    sb = appendVar(sb, stmt.getObjectVar(), varNames, bindings).append(" . ");
+                }
+                return sb.toString();
+        }
 	
 	/**
 	 * Construct the statement string, i.e. "s p o . " with bindings inserted wherever possible. Variables
@@ -730,12 +752,13 @@ public class QueryStringUtil {
                 StringBuilder sb = new StringBuilder();
 
                 String _varID = Integer.toString(varID);
+                int i = 0;
                 for (ExclusiveStatement stmt : stmts) {
                 sb = appendVarId(sb, stmt.getSubjectVar(), _varID, varNames, bindings).append(" ");
                 sb = appendVarId(sb, stmt.getPredicateVar(), _varID, varNames, bindings).append(" ");
 
-                sb.append("?o_").append(_varID);
-                varNames.add("o_" + _varID);
+                sb.append("?o"+i+"_").append(_varID);
+                varNames.add("o"+i+"_" + _varID);
 
                 String objValue;
                 if (stmt.getObjectVar().hasValue()) {
@@ -747,7 +770,8 @@ public class QueryStringUtil {
                         throw new RuntimeException("Unexpected.");
                 }
 
-                sb.append(" FILTER (?o_").append(_varID).append(" = ").append(objValue).append(" )");
+                sb.append(" FILTER (?o"+i+"_").append(_varID).append(" = ").append(objValue).append(" )");
+                i++;
                 }
                 return sb.toString();
         }

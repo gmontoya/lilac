@@ -39,7 +39,6 @@ import com.fluidops.fedx.evaluation.iterator.SingleBindingSetIteration;
 import com.fluidops.fedx.structures.Endpoint;
 import com.fluidops.fedx.structures.QueryInfo;
 
-
 /**
  * A statement pattern with no free variables when provided with some particular BindingSet
  * in evaluate. For evaluation a boolean ASK query is performed.
@@ -150,23 +149,23 @@ public class CheckStatementPattern implements StatementTupleExpr, BoundJoinTuple
 	@Override
 	public CloseableIteration<BindingSet, QueryEvaluationException> evaluate(BindingSet bindings) throws QueryEvaluationException {
 		
-		StatementPattern st = (StatementPattern)stmt;
-	
+		//StatementPattern st = (StatementPattern)stmt;
 		try {
 			// return true if at least one endpoint has a result for this binding set
 			for (StatementSource source : stmt.getStatementSources()) {
 				Endpoint ownedEndpoint = EndpointManager.getEndpointManager().getEndpoint(source.getEndpointID());
 				RepositoryConnection ownedConnection = ownedEndpoint.getConn();
 				TripleSource t = ownedEndpoint.getTripleSource();
-				if (t.hasStatements(st, ownedConnection, bindings))
+				if ((stmt instanceof StatementPattern) && t.hasStatements((StatementPattern)stmt, ownedConnection, bindings))
 					return new SingleBindingSetIteration(bindings);
+                                else if ((stmt instanceof ExclusiveGroup) && t.hasStatements((ExclusiveGroup)stmt, ownedConnection, bindings))
+                                        return new SingleBindingSetIteration(bindings);
 			}
 		} catch (RepositoryException e) {
 			throw new QueryEvaluationException(e);
 		} catch (MalformedQueryException e) {
 			throw new QueryEvaluationException(e);
 		}
-	
 		// XXX return NULL instead and add an additional check?
 		return new EmptyIteration<BindingSet, QueryEvaluationException>();
 	}
