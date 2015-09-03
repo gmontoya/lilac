@@ -33,12 +33,14 @@ import com.fluidops.fedx.algebra.CheckStatementPattern;
 import com.fluidops.fedx.algebra.FedXService;
 import com.fluidops.fedx.algebra.IndependentJoinGroup;
 import com.fluidops.fedx.algebra.StatementTupleExpr;
+import com.fluidops.fedx.algebra.ExclusiveGroup;
 import com.fluidops.fedx.evaluation.FederationEvalStrategy;
 import com.fluidops.fedx.evaluation.concurrent.ControlledWorkerScheduler;
 import com.fluidops.fedx.evaluation.concurrent.ParallelTask;
 import com.fluidops.fedx.structures.QueryInfo;
 
-
+import org.openrdf.model.Value;
+import org.openrdf.query.Binding;
 
 /**
  * Execute the nested loop join in an asynchronous fashion, using grouped requests,
@@ -72,8 +74,11 @@ public class ControlledWorkerBoundJoin extends ControlledWorkerJoin {
 			super.handleBindings();	// fallback
 			return;
 		}
-		
-		int nBindingsCfg = Config.getConfig().getBoundJoinBlockSize();	
+                int numberTriples = 1;
+		if (rightArg instanceof ExclusiveGroup) {
+                    numberTriples = ((ExclusiveGroup) rightArg).getNumberStatements();
+                }
+		int nBindingsCfg = Config.getConfig().getBoundJoinBlockSize() - ((numberTriples+1)/2);	
 		int totalBindings = 0;		// the total number of bindings
 		TupleExpr expr = rightArg;
 		
@@ -124,9 +129,13 @@ public class ControlledWorkerBoundJoin extends ControlledWorkerJoin {
 			bindings = new ArrayList<BindingSet>(nBindings);
 			
 			int count=0;
-			while (count < nBindings && leftIter.hasNext()) {
-				bindings.add(leftIter.next());
+                        int size = 0;
+			while (count < nBindings && size < 1000 && leftIter.hasNext()) {
+                                BindingSet bs = leftIter.next();
+                                bindings.add(bs);
+				//bindings.add(leftIter.next());
 				count++;
+                                size = size + size(bs);
 			}
 			
 			totalBindings += count;		
@@ -149,6 +158,18 @@ public class ControlledWorkerBoundJoin extends ControlledWorkerJoin {
 			}
 		}	
 	}
+
+    private static int size(BindingSet bs) {
+
+        java.util.Iterator<Binding> it = bs.iterator();
+        int s = 0;
+        while (it.hasNext()) {
+            Binding b = it.next();
+            Value v = b.getValue();
+            s = s + v.stringValue().length();
+        }
+        return s;
+    }
 
 	/**
 	 * Returns true if the vectored evaluation can be applied for the join argument, i.e.

@@ -136,6 +136,10 @@ public class ExclusiveGroup extends QueryModelNodeBase implements StatementTuple
 		// XXX make a copy? (or copyOnWrite list?)
 		return owned;
 	}
+
+        public int getNumberStatements() {
+                return owned.size();
+        }
 	
 	@Override
 	public int getFreeVarCount() {
