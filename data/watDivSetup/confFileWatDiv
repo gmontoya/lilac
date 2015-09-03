@@ -1,8 +1,10 @@
 debugQueryPlan=true
+cacheLocation=$fedrahome/data/watDivSetup/cache.db
 EndpointsFile=$fedrahome/data/watDivSetup/fedraFiles/endpoints
 FragmentsSources=$fedrahome/data/watDivSetup/fedraFiles/fragmentsSources
 FragmentsDefinitionFolder=$fedrahome/data/watDivSetup/fedraFiles/fragments
+PredicateIndex=$fedrahome/data/watDivSetup/fedraFiles/predicateIndex
 Random=false
-SourceSelectionStrategy=engine
+SourceSelectionStrategy=Fedra
 Threshold=0
 DawIndex=$fedrahome/data/watDivSetup/dawIndex.ttl

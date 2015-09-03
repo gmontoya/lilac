@@ -1,8 +1,10 @@
 debugQueryPlan=true
+cacheLocation=$fedrahome/data/linkedMDBSetup/cache.db
 EndpointsFile=$fedrahome/data/linkedMDBSetup/fedraFiles/endpoints
 FragmentsSources=$fedrahome/data/linkedMDBSetup/fedraFiles/fragmentsSources
 FragmentsDefinitionFolder=$fedrahome/data/linkedMDBSetup/fedraFiles/fragments
+PredicateIndex=$fedrahome/data/linkedMDBSetup/fedraFiles/predicateIndex
 Random=false
-SourceSelectionStrategy=engine
+SourceSelectionStrategy=Fedra
 Threshold=0
 DawIndex=$fedrahome/data/linkedMDBSetup/dawIndex.ttl

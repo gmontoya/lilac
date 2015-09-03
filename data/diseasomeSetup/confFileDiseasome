@@ -1,8 +1,10 @@
 debugQueryPlan=true
+cacheLocation=$fedrahome/data/diseasomeSetup/cache.db
 EndpointsFile=$fedrahome/data/diseasomeSetup/fedraFiles/endpoints
 FragmentsSources=$fedrahome/data/diseasomeSetup/fedraFiles/fragmentsSources
 FragmentsDefinitionFolder=$fedrahome/data/diseasomeSetup/fedraFiles/fragments
+PredicateIndex=$fedrahome/data/diseasomeSetup/fedraFiles/predicateIndex
 Random=false
-SourceSelectionStrategy=engine
+SourceSelectionStrategy=Fedra
 Threshold=0
 DawIndex=$fedrahome/data/diseasomeSetup/dawIndex.ttl

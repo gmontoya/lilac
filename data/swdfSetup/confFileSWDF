@@ -1,8 +1,10 @@
 debugQueryPlan=true
+cacheLocation=$fedrahome/data/swdfSetup/cache.db
 EndpointsFile=$fedrahome/data/swdfSetup/fedraFiles/endpoints
 FragmentsSources=$fedrahome/data/swdfSetup/fedraFiles/fragmentsSources
 FragmentsDefinitionFolder=$fedrahome/data/swdfSetup/fedraFiles/fragments
+PredicateIndex=$fedrahome/data/swdfSetup/fedraFiles/predicateIndex
 Random=false
-SourceSelectionStrategy=engine
+SourceSelectionStrategy=Fedra
 Threshold=0
 DawIndex=$fedrahome/data/swdfSetup/dawIndex.ttl
