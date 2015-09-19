@@ -59,6 +59,9 @@ class DawSourceSelection:
 
         for tp in self.selectedSources:
             capableDatasources = self.selectedSources[tp]
+            capableDatasources = sorted(list(capableDatasources))
+            #print 'triple: '+str(tp)
+            #print 'capable datasources: '+str(capableDatasources)
             bestSources = []
             if len(capableDatasources) > 0:
                 bestSources = self.sourceWiseRankingAndSkipping(tp, capableDatasources)
@@ -118,7 +121,8 @@ class DawSourceSelection:
 
         while len(capableDatasources) > 0:
             selectedSource = None
-            maxNewTriples = -sys.maxint - 1
+            maxNewTriples = 0 
+            # -sys.maxint - 1
 
             for cd in capableDatasources:
                 e = self.summaries[cd]

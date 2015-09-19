@@ -13,23 +13,76 @@ from services import Argument, Triple
 import random
 
 def obtainInstance(candidateSources, elements, collections):
+        endpoints = {}
         for t in candidateSources:
             fs = candidateSources[t]
-            i = 0
+            elements.add(t)
             for f in fs:
-                elements.add((t, i)) 
                 for e in f:
-                    if not (e in collections):
-                        ts = set()
+                    if e in ts:
+                        ts = endpoints[e]
                     else:
-                        ts = collections[e]
-                    ts.add((t, i))
-                    collections[e] = ts
+                        ts = set()
+                    ts.add(t)
+                    endpoints[e] = ts
+        for e in endpoints:
+            i = 0
+            triples = endpoints[e]
+            triplesAux = set(triples)
+            while len(triplesAux) > 0:
+                for x in triplesAux:
+                    ts = x
+                    break
+                c = getConnected(ts, triples)
+                collections[(e, i)] = c
+                for x in c:
+                    triplesAux.remove(x)
                 i = i + 1
+
+def getConnected(t, triples):
+        triplesAux = set()
+        connected = set()
+        connected.add(t)
+        size = 0
+        while size != len(connected):
+            size = len(connected)
+            toRemove = set()
+            for tAux in triplesAux:
+                if joinAny(tAux, connected):
+                    connected.add(tAux)
+                    toRemove.add(tAux)
+            for tAux in toRemove:
+                triplesAux.remove(tAux)
+        return connected
+
+def joinAny(t, triples):
+    join = False
+    for tAux in triples:
+        if join(t, tAux):
+            join = True
+            break
+    return join
+
+def join(t1, t2):
+    varsT1 = set()
+    varsT2 = set()
+
+    varsT1.add(t1.subject.value)
+    if not(t1.predicate.constant):
+        varsT1.add(t1.predicate.value)
+    varsT1.add(t1.theobject.value)
+
+    varsT2.add(t2.subject.value)
+    if not(t2.predicate.constant):
+        varsT2.add(t2.predicate.value)
+    varsT2.add(t2.theobject.value)
+
+    varsT1.intersection_update(varsT2)
+    return (len(varsT1) > 0)
 
 def getMinimalSetCovering(elements, collections, r):
         elementsToCover = { x for x in elements }
-        selected = set()
+        selected = {}
         while len(elementsToCover) > 0:
             c = []
             for k in collections:
@@ -47,19 +100,32 @@ def getMinimalSetCovering(elements, collections, r):
             else: 
                 e = c[0]
             elementsToCover = { x for x in elementsToCover if not(x in collections[e])}
-            selected.add(e)
+            selected[e] = collections[e]
             del collections[e]
         return selected
 
 def select(candidateSources, selected):
         ss = {}
+        ssAux = {}
+        for s in selected:
+            endpoint = s[0]
+            triples = selected[s]
+            for t in triples:
+                if t in ssAux:
+                    endpoints = ssAux[t]
+                else:
+                    endpoints = set()
+                if not(endpoint in endpoints):
+                    endpoints.add(frozenset(endpoint))
+                ssAux[t] = endpoints
         for t in candidateSources:
-            fs = candidateSources[t]
+            fs = cantidateSources[t]
+            tSelected = ssAux[t]
             es = set()
             for f in fs:
-                nf = set(f)
-                nf.intersection_update(selected)
-                es.add(frozenset(nf))
+                newSelected = set(tSelected)
+                newSelected.intersection_update(f)
+                es.add(frozenset(newSelected))
             ss[t] = es
         return ss
 
@@ -187,7 +253,7 @@ class TriplePatternFragment:
     def __repr__(self):
         return '<'+str(self.triple)+', '+str(self.dataset)+', '+str(self.endpoints)+'>'
 
-class FedraSourceSelection:
+class FedraQueryRewriter:
 
     def __init__(self, tl, el, props, ps):
         self.tripleList = []
@@ -202,11 +268,16 @@ class FedraSourceSelection:
         self.loadFragmentDefinitions(props['FragmentsDefinitionFolder'], props['FragmentsSources'])
         self.loadEndpoints(props['EndpointsFile'])
         self.random = (props['Random'] == 'true')
+        self.loadIndex(props['PredicateIndex'])
+        self.options = {}
         #print 'end of the constructor'
         #print 'fragments: '+str(self.fragments)
 
     def getSelectedSources(self):
         return self.selectedSources
+
+    def getOptions(self):
+        return self.options
 
     def getEndpoints(self, selectedFragments):
         fs = set()
@@ -228,7 +299,14 @@ class FedraSourceSelection:
         for t in self.tripleList:
             #print 'triple: '+str(t)
             selectedFragments = set()
-            for fn in self.fns:
+            # predicate index
+            frags = None
+            if t.predicate.constant:
+                frags = self.predicateIndex[t.predicate.name]
+            else:
+                frags = self.fns
+
+            for fn in frags:
                 f = self.fragments[fn]
                 #print 'considering fragment: '+str(fn)
                 #print 'f: '+str(f)
@@ -274,6 +352,20 @@ class FedraSourceSelection:
     def performSourceSelection(self):
         candidateSources = self.sourceSelectionPerTriple()
         #print 'candidate sources: '+str(candidateSources)
+        for t in candidateSources:
+            sources = candidateSources[t]
+            if len(sources) == 1:
+                for x in sources:
+                    equivalentSources = x
+                    break
+                for es in equivalentSources:
+                    if es in options:
+                        optionalStatements = options[es]
+                    else:
+                        optionalStatements = set()
+                    optionalStatements.add(t)
+                    options[es] = optionalStatements
+
         bgp2 = []
         for t in self.tripleList:
             if len(candidateSources[t]) > 1:
@@ -299,15 +391,38 @@ class FedraSourceSelection:
         selectedSubsets = getMinimalSetCovering(elements, collections, self.random)
         bgpCandidateSources = select(bgpCandidateSources, selectedSubsets)
         update(candidateSources, bgpCandidateSources)
+        self.selectedSources = candidateSources
 
-        self.selectedSources.clear()
-        for t in candidateSources:
-            fs = candidateSources[t]
-            es = set()
-            for f in fs:
-                e = random.choice(list(f))
-                es.add('<'+str(e)+'>')
-            self.selectedSources[t] = es
+    def loadIndex(self, fileName):
+        self.predicateIndex = {}
+        predicates = set()
+        for t in self.tripleList:
+            if t.predicate.constant:
+                predicates.add(t.predicate.name)
+            else:
+                predicates = None
+                break
+        with open (fileName, 'r') as f:
+            predicate = None
+            skip = False
+            for line in f:
+                line = line.strip()
+                ws = line.split()
+                if (len(ws) == 0):
+                    continue
+                if (predicate == None) or skip:
+                    predicate = ws[0]
+                    fs = set()
+                    skip = (predicates != None) and not(predicate in predicates)
+                    continue
+                else:
+                    i = 0
+                    while i < len(ws):
+                        f = ws[i]
+                        fs.add(f)
+                        i = i + 1
+                    self.predicateIndex[predicate] = fs
+                    predicate = None
 
     def loadEndpoints(self, fileName):
         with open (fileName, 'r') as f:
@@ -318,7 +433,7 @@ class FedraSourceSelection:
                     fragment = ws[0]
                     i = 1
                     f = self.fragments[fragment]
-                    while i < len(ws):
+                    while (i < len(ws)) and (f != None):
                         endpoint = ws[i]
                         f.addSource(endpoint)
                         i = i + 1
@@ -335,11 +450,13 @@ class FedraSourceSelection:
                     ds = ws[1]
                     datasets[fragment] = ds
                     self.fns.append(fragment)
+        fs = set()
+        for frags in self.predicateIndex.values():
+            for f in frags:
+                fs.add(f)
 
-        content = os.listdir(folder)
-        self.viewsDefinition = {}
-        for g in content:
-            path = folder+'/'+g
+        for f in fs:
+            path = folder+'/'+f
             f = open(path)
             viewStr = f.read()
             f.close()

@@ -72,35 +72,48 @@ def decomposeJoinBlock(jb, l, genPred, prefixes, decomposition, c):
             if pub:
                 sl.append(pub)
     #print 'fl'
-    #print fl 
+    #print fl
+    replace = False 
     if tl:
         #confFile=os.getcwd()+'/confFile'
+        selectedSources = {}
+        props = {}
         if os.path.isfile(confFile):
-            props = {}
             with open(confFile, 'r') as f:
                 for line in f:
                     line = line.strip()
                     k, v = line.split("=", 1)
                     props[k.strip()] = v.strip()
             #print props['SourceSelectionStrategy']
-            selectedSources = {}
-            if (len(props['SourceSelectionStrategy'])>4 and props['SourceSelectionStrategy'][:5] == 'Fedra'):
+        if 'SourceSelectionStrategy' in props:
+            sss = props['SourceSelectionStrategy']
+        else:
+            sss = 'engine'
+        if (sss == 'FedraQR'):
+            fqr = FedraQueryRewriter(tl, l, props, prefixes)
+            fqr.performSourceSelection()
+            selectedSources = fqr.getSelectedSources()
+            options = fqr.getOptions()
+            gs = getGroupsFedraQR(l, tl, prefixes, selectedSources, options)
+        else:
+            if (sss == 'Fedra'):
                 fss = FedraSourceSelection(tl, l, props, prefixes)
                 fss.performSourceSelection()
                 selectedSources = fss.getSelectedSources()
                 #print 'Fedra selected sources: \n'+str(selectedSources)
-            for tp in tl:
-                if not (tp in selectedSources):
+                replace = True
+            else:
+                for tp in tl:
                     ss = set(search(l, tp.predicate, prefixes))
                     selectedSources[tp] = ss
-                #print selectedSources
-            if (len(props['SourceSelectionStrategy'])>2 and props['SourceSelectionStrategy'][-3:] == 'DAW'):
-                dss = DawSourceSelection(selectedSources, props, prefixes)
-                dss.performSourceSelection()
-                selectedSources = dss.getSelectedSources()
-                #print 'DAW selected sources: \n'+str(selectedSources)
-        #print 'selected sources: '+str(selectedSources)
-        gs = getGroups(l, tl, genPred, prefixes, decomposition, c, selectedSources)
+                if (sss == 'DAW'):
+                    dss = DawSourceSelection(selectedSources, props, prefixes)
+                    dss.performSourceSelection()
+                    selectedSources = dss.getSelectedSources()
+                    replace = True
+                    #print 'DAW selected sources: \n'+str(selectedSources)
+                #print 'selected sources: '+str(selectedSources)
+            gs = getGroups(l, tl, genPred, prefixes, decomposition, c, selectedSources, replace)
         #print l
         #print 'gs'
         #print gs
@@ -126,7 +139,121 @@ def decomposeJoinBlock(jb, l, genPred, prefixes, decomposition, c):
 def updateFilters(node,filters):
    return UnionBlock(node.triples,filters)
 
-def getGroups(l, tl, genPred, prefixes, decomposition, c, selectedSources):
+def getGroupsFedraQR(l, tl, prefixes, selectedSources, options):
+    union = set()
+    exclusive = set()
+    covered = set()
+    endpoints = collections.defaultdict(list)
+    exclusiveSources = set()
+    for t in tl:
+        sources = selectedSources[t]
+        if len(sources) > 1:
+            union.add(t)
+            for ss in sources:
+                for s in ss:
+                    if s in options:
+                        set2 = set(options[s])
+                    else:
+                        set2 = set()
+                    endpoints[s] = set2
+        else:
+            exclusive.add(t)
+    listOperators = []
+    for t in union:
+        r = transform(t, endpoints, covered, selectedSources)
+        if r == None:
+            return []
+        listOperators.append(r)
+    endpoints = collections.defaultdict(list)
+    added = set()
+    for e in exclusive:
+        sourcesAux = selectedSources[e]
+        for s in sourcesAux:
+            sources = s
+            break
+        for endpoint in sources:
+            if ss in endpoints:
+                ss = endpoints[endpoint]
+            else:
+                ss = set()
+            ss.add(e)
+            endpoints[endpoint] = ss
+    listExclusiveOperators = []
+    for endpoint in endpoints: 
+        triples0 = endpoints[endpoint]
+        connectedTriples = getConnectedTriples(triples0)
+   
+        aux = [Service(endpoint, triples) for triples in connectedTriples if not(triples.issubset(covered))]
+        listExclusiveOperators = listExclusiveOperators + aux
+        for triples in connectedTriples:
+            for tp in triples:
+                if not(tp in covered):
+                    covered.add(tp)
+    if (len(listExclusiveOperators) > 0) and (len(listOperators) > 0):
+        listOperators.insert(0, listExclusiveOperators)
+    elif (len(listExclusiveOperators) > 0):
+        listOperators = listExclusiveOperators
+    return listOperators
+
+def transform(t, endpoints, covered, selectedSources):
+    sources = selectedSources[t]
+    if sources != None:
+        args = []
+        ts = None
+        alreadyIncludedSources = set()
+        for ss in sources:
+            s = None
+            max = 0
+            for sAux in ss:
+                if sAux in endpoints:
+                    size = len(endpoints[sAux])
+                else:
+                    size = 0
+                if (s != None) or (size > max):
+                    max = size
+                    s = sAux
+            if s in alreadyIncludedSources:
+                continue
+            alreadyIncludedSources.add(s)
+            if ts == None:
+                ts = set(endpoints[s])
+            else:
+                ts = { x for x in ts if x in endpoints[s] }
+            tl = []
+            for tp in endpoints[s]:
+                tl.append(tp)
+            tl.append(t)
+            aux = JoinBlock([Service(s, tl)]) 
+            args.append(aux)
+        if ts != None:
+            for tp in ts:
+                covered.add(tp)
+        if len(args) > 1:
+            return UnionBlock(args)
+        elif len(args) == 1:
+            return aux[0]
+    return None
+
+def getConnectedTriples(triples):
+
+    connected = []
+    for t in triples:
+        c = FedraQueryRewriter.getConnected(t, triples)
+        toRemove = []
+        add = True
+        for d in connected:
+            if c.issuperset(d):
+                toRemove.append(d)
+            elif d.issuperset(c):
+                add = False
+                break
+        for d in toRemove:
+            connected.remove(d)
+        if add and not(c in connected):
+            connected.append(c)
+    return connected
+
+def getGroups(l, tl, genPred, prefixes, decomposition, c, selectedSources, replace):
 
     if decomposition == "EG":
         (g, f) = getExclusiveGroups(l, tl, prefixes, selectedSources)
@@ -145,7 +272,7 @@ def getGroups(l, tl, genPred, prefixes, decomposition, c, selectedSources):
         else:
             return r
     elif decomposition == "SSGM":
-        (g, f) = getStarsM(l, tl, genPred, prefixes, c, selectedSources)
+        (g, f) = getStarsM(l, tl, genPred, prefixes, c, selectedSources, replace)
         if g and f:
             f.insert(0, g)
             return f
@@ -536,11 +663,24 @@ def assignEndpointS(tl, l, genPred, prefixes, c, selectedSources):
         qcl[p].append(sg)
     return qcl
 
-def assignEndpointM(tl, l, genPred, prefixes, c, selectedSources):
+def useSelectedSources(selectedSources, qcl0, qcl1):
+
+    for tp in selectedSources:
+        endpoints = selectedSources[tp]
+        if len(endpoints) > 1:
+            qcl1[tp].extend(endpoints)
+        elif len(endpoints) == 1:
+            for e in endpoints:
+                break
+            qcl0[e].append(tp)            
+
+def assignEndpointM(tl, l, genPred, prefixes, c, selectedSources, replace):
     qcl0 = collections.defaultdict(list)
     qcl1 = collections.defaultdict(list)
     ts = list(tl)
-
+    if replace:
+        useSelectedSources(selectedSources, qcl0, qcl1)
+        return (qcl0, qcl1)
     for sg in tl:
         eps0 = list(selectedSources[sg]) #['<'+ss+'>' for ss in selectedSources[sg]] #search(l, sg, prefixes)
         eps = eps0
@@ -656,8 +796,8 @@ def getStarsS(l, tl, genPred, prefixes, c, selectedSources):
         views = views + serv
     return postp2(views)
 
-def getStarsM(l, tl, genPred, prefixes, c, selectedSources):
-    (qcl0, qcl1) = assignEndpointM(tl, l, genPred, prefixes, c, selectedSources)
+def getStarsM(l, tl, genPred, prefixes, c, selectedSources, replace):
+    (qcl0, qcl1) = assignEndpointM(tl, l, genPred, prefixes, c, selectedSources, replace)
     views0 = []
     views1 = []
     #print qcl0
