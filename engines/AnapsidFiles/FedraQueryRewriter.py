@@ -19,7 +19,7 @@ def obtainInstance(candidateSources, elements, collections):
             elements.add(t)
             for f in fs:
                 for e in f:
-                    if e in ts:
+                    if e in endpoints:
                         ts = endpoints[e]
                     else:
                         ts = set()
@@ -40,7 +40,8 @@ def obtainInstance(candidateSources, elements, collections):
                 i = i + 1
 
 def getConnected(t, triples):
-        triplesAux = set()
+        #print 'getConnected. t: '+str(t)+' triples: '+str(triples)
+        triplesAux = set(triples)
         connected = set()
         connected.add(t)
         size = 0
@@ -56,26 +57,27 @@ def getConnected(t, triples):
         return connected
 
 def joinAny(t, triples):
-    join = False
+    #print 'inside joinAny'
+    joinExists = False
     for tAux in triples:
         if join(t, tAux):
-            join = True
+            joinExists = True
             break
-    return join
+    return joinExists
 
 def join(t1, t2):
     varsT1 = set()
     varsT2 = set()
 
-    varsT1.add(t1.subject.value)
+    varsT1.add(t1.subject.name)
     if not(t1.predicate.constant):
-        varsT1.add(t1.predicate.value)
-    varsT1.add(t1.theobject.value)
+        varsT1.add(t1.predicate.name)
+    varsT1.add(t1.theobject.name)
 
-    varsT2.add(t2.subject.value)
+    varsT2.add(t2.subject.name)
     if not(t2.predicate.constant):
-        varsT2.add(t2.predicate.value)
-    varsT2.add(t2.theobject.value)
+        varsT2.add(t2.predicate.name)
+    varsT2.add(t2.theobject.name)
 
     varsT1.intersection_update(varsT2)
     return (len(varsT1) > 0)
@@ -109,6 +111,7 @@ def select(candidateSources, selected):
         ssAux = {}
         for s in selected:
             endpoint = s[0]
+            #print 'endpoint: '+str(endpoint)
             triples = selected[s]
             for t in triples:
                 if t in ssAux:
@@ -116,10 +119,11 @@ def select(candidateSources, selected):
                 else:
                     endpoints = set()
                 if not(endpoint in endpoints):
-                    endpoints.add(frozenset(endpoint))
+                    endpoints.add(endpoint)
                 ssAux[t] = endpoints
+        #print 'ssAux: '+str(ssAux)
         for t in candidateSources:
-            fs = cantidateSources[t]
+            fs = candidateSources[t]
             tSelected = ssAux[t]
             es = set()
             for f in fs:
@@ -265,13 +269,15 @@ class FedraQueryRewriter:
         self.endpointsList = el
         self.selectedSources = {}
         self.fns = []
+        self.loadIndex(props['PredicateIndex'])
         self.loadFragmentDefinitions(props['FragmentsDefinitionFolder'], props['FragmentsSources'])
         self.loadEndpoints(props['EndpointsFile'])
         self.random = (props['Random'] == 'true')
-        self.loadIndex(props['PredicateIndex'])
+        #self.loadIndex(props['PredicateIndex'])
         self.options = {}
         #print 'end of the constructor'
         #print 'fragments: '+str(self.fragments)
+        #print 'PredicateIndex: '+str(self.predicateIndex)
 
     def getSelectedSources(self):
         return self.selectedSources
@@ -359,12 +365,12 @@ class FedraQueryRewriter:
                     equivalentSources = x
                     break
                 for es in equivalentSources:
-                    if es in options:
-                        optionalStatements = options[es]
+                    if es in self.options:
+                        optionalStatements = self.options[es]
                     else:
                         optionalStatements = set()
                     optionalStatements.add(t)
-                    options[es] = optionalStatements
+                    self.options[es] = optionalStatements
 
         bgp2 = []
         for t in self.tripleList:
@@ -389,11 +395,15 @@ class FedraQueryRewriter:
         #print 'elements: '+str(elements)
         #print 'collections: '+str(collections)
         selectedSubsets = getMinimalSetCovering(elements, collections, self.random)
+        #print 'selectedSubsets: '+str(selectedSubsets)
+        #print 'bgpCandidateSources: '+str(bgpCandidateSources)
         bgpCandidateSources = select(bgpCandidateSources, selectedSubsets)
+        #print 'bgpCandidateSources: '+str(bgpCandidateSources)
         update(candidateSources, bgpCandidateSources)
         self.selectedSources = candidateSources
 
     def loadIndex(self, fileName):
+        #print "inside loadIndex"
         self.predicateIndex = {}
         predicates = set()
         for t in self.tripleList:
@@ -402,28 +412,31 @@ class FedraQueryRewriter:
             else:
                 predicates = None
                 break
+        #print 'predicates: '+str(predicates)
         with open (fileName, 'r') as f:
-            predicate = None
-            skip = False
+            
             for line in f:
+                #print line
                 line = line.strip()
                 ws = line.split()
                 if (len(ws) == 0):
                     continue
-                if (predicate == None) or skip:
-                    predicate = ws[0]
-                    fs = set()
-                    skip = (predicates != None) and not(predicate in predicates)
+     
+                predicate = ws[0]
+                fs = set()
+                if (predicates != None) and not(('<'+predicate+'>') in predicates):
                     continue
-                else:
-                    i = 0
-                    while i < len(ws):
-                        f = ws[i]
-                        fs.add(f)
-                        i = i + 1
-                    self.predicateIndex[predicate] = fs
-                    predicate = None
-
+                #print 'predicate! '+str(predicate)
+                i = 1
+                while i < len(ws):
+                    f = ws[i]
+                    #print 'f: '+str(f)
+                    fs.add(f)
+                    i = i + 1
+                #print 'fs '+str(fs)
+                self.predicateIndex['<'+predicate+'>'] = fs
+     
+        #print 'predicateIndex: '+str(self.predicateIndex)
     def loadEndpoints(self, fileName):
         with open (fileName, 'r') as f:
             for line in f:
@@ -432,8 +445,10 @@ class FedraQueryRewriter:
                 if (len(ws) > 0):
                     fragment = ws[0]
                     i = 1
+                    if not(fragment in self.fragments):
+                        continue
                     f = self.fragments[fragment]
-                    while (i < len(ws)) and (f != None):
+                    while (i < len(ws)):
                         endpoint = ws[i]
                         f.addSource(endpoint)
                         i = i + 1
@@ -454,7 +469,7 @@ class FedraQueryRewriter:
         for frags in self.predicateIndex.values():
             for f in frags:
                 fs.add(f)
-
+        #print 'fs: '+str(fs)
         for f in fs:
             path = folder+'/'+f
             f = open(path)
@@ -468,7 +483,7 @@ class FedraQueryRewriter:
             name = path[i:j]
             ds = datasets[name]
             self.fragments[name] = TriplePatternFragment(t, ds)
-
+        #print self.fragments
 def getTriple(query):
     ts = getTriples(query)
     t = ts[0]

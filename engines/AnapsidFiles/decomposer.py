@@ -16,6 +16,8 @@ from Tree import Node, Leaf
 from utils import *
 from services import Service, Argument, Triple, Filter, Optional, UnionBlock, JoinBlock, Query
 from FedraSourceSelection import FedraSourceSelection
+from FedraQueryRewriter import FedraQueryRewriter, getConnected
+
 from DawSourceSelection import DawSourceSelection
 
 logger = logging.getLogger(__name__)
@@ -94,7 +96,10 @@ def decomposeJoinBlock(jb, l, genPred, prefixes, decomposition, c):
             fqr.performSourceSelection()
             selectedSources = fqr.getSelectedSources()
             options = fqr.getOptions()
+            #print 'FedraQR selected sources: \n'+str(selectedSources)
+            #print 'FedraQR options: \n'+str(options)
             gs = getGroupsFedraQR(l, tl, prefixes, selectedSources, options)
+            #print 'groups fedra: '+str(gs)
         else:
             if (sss == 'Fedra'):
                 fss = FedraSourceSelection(tl, l, props, prefixes)
@@ -172,23 +177,34 @@ def getGroupsFedraQR(l, tl, prefixes, selectedSources, options):
             sources = s
             break
         for endpoint in sources:
-            if ss in endpoints:
+            if endpoint in endpoints:
                 ss = endpoints[endpoint]
             else:
                 ss = set()
             ss.add(e)
             endpoints[endpoint] = ss
+    #print 'listOperators: '+str(listOperators)
     listExclusiveOperators = []
     for endpoint in endpoints: 
         triples0 = endpoints[endpoint]
         connectedTriples = getConnectedTriples(triples0)
-   
-        aux = [Service(endpoint, triples) for triples in connectedTriples if not(triples.issubset(covered))]
-        listExclusiveOperators = listExclusiveOperators + aux
+        aux = []
+        for triples in connectedTriples:
+            #print 'type(triples)'+str(type(triples))
+            if not(triples.issubset(covered)):
+                x = Service('<'+endpoint+'>', list(triples))
+                #print 'type(x) '+str(type(x))
+                aux.append(x)
+        #aux = [Service(endpoint, triples) for triples in connectedTriples if not(triples.issubset(covered))]
+
+        #print 'aux '+str(aux)
+        #print 'type(aux)'+str(type(aux))
+        listExclusiveOperators.extend(aux)
         for triples in connectedTriples:
             for tp in triples:
                 if not(tp in covered):
                     covered.add(tp)
+    #print 'listEO: '+str(listExclusiveOperators)
     if (len(listExclusiveOperators) > 0) and (len(listOperators) > 0):
         listOperators.insert(0, listExclusiveOperators)
     elif (len(listExclusiveOperators) > 0):
@@ -223,7 +239,7 @@ def transform(t, endpoints, covered, selectedSources):
             for tp in endpoints[s]:
                 tl.append(tp)
             tl.append(t)
-            aux = JoinBlock([Service(s, tl)]) 
+            aux = JoinBlock([Service('<'+s+'>', list(tl))]) 
             args.append(aux)
         if ts != None:
             for tp in ts:
@@ -238,7 +254,7 @@ def getConnectedTriples(triples):
 
     connected = []
     for t in triples:
-        c = FedraQueryRewriter.getConnected(t, triples)
+        c = getConnected(t, triples)
         toRemove = []
         add = True
         for d in connected:
