@@ -163,12 +163,16 @@ def getGroupsFedraQR(l, tl, prefixes, selectedSources, options):
                     endpoints[s] = set2
         else:
             exclusive.add(t)
+    #print 'endpoints'
+    #print endpoints
     listOperators = []
     for t in union:
         r = transform(t, endpoints, covered, selectedSources)
         if r == None:
             return []
         listOperators.append(r)
+    #print 'list of operators'
+    #print listOperators
     endpoints = collections.defaultdict(list)
     added = set()
     for e in exclusive:
@@ -183,6 +187,8 @@ def getGroupsFedraQR(l, tl, prefixes, selectedSources, options):
                 ss = set()
             ss.add(e)
             endpoints[endpoint] = ss
+    #print 'endpoints'
+    #print endpoints
     #print 'listOperators: '+str(listOperators)
     listExclusiveOperators = []
     for endpoint in endpoints: 
@@ -209,6 +215,8 @@ def getGroupsFedraQR(l, tl, prefixes, selectedSources, options):
         listOperators.insert(0, listExclusiveOperators)
     elif (len(listExclusiveOperators) > 0):
         listOperators = listExclusiveOperators
+    elif (len(listExclusiveOperators) == 0) and (len(listOperators) == 0):
+        listOperators = None
     return listOperators
 
 def transform(t, endpoints, covered, selectedSources):
@@ -225,7 +233,7 @@ def transform(t, endpoints, covered, selectedSources):
                     size = len(endpoints[sAux])
                 else:
                     size = 0
-                if (s != None) or (size > max):
+                if (s == None) or (size > max):
                     max = size
                     s = sAux
             if s in alreadyIncludedSources:
