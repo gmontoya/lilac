@@ -16,21 +16,24 @@ updatesFile=${14}
 localProxyPort=${15}
 action=${16}
 address=${17}
+graph=${18}
 n=0
 queryFile=`mktemp`
 tmpFileNR=`mktemp --tmpdir=/home/gmontoya/tmp`
 
+
 if [ "$strategy" = "FEDERATION" ]; then
-  if [ "$action" != "justExecute" ]; then
+  if [ "$action" != "justExecute" ] && [ "$action" != "justSelect" ]; then
      cd ${fusekiPath}
      ./fuseki-server --port=${localPort} --update --mem /ds > outputFederationEndpoint${localPort} &
      pidFE=$!
      sleep 10
   fi
-  if [ "$action" != "justReplicate" ]; then 
+  if [ "$action" != "justReplicate" ] && [ "$action" != "justSelect" ]; then 
      cd ${fedrahome}/scripts
-     pidProxy=`./startOneProxy.sh $address ${localPort} ${localProxyPort} $tmpFileNR`
+     pidProxy=`./startOneProxy.sh $address ${localPort} ${localProxyPort} $tmpFileNR ${graph}`
      sleep 10s
+     #echo "proxy with pid $pidProxy started in address $address "
   fi
 fi
 if [ "$strategy" = "LOCAL" ]; then

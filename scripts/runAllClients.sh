@@ -23,6 +23,7 @@ queriesToExecute=${19}
 publicEndpointPort=${20}
 publicEndpointProxyPort=${21}
 setupFolder=${22}
+federation=${23}
 tmpFilePEP=`mktemp`
 lastPort=$(($firstPort+$numberClients-1))
 last=$(($numberClients-1))
@@ -63,7 +64,7 @@ for strategy in $strategies; do
     for engine in $es; do
       for ss in $sss; do
         if [ "$strategy" = "FEDERATION" ] || [ "$strategy" = "PUBLIC" ]; then
-          if [ "$action" != "justReplicate" ]; then
+          if [ "$action" != "justReplicate" ] && [ "$action" != "justSelect" ]; then
             p=`pwd`
             cd ${fedrahome}/scripts
             address=`./getHost.sh $setupFolder/hosts 3040`
@@ -74,7 +75,7 @@ for strategy in $strategies; do
           fi
         fi
         sed -i".bkp" "s/SourceSelectionStrategy=[a-zA-Z_]*/SourceSelectionStrategy=${ss}/" ${configFile}
-        label="$engine${ss}$strategy"
+        label="$engine${ss}${strategy}"
         for i in `seq 0 $last`; do
             port=$(($firstPort+$i))
             proxyPort=$(($firstProxyPort+$i))
@@ -82,8 +83,9 @@ for strategy in $strategies; do
             cd ${fedrahome}/scripts
             address=`./getHost.sh $setupFolder/hosts $port`
             host=http://$address
-            cd $p 
-            oarsh $address "${fedrahome}/scripts/runClient.sh $strategy $queriesFile \"${l[i]}\" $port $ldfServer ${federationFile} $availability $answersFolder $publicEndpoint $engine $configFile $hdtFile $anapsidFederationFile ${updatesFile}${port} ${proxyPort} ${action} ${address} ${setupFolder}/output${label}${numberClients}Client$port > ${tmpFile}" 
+            cd $p
+            graph=http://${federation}Endpoint${i}
+            oarsh $address "${fedrahome}/scripts/runClient.sh $strategy $queriesFile \"${l[i]}\" $port $ldfServer ${federationFile} $availability $answersFolder $publicEndpoint $engine $configFile $hdtFile $anapsidFederationFile ${updatesFile}${port} ${proxyPort} ${action} ${address} ${setupFolder}/output${label}${numberClients}Client$port ${graph} > ${tmpFile}" 
             pid=`cat $tmpFile`
             spids="$spids $pid"
         done
@@ -107,7 +109,7 @@ for strategy in $strategies; do
         echo "clients finished"
         #sleep 1d
         if [ "$strategy" = "FEDERATION" ] || [ "$strategy" = "PUBLIC" ]; then                                                                                                       
-          if [ "$action" != "justReplicate" ]; then
+          if [ "$action" != "justReplicate" ] && [ "$action" != "justSelect" ]; then
             echo "pidPEProxy: $pidPEProxy"
             kill $pidPEProxy
             echo "pidPEProxy killed"
@@ -127,7 +129,7 @@ for strategy in $strategies; do
             n=$(($n-1))
             tmpFileNR=`head -n $n $file | tail -n 1`
             proxyAddress=`${fedrahome}/scripts/getHost.sh $setupFolder/hosts $port`
-            if [ "$action" != "justReplicate" ]; then
+            if [ "$action" != "justReplicate" ] && [ "$action" != "justSelect" ]; then
                 #echo "killing proxy with pid: $pidProxy in machine $proxyAddress"
                 oarsh $proxyAddress "${fedrahome}/scripts/endProxy.sh $pidProxy"
                 sleep 2s
@@ -142,7 +144,7 @@ for strategy in $strategies; do
                 cp ${setupFolder}/federation.ttl.bkp ${setupFolder}/federation.ttl
                 cp ${setupFolder}/endpointsDescription.bkp ${setupFolder}/endpointsDescription
             fi
-            if [ "$action" != "justExecute" ]; then
+            if [ "$action" != "justExecute" ] && [ "$action" != "justSelect" ]; then
                 updateTime=`./processUpdateFile.sh ${updatesFile}${port}`
                 (echo "$updateTime") >> $file
                 rm ${updatesFile}${port}

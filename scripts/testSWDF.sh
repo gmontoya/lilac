@@ -5,19 +5,23 @@ numQueries=100
 availability=0
 strategy="FEDERATION"
 firstProxyPort=3130
-engines="FedX11 ANAPSID11" 
-sourceSelectionStrategy="Fedra" 
-action=justExecute
-# justExecute justReplicate all
+engines="ANAPSID"
+sourceSelectionStrategy="FedraQR Fedra DAW engine" 
+action=justSelect
+# justSelect justExecute justReplicate all
 queriesToExecute=${fedrahome}/data/swdfSetup/queriesToExecute
-pePort=8996
+pePort=8900
 peProxyPort=3100
 setupFolder=${fedrahome}/data/swdfSetup
 host=`./getHost.sh $setupFolder/hosts 3040`
 host=http://$host
-publicEndpoint=${host}:${peProxyPort}/sparql
+if [ "$action" = "justSelect" ]; then
+  publicEndpoint=${host}:${pePort}/sparql
+else
+  publicEndpoint=${host}:${peProxyPort}/sparql
+fi
 queries=$setupFolder/queriesC
-firstPort=3030
+firstPort=8890
 federation=swdf
 ldfServer=${host}:5000/${federation}
 federationFile=$setupFolder/federation.ttl
@@ -27,4 +31,4 @@ hdtFile=$setupFolder/federationData.hdt
 endpointsDescription=$setupFolder/endpointsDescription
 updatesFile=$setupFolder/updatesFile
 
-./runAllClients.sh "${strategy}" ${numClients} ${queries} ${numQueries} ${firstPort} ${ldfServer} ${federationFile} ${availability} ${answersFile} ${publicEndpoint} "${engines}" ${confFile} ${hdtFile} ${endpointsDescription} ${updatesFile} ${firstProxyPort} "${sourceSelectionStrategy}" $action "$queriesToExecute" $pePort $peProxyPort $setupFolder
+./runAllClients.sh "${strategy}" ${numClients} ${queries} ${numQueries} ${firstPort} ${ldfServer} ${federationFile} ${availability} ${answersFile} ${publicEndpoint} "${engines}" ${confFile} ${hdtFile} ${endpointsDescription} ${updatesFile} ${firstProxyPort} "${sourceSelectionStrategy}" $action "$queriesToExecute" $pePort $peProxyPort $setupFolder ${federation}

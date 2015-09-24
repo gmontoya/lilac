@@ -4,14 +4,14 @@ strategies="FEDERATION"
 numClients=10
 queriesFile=${fedrahome}/data/swdfSetup/queriesC
 numQueries=100
-firstPort=3030
+firstPort=8890
 answersFile=${fedrahome}/data/swdfSetup/answers
-engines="FedX11 ANAPSID11"
+engines="ANAPSID"
 setupFolder=${fedrahome}/data/swdfSetup
 hdtFile=$setupFolder/federationData.hdt
 firstProxyPort=3130
-sourceSelectionStrategy="Fedra"
+sourceSelectionStrategy="FedraQR Fedra DAW engine"
 federation=SWDF
-queriesToExecute=$setupFolder/queriesToExecute
+queriesToExecute=${fedrahome}/data/swdfSetup/queriesToExecute
 
 ./testWithIndividualMeasures.sh "${strategies}" ${numClients} ${queriesFile} ${numQueries} ${firstPort} ${answersFile} "${engines}" ${hdtFile} ${firstProxyPort} "${sourceSelectionStrategy}" $setupFolder $federation "${queriesToExecute}"

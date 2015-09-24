@@ -46,7 +46,7 @@ while [ "$n" -lt "$numberQueries" ]; do
     for strategy in $strategies; do
         for engine in $engines; do
             for ss in $sourceSelectionStrategy; do    
-                label="$engine${ss}$strategy"
+                label="$engine${ss}${strategy}"
                 f=${setupFolder}/output${label}${numberClients}Client
                 x=`./getIRNCFederation.sh ${f} ${firstPort} ${lastPort}`
                 y=`grep "query${q}" ${f}${firstPort}`

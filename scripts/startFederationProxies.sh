@@ -1,13 +1,13 @@
 firstPort=8890
 lastPort=8899
 firstProxyPort=3130
-pePort=8890
+pePort=8900
 peProxyPort=3100
 proxyFolder=${fedrahome}/proxy
 peGraph=""
-graphPrefix=""
-graphIndex=""
+graphIndex=0
 federation=$1
+graphPrefix=http://${federation}Endpoint
 
-./startProxies.sh $firstPort $lastPort $firstProxyPort $pePort $peProxyPort $proxyFolder $federation "$peGraph" "$graphPrefix" "$graphIndex"
+./startProxies.sh $firstPort $lastPort $firstProxyPort $pePort $peProxyPort $proxyFolder $federation "$peGraph" $graphPrefix $graphIndex
 

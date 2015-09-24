@@ -4,14 +4,15 @@ strategies="FEDERATION"
 numClients=10
 queriesFile=${fedrahome}/data/linkedMDBSetup/queries
 numQueries=100
-firstPort=3030
+firstPort=8890
 answersFile=${fedrahome}/data/linkedMDBSetup/answers
-engines="FedX11 ANAPSID11"
+engines="ANAPSID"
 setupFolder=${fedrahome}/data/linkedMDBSetup
 hdtFile=$setupFolder/federationData.hdt
 firstProxyPort=3130
-sourceSelectionStrategy="Fedra"
+sourceSelectionStrategy="FedraQR Fedra DAW engine"
 federation=LinkedMDB
-queriesToExecute=$setupFolder/queriesToExecute
+queriesToExecute=${fedrahome}/data/linkedMDBSetup/queriesToExecute
+#$setupFolder/queriesToExecute
 
 ./testWithIndividualMeasures.sh "${strategies}" ${numClients} ${queriesFile} ${numQueries} ${firstPort} ${answersFile} "${engines}" ${hdtFile} ${firstProxyPort} "${sourceSelectionStrategy}" $setupFolder $federation "${queriesToExecute}"

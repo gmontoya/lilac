@@ -52,23 +52,35 @@ done
 query=`echo "${groundTruth##*/}"`
 if [ "$strategy" = "FEDERATION" ]; then
     # update endpoint should update also the fedra files, and possibly include this endpoint in the federationFile
-    if [ "$action" != "justExecute" ]; then
+    if [ "$action" != "justExecute" ] && [ "$action" != "justSelect" ]; then
       bash ./updateFederation.sh $queryFile http://${address}:${localPort}/ds $ldfServer $configFile $federationFile $newFederationFile $anapsidFederationFile $newAnapsidFederationFile $updatesFile http://${address}:${localProxyPort}/ds ${publicEndpoint}
     fi
     if [ "$engine" = "FedX11" ] && [ "$action" != "justReplicate" ]; then
         cd ${fedrahome}/code
         source $configFile
-        /usr/bin/time -f "%e %S %U" java -cp ".:${jenaPath}/lib/*" fedra2 $queryFile $FragmentsDefinitionFolder $EndpointsFile $FragmentsSources $Random $queryFileB $availableSources 2> $tmpFile
+        rm $tmpFile
+        for i in `seq 1 2`; do
+            /usr/bin/time -f "%e %S %U" java -cp ".:${jenaPath}/lib/*" fedra2 $queryFile $FragmentsDefinitionFolder $EndpointsFile $FragmentsSources $Random $queryFileB $availableSources 2> $tmpFile
+        done
+        #echo "query with service"
+        #echo $queryFileB
         sst=`tail -n 1 $tmpFile` 
         cd ${fedXPath}
         rm $cacheLocation
         /usr/bin/time -f "$query $sst %e %S %U %P %t %M" timeout ${to} ./cli.sh  -d $newFederationFile -f JSON -folder results @q $queryFileB > $planFile 2> $tmpFile
+        #cat ${fedXPath}/results/results/q_1.json
         if [ -f "${fedXPath}/results/results/q_1.json" ]; then
             mv ${fedXPath}/results/results/q_1.json $queryAnswer
         else
             rm $queryAnswer
             touch $queryAnswer
         fi
+        #echo "query plan"
+        #cat $planFile
+        #echo "query answer"
+        #cat $queryAnswer
+        #echo "error file"
+        #cat $tmpFile
         z=`grep "^ERROR:" $tmpFile`
         w=`grep "^Exception" $tmpFile`
         if [ -z "$z" ] && [ -z "$w" ]; then
@@ -85,10 +97,16 @@ if [ "$strategy" = "FEDERATION" ]; then
         fi
     fi
     if [ "$engine" = "FedX" ] && [ "$action" != "justReplicate" ]; then
+        if  [ "$action" = "justSelect" ]; then
+            planOnly="-planOnly"
+        else
+            planOnly=""
+        fi
         cd ${fedXPath}
         source $configFile
         rm $cacheLocation
-        /usr/bin/time -f "$query %e %S %U %P %t %M" timeout ${to} ./cli.sh -c $configFile -d $newFederationFile -f JSON -folder results @q $queryFile > $planFile 2> $tmpFile
+        rm ${fedXPath}/results/results/*
+        /usr/bin/time -f "$query %e %S %U %P %t %M" timeout ${to} ./cli.sh $planOnly -c $configFile -d $newFederationFile -f JSON -folder results @q $queryFile > $planFile 2> $tmpFile
         if [ -f "${fedXPath}/results/results/q_1.json" ]; then
               mv ${fedXPath}/results/results/q_1.json $queryAnswer
         else
@@ -115,6 +133,7 @@ if [ "$strategy" = "FEDERATION" ]; then
             echo "$x $y $nss $ntp $shape"
         else 
             echo "$query ERROR"
+            cat $tmpFile
         fi
     fi
     if [ "$engine" = "ANAPSID11" ] && [ "$action" != "justReplicate" ]; then
@@ -137,15 +156,23 @@ if [ "$strategy" = "FEDERATION" ]; then
         cd $p
     fi
     if [ "$engine" = "ANAPSID" ] && [ "$action" != "justReplicate" ]; then
+        if  [ "$action" = "justSelect" ]; then
+          decomposition=d
+        else
+          decomposition=b
+        fi
         cd ${fedrahome}
         m=`free | awk 'NR==2{printf "%s", $2 }'`
-        m=`echo "scale=0; $m/4" | bc`
-        (ulimit -m $m; ulimit -v $m; /usr/bin/time -f "$query %e %S %U %P %t %M" timeout -s 12 ${to}s ${anapsidPath}/scripts/run_anapsid -e $newAnapsidFederationFile -q $queryFile -c $configFile -s False -p b -o False -d SSGM -a True -w False -r True -f $queryAnswer -k b > $planFile 2> $tmpFile)
+        m=`echo "scale=0; $m/3.43" | bc`
+        rm $queryAnswer $planFile $tmpFile
+        (ulimit -m $m; ulimit -v $m; /usr/bin/time -f "$query %e %S %U %P %t %M" timeout -s 12 ${to}s ${anapsidPath}/scripts/run_anapsid -e $newAnapsidFederationFile -q $queryFile -c $configFile -s False -p ${decomposition} -o False -d SSGM -a True -w False -r True -f $queryAnswer -k b > $planFile 2> $tmpFile)
         x=`less $tmpFile`
         cd ${fedrahome}/scripts
         ./processANAPSIDAnswer.sh $queryAnswer $groundTruth > $tmpFile
         y=`less $tmpFile`
         cd ${fedrahome}/code
+        #echo "planFile: $planFile"
+        #cat $planFile
         nss=`java -cp ".:${jenaPath}/lib/*" VisitorCountTriples $planFile`
         echo "$x $y $nss $ntp $shape"
         cd $p

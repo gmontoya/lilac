@@ -16,8 +16,9 @@ proxyPort=${15}
 action=${16}
 address=${17}
 output=${18}
+graph=${19}
 
-${fedrahome}/scripts/runAllQueries.sh $strategy $queriesFile "${queries}" $port $ldfServer ${federationFile} $availability $answersFolder $publicEndpoint $engine $configFile $hdtFile $anapsidFederationFile ${updatesFile} ${proxyPort} ${action} ${address} > ${output} &
+${fedrahome}/scripts/runAllQueries.sh $strategy $queriesFile "${queries}" $port $ldfServer ${federationFile} $availability $answersFolder $publicEndpoint $engine $configFile $hdtFile $anapsidFederationFile ${updatesFile} ${proxyPort} ${action} ${address} ${graph} > ${output} &
 pid=$!
 
 echo $pid

@@ -4,14 +4,14 @@ strategies="FEDERATION"
 numClients=10
 queriesFile=${fedrahome}/data/diseasomeSetup/queriesB
 numQueries=100
-firstPort=3030
+firstPort=8890
 answersFile=${fedrahome}/data/diseasomeSetup/answers
-engines="FedX11 ANAPSID11"
+engines="ANAPSID"
 firstProxyPort=3130
-sourceSelectionStrategy="Fedra"
+sourceSelectionStrategy="FedraQR Fedra DAW engine"
 setupFolder=${fedrahome}/data/diseasomeSetup
 hdtFile=$setupFolder/federationData.hdt
 federation=Diseasome
-queriesToExecute=$setupFolder/queriesToExecute
+queriesToExecute=${fedrahome}/data/diseasomeSetup/queriesToExecute
 
 ./testWithIndividualMeasures.sh "${strategies}" ${numClients} ${queriesFile} ${numQueries} ${firstPort} ${answersFile} "${engines}" ${hdtFile} ${firstProxyPort} "${sourceSelectionStrategy}" $setupFolder $federation "${queriesToExecute}"

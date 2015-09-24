@@ -28,7 +28,8 @@ for i in `seq 0 $last`; do
     fi
     cd ${fedrahome}/scripts
     address=`./getHost.sh ${fedrahome}/data/${federation}Setup/hosts $localPort`
-    oarsh $address "${fedrahome}/scripts/startOneProxy.sh ${address} ${localPort} ${localProxyPort} ${tmpFile}_$i" 
+    echo $address
+    oarsh $address "${fedrahome}/scripts/startOneProxy.sh ${address} ${localPort} ${localProxyPort} ${tmpFile}_$i ${graph}" 
 done
 
 if [ -n "${peGraph}" ]; then
@@ -39,6 +40,7 @@ fi
 
 cd ${fedrahome}/scripts
 address=`./getHost.sh ${fedrahome}/data/${federation}Setup/hosts 3040`
+echo $address
 oarsh $address "${fedrahome}/scripts/startOneProxy.sh ${address} ${pePort} ${peProxyPort} ${tmpFile}_pe"
 
 cd $p

@@ -19,7 +19,7 @@ for i in `seq 4 9`; do
     pid=$!
     sleep 2m
     cd ${fedrahome}/scripts
-    ./loadOneEndpoint.sh $f $i
+    ./loadOneEndpoint.sh $f $i $i $i
     echo "${f}${i} loaded"
     kill $pid
     sleep 2m

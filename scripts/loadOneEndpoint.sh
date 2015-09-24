@@ -1,11 +1,13 @@
 #!/bin/bash
 
 federation=$1
-i=$2
+suffix=$2
+offset=$3
+i=$4
 
-port=$(($i+3030))
+port=$((${offset}+3030))
 
-cmdA="ld_dir('${fedrahome}/data/${federation}Setup/', 'endpoint${port}.nt', 'http://${federation}Endpoint${i}');"
+cmdA="ld_dir('${fedrahome}/data/${federation}Setup/', 'endpoint${port}.nt', 'http://${federation}Endpoint${suffix}');"
 cmdB="rdf_loader_run();"
 cmdC="checkpoint;"
 p=$(($i+1111))
