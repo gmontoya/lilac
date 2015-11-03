@@ -116,7 +116,7 @@ def decomposeJoinBlock(jb, l, genPred, prefixes, decomposition, c):
                     dss.performSourceSelection()
                     selectedSources = dss.getSelectedSources()
                     replace = True
-                    #print 'DAW selected sources: \n'+str(selectedSources)
+                    print 'DAW selected sources: \n'+str(selectedSources)
                 #print 'selected sources: '+str(selectedSources)
             gs = getGroups(l, tl, genPred, prefixes, decomposition, c, selectedSources, replace)
         #print l
@@ -198,7 +198,7 @@ def getGroupsFedraQR(l, tl, prefixes, selectedSources, options):
         for triples in connectedTriples:
             #print 'type(triples)'+str(type(triples))
             if not(triples.issubset(covered)):
-                x = Service('<'+endpoint+'>', list(triples))
+                x = Service('<'+endpoint+'>', UnionBlock([JoinBlock(list(triples))]))
                 #print 'type(x) '+str(type(x))
                 aux.append(x)
         #aux = [Service(endpoint, triples) for triples in connectedTriples if not(triples.issubset(covered))]
@@ -247,7 +247,7 @@ def transform(t, endpoints, covered, selectedSources):
             for tp in endpoints[s]:
                 tl.append(tp)
             tl.append(t)
-            aux = JoinBlock([Service('<'+s+'>', list(tl))]) 
+            aux = JoinBlock([Service('<'+s+'>', UnionBlock([JoinBlock(list(tl))]))]) 
             args.append(aux)
         if ts != None:
             for tp in ts:
@@ -383,6 +383,8 @@ def makePlanJoinBlock(jb, plan):
     sl = []
     ol = []
     for bgp in jb.triples:
+        #print 'bgp: ', bgp
+        #print type(bgp)
         if type(bgp) == list:
             sl.extend(bgp)
         elif isinstance(bgp, Optional):
@@ -393,6 +395,7 @@ def makePlanJoinBlock(jb, plan):
             sl.append(makePlanJoinBlock(bgp, plan))
         elif isinstance(bgp, Service):
             sl.append(bgp)
+        #print 'sl: ', sl
     pl = makePlanAux(sl, plan,jb.filters)
     if ol:
        pl = [pl]
@@ -800,11 +803,11 @@ def getExclusiveGroups(l, tl, prefixes, selectedSources):
     views1 = []
     for cl in qcl0:
         l0 = qcl0[cl]
-        serv = Service(cl, l0)
+        serv = Service(cl, UnionBlock([JoinBlock(l0)]))
         views0 = views0 + [serv]
     for t in qcl1:
         eps = qcl1[t]
-        elems = [JoinBlock([Service(ep, t)]) for ep in eps]
+        elems = [JoinBlock([Service(ep, UnionBlock([JoinBlock([t])]))]) for ep in eps]
         ub = UnionBlock(elems)
         views1 = views1 + [ub]
     return (views0, views1)
@@ -816,7 +819,7 @@ def getStarsS(l, tl, genPred, prefixes, c, selectedSources):
     for cl in qcl:
         l0 = qcl[cl]
         vs = formStars(l0)
-        serv = [Service(cl, view) for view in vs]
+        serv = [Service(cl, UnionBlock([JoinBlock(view)])) for view in vs]
         views = views + serv
     return postp2(views)
 
@@ -829,11 +832,11 @@ def getStarsM(l, tl, genPred, prefixes, c, selectedSources, replace):
     for cl in qcl0:
         l0 = qcl0[cl]
         vs = formStars(l0)
-        serv = [Service(cl, view) for view in vs]
+        serv = [Service(cl, UnionBlock([JoinBlock(view)])) for view in vs] # UnionBlock([JoinBlock(view)]))
         views0 = views0 + serv
     for t in qcl1:
         eps = qcl1[t]
-        elems = [JoinBlock([Service(ep, t)]) for ep in eps]
+        elems = [JoinBlock([Service(ep, UnionBlock([JoinBlock([t])]))]) for ep in eps] # UnionBlock([JoinBlock([t])])
         ub = UnionBlock(elems)
         views1 = views1 + [ub]
     return (postp2(views0), views1)
@@ -843,6 +846,8 @@ def postp2(ss):
    r = []
 
    for s in ss:
+       #print 's', s
+       #print 'r', r
        (subsets, supersets) = check(s, r)
        if len(subsets) > 0:
            for t in subsets:
@@ -858,9 +863,9 @@ def check(s, sl):
     supersets = []
 
     for e in sl:
-        if subList(s.triples, e.triples):
+        if subListB(s.triples, e.triples):
            supersets.append(e)
-        elif subList(e.triples, s.triples):
+        elif subListB(e.triples, s.triples):
            subsets.append(e)
 
     return (subsets, supersets)
@@ -1035,6 +1040,14 @@ def inEveryOne(v, a):
             break
     return b
 
+def subListB(a, b):
+    a = a.triples
+    b = b.triples
+    for e in a:
+        if not e in b:
+            return False
+    return True
+
 def subList(a, b):
 
     for e in a:
@@ -1053,8 +1066,10 @@ def decompose(qString, eFile, decomposition, contact):
         return None
     if groups == []:
         return None
-
     query.body = groups
+    #print type(groups)
+    query.join_vars = query.getJoinVars()
+    #print query.join_vars
     logger.info('Decomposition Obtained')
     logger.info(query)
     #print 'decomposition'
