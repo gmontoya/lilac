@@ -230,7 +230,7 @@ def transform(t, endpoints, covered, selectedSources):
             max = 0
             for sAux in ss:
                 if sAux in endpoints:
-                    size = len(endpoints[sAux])
+                    size = len(getConnected(t, endpoints[sAux]))-1
                 else:
                     size = 0
                 if (s == None) or (size > max):
@@ -243,10 +243,11 @@ def transform(t, endpoints, covered, selectedSources):
                 ts = set(endpoints[s])
             else:
                 ts = { x for x in ts if x in endpoints[s] }
-            tl = []
-            for tp in endpoints[s]:
-                tl.append(tp)
-            tl.append(t)
+            tl = getConnected(t, endpoints[s])
+            #tl = []
+            #for tp in endpoints[s]:
+            #    tl.append(tp)
+            #tl.append(t)
             aux = JoinBlock([Service('<'+s+'>', UnionBlock([JoinBlock(list(tl))]))]) 
             args.append(aux)
         if ts != None:

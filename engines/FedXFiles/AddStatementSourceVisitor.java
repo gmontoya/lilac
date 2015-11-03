@@ -120,6 +120,14 @@ public class AddStatementSourceVisitor extends QueryModelVisitorBase<Optimizatio
                         for (StatementPattern t : triples) {
                             list.add(new ExclusiveStatement(t, n, queryInfo));
                         }
+                        ////ArrayList<TupleExpr> l = new ArrayList<TupleExpr>(list);
+                        //System.out.println("listOperators: "+list);
+                        ////List<TupleExpr> sortedListOperators = JoinOrderOptimizer.optimizeJoinOrder(l);
+//System.out.println("sortedListOperators: "+sortedListOperators);
+                        ////list.clear();
+                        ////for (TupleExpr te : sortedListOperators) {
+                        ////    list.add((ExclusiveStatement) te);
+                        ////}
                         TupleExpr aux = null;
                         if (list.size()>=1) {
                             aux = new ExclusiveGroup(list, n, queryInfo);
@@ -164,7 +172,7 @@ public class AddStatementSourceVisitor extends QueryModelVisitorBase<Optimizatio
                 int max = 0;
                 // From the alternative sources for a fragment, take the one that will incur in more joins
                 for (Endpoint sAux : ss) {
-                    int size = endpoints.get(sAux) != null ? endpoints.get(sAux).size() : 0;
+                    int size = endpoints.get(sAux) != null ? FedraQueryRewriter.getConnected(sp, endpoints.get(sAux)).size()-1 : 0;
                     if ((s == null) || (size > max)) {
                         max = size;
                         s = sAux;
@@ -183,12 +191,12 @@ public class AddStatementSourceVisitor extends QueryModelVisitorBase<Optimizatio
                 } else {
                     ts.retainAll(endpoints.get(s));
                 }
-
+                HashSet<StatementPattern> c = FedraQueryRewriter.getConnected(sp, endpoints.get(s));
                 List<ExclusiveStatement> tl = new ArrayList<ExclusiveStatement>();
-                for (StatementPattern t : endpoints.get(s)) {
+                for (StatementPattern t : c) {
                     tl.add(new ExclusiveStatement(t, n, queryInfo));
                 }
-                tl.add(new ExclusiveStatement(sp, n, queryInfo));
+                //tl.add(new ExclusiveStatement(sp, n, queryInfo));
 
                 TupleExpr aux = null;
                 if (tl.size()>=1) {
