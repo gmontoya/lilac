@@ -299,7 +299,8 @@ def getGroups(l, tl, genPred, prefixes, decomposition, c, selectedSources, repla
     elif decomposition == "SSGM":
         (g, f) = getStarsM(l, tl, genPred, prefixes, c, selectedSources, replace)
         if g and f:
-            f.insert(0, g)
+            for s in g:
+                f.insert(0, s)
             return f
         elif g:
             #return [g]
@@ -828,6 +829,7 @@ def getStarsM(l, tl, genPred, prefixes, c, selectedSources, replace):
     (qcl0, qcl1) = assignEndpointM(tl, l, genPred, prefixes, c, selectedSources, replace)
     views0 = []
     views1 = []
+    #print 'inside getStarsM'
     #print qcl0
     #print qcl1
     for cl in qcl0:
@@ -1071,6 +1073,7 @@ def decompose(qString, eFile, decomposition, contact):
     #print type(groups)
     query.join_vars = query.getJoinVars()
     #print query.join_vars
+    #print query.getJoinVars()
     logger.info('Decomposition Obtained')
     logger.info(query)
     #print 'decomposition'
