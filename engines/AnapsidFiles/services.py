@@ -279,6 +279,7 @@ def getJoinVarsJoinBlock(jb):
         #print 'bgp: '+str(bgp)
         #print 'type(bgp): '+str(type(bgp))
         jv = []
+        #b = False
         if isinstance(bgp, Triple):
             if not bgp.subject.constant:
                 jv.append(bgp.subject.name)
@@ -286,13 +287,18 @@ def getJoinVarsJoinBlock(jb):
                 jv.append(bgp.theobject.name)
         elif isinstance(bgp, Service):
             jv.extend(getJoinVarsUnionBlock(bgp.triples))
+            #b = True
         elif isinstance(bgp, Optional):
             jv.extend(getJoinVarsUnionBlock(bgp.bgg))
         elif isinstance(bgp, UnionBlock):
             jv.extend(getJoinVarsUnionBlock(bgp))
+            #b = True
         elif isinstance(bgp, JoinBlock): # added on June 2nd, 2015 to correctly compute join vars for queries with SERVICE clauses
             jv.extend(getJoinVarsJoinBlock(bgp))
-        jv = list(set(jv))
+        #else:
+        #    print bgp
+        #if b:
+        #    jv = list(set(jv))
         #print 'jv: '+str(jv)
         join_vars.extend(jv)
         #print 'join_vars: '+str(join_vars)
