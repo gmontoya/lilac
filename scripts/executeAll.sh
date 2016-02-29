@@ -1,15 +1,15 @@
 #!/bin/bash
 
-cd ${fedrahome}/scripts/
+cd ${lilachome}/scripts/
 ./execute0.sh watDiv WatDiv
-cd ${fedrahome}/scripts/
+cd ${lilachome}/scripts/
 ./execute0.sh diseasome Diseasome
-cd ${fedrahome}/scripts/
+cd ${lilachome}/scripts/
 ./execute0.sh swdf SWDF
-cd ${fedrahome}/scripts/
+cd ${lilachome}/scripts/
 ./execute0.sh linkedMDB LinkedMDB
-cd ${fedrahome}/scripts/
+cd ${lilachome}/scripts/
 ./execute0.sh geoCoordinates GeoCoordinates
-cd ${fedrahome}/scripts/
+cd ${lilachome}/scripts/
 ./execute0.sh watDiv100 WatDiv100
 

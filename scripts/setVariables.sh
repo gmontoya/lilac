@@ -1,6 +1,6 @@
 #!/bin/bash
 
-fedrahome=${fedrahome}
+lilachome=${lilachome}
 fusekiPath=${fusekiPath}
 dawIndexGeneratorPath=${dawIndexGeneratorPath}
 fusekiHDTPath=${fusekiHDTPath}
@@ -9,16 +9,16 @@ watdivPath=${watdivPath}
 fedXPath=${fedXPath}
 jenaPath=${jenaPath}
 anapsidPath=${anapsidPath}
-variables="fedrahome fusekiPath dawIndexGeneratorPath fusekiHDTPath httpcomponentsClientPath watdivPath fedXPath jenaPath anapsidPath"
+variables="lilachome fusekiPath dawIndexGeneratorPath fusekiHDTPath httpcomponentsClientPath watdivPath fedXPath jenaPath anapsidPath"
 
 for v in $variables; do
     sed -i "s,\${$v},${!v},g" *.sh
     sed -i "s,\$$v,${!v},g" *.sh
-    sed -i "s,\$$v,${!v},g" ${fedrahome}/data/diseasomeSetup/confFileDiseasome
-    sed -i "s,\$$v,${!v},g" ${fedrahome}/data/swdfSetup/confFileSWDF
-    sed -i "s,\$$v,${!v},g" ${fedrahome}/data/linkedMDBSetup/confFileLinkedMDB
-    sed -i "s,\$$v,${!v},g" ${fedrahome}/data/geoCoordinatesSetup/confFileGeocoordinates
-    sed -i "s,\$$v,${!v},g" ${fedrahome}/data/watDivSetup/confFileWatDiv
-    sed -i "s,\$$v,${!v},g" ${fedrahome}/data/watDiv100Setup/confFileWatDiv100
+    sed -i "s,\$$v,${!v},g" ${lilachome}/data/diseasomeSetup/confFileDiseasome
+    sed -i "s,\$$v,${!v},g" ${lilachome}/data/swdfSetup/confFileSWDF
+    sed -i "s,\$$v,${!v},g" ${lilachome}/data/linkedMDBSetup/confFileLinkedMDB
+    sed -i "s,\$$v,${!v},g" ${lilachome}/data/geoCoordinatesSetup/confFileGeocoordinates
+    sed -i "s,\$$v,${!v},g" ${lilachome}/data/watDivSetup/confFileWatDiv
+    sed -i "s,\$$v,${!v},g" ${lilachome}/data/watDiv100Setup/confFileWatDiv100
 done
 

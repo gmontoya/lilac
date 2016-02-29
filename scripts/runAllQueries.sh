@@ -19,7 +19,7 @@ address=${17}
 graph=${18}
 n=0
 queryFile=`mktemp`
-tmpFileNR=`mktemp --tmpdir=/home/gmontoya/tmp`
+tmpFileNR=`mktemp`
 
 
 if [ "$strategy" = "FEDERATION" ]; then
@@ -30,7 +30,7 @@ if [ "$strategy" = "FEDERATION" ]; then
      sleep 10
   fi
   if [ "$action" != "justReplicate" ] && [ "$action" != "justSelect" ]; then 
-     cd ${fedrahome}/scripts
+     cd ${lilachome}/scripts
      pidProxy=`./startOneProxy.sh $address ${localPort} ${localProxyPort} $tmpFileNR ${graph}`
      sleep 10s
      #echo "proxy with pid $pidProxy started in address $address "
@@ -43,7 +43,7 @@ fi
 
 for qn in $l; do
   head -n $qn $queriesFile | tail -n 1 > $queryFile
-  cd ${fedrahome}/scripts
+  cd ${lilachome}/scripts
   #(
   #flock -e 200
   ./runOneQuery.sh $strategy $queryFile $localPort $ldfServer $federationFile $availability $answersFolder/query${qn} $publicEndpoint $engine $configFile $anapsidFederationFile $updatesFile ${localProxyPort} $action $address

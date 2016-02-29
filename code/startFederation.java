@@ -9,7 +9,6 @@
  *
  * @author Gabriela Montoya
  * 
- * Usage: java -cp ".:/home/montoya/apache-jena-2.11.0/lib/*" startFederation /home/montoya/dbpediaSetup/index.ttl /home/montoya/dbpediaSetup/federation2/endpointDescription /home/montoya/dbpediaSetup/federation2/publicEndpoints /home/montoya/dbpediaSetup/federation2/containedIn /home/montoya/dbpediaSetup/federation2/origin /home/montoya/dbpediaSetup/federation2/viewsDefinition /home/montoya/dbpediaSetup/federation2/dates
  */
 
 import java.io.*;

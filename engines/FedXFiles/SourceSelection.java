@@ -159,7 +159,7 @@ public class SourceSelection {
             }
         }
 
-        public void doFedraQueryRewriting(List<StatementPattern> stmts) {
+        public void doLilacDecomposition(List<StatementPattern> stmts) {
             /*String queryStr = queryInfo.getQuery();
             QueryParser qp = (new SPARQLParserFactory()).getParser();
             String baseURI = null;
@@ -172,7 +172,7 @@ public class SourceSelection {
                 System.exit(1);
             }*/
             //Query query = queryInfo.getQuery();
-            FedraQueryRewriter fqr = new FedraQueryRewriter(query, stmts, endpoints);
+            LilacDecomposer fqr = new LilacDecomposer(query, stmts, endpoints);
             fqr.performSourceSelection();
             HashMap<StatementPattern, HashSet<TreeSet<Endpoint>>> selectedSources = fqr.getSelectedSources();
             //System.out.println("selected sources: "+selectedSources);
@@ -201,8 +201,8 @@ public class SourceSelection {
          */
         public void doSourceSelection(List<StatementPattern> stmts) {
 
-                if (this.sourceSelectionStrategy.equals("FedraQR")) {
-                    doFedraQueryRewriting(stmts);
+                if (this.sourceSelectionStrategy.equals("LILAC")) {
+                    doLilacDecomposition(stmts);
                     return;
                 }	
                 if (this.sourceSelectionStrategy.equals("Fedra")) {

@@ -12,9 +12,9 @@ for i in `seq 0 9`; do
     p=$(($i+8890))
     np=$(($i+$firstPort))
     #p=$(($port-100))
-    address=`./getHost.sh ${fedrahome}/data/${f}Setup/hosts ${p}`
+    address=`./getHost.sh ${lilachome}/data/${f}Setup/hosts ${p}`
     host=http://$address
-    files="${fedrahome}/data/${f}Setup/endpointsDescription ${fedrahome}/data/${f}Setup/federation.ttl ${fedrahome}/data/${f}Setup/dawIndex.ttl ${fedrahome}/data/${f}Setup/fedraFiles/endpoints"
+    files="${lilachome}/data/${f}Setup/endpointsDescription ${lilachome}/data/${f}Setup/federation.ttl ${lilachome}/data/${f}Setup/dawIndex.ttl ${lilachome}/data/${f}Setup/fedraFiles/endpoints"
     for file in $files; do
         sed -i "s,HOST:$port,${host}:${np},g" $file
     done
@@ -24,9 +24,9 @@ port=3100
 p=8900
 np=$publicEndpointPort
 
-address=`./getHost.sh ${fedrahome}/data/${f}Setup/hosts ${p}`
+address=`./getHost.sh ${lilachome}/data/${f}Setup/hosts ${p}`
 host=http://$address
-files="${fedrahome}/data/${f}Setup/endpointsDescription ${fedrahome}/data/${f}Setup/federation.ttl ${fedrahome}/data/${f}Setup/dawIndex.ttl ${fedrahome}/data/${f}Setup/fedraFiles/endpoints"
+files="${lilachome}/data/${f}Setup/endpointsDescription ${lilachome}/data/${f}Setup/federation.ttl ${lilachome}/data/${f}Setup/dawIndex.ttl ${lilachome}/data/${f}Setup/fedraFiles/endpoints"
 for file in $files; do
     sed -i "s,HOST:$port,${host}:${np},g" $file
 done

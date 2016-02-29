@@ -54,8 +54,6 @@ import com.hp.hpl.jena.sparql.syntax.Element;*/
 //import com.hp.hpl.jena.rdf.model.regression.Regression.LitTestObjF;
 //import com.hp.hpl.jena.rdf.common.ResourceImpl;
 
-// javac -cp ".:/Users/montoya-g/Documents/semLAV/code/queryExecutor/lib2/*" daw.java
-// javac -cp ".:/home/gabriela/SemLAV/code/queryExecutor/lib2/*" daw.java
 class DawSourceSelection {
 
     private Map<StatementPattern, List<StatementSource>> stmtToSources;

@@ -1,39 +1,63 @@
-fedra
-=====
+LILAC (sparqL query decomposItion against federations of repLicAted data sourCes)
+================================================================================
 
-Federated SPARQL Queries Processing with Replicated Fragments
+Decomposing Federated Queries in presence of Replicated Fragments
 
 Requirements:
 ------------
 * ANAPSID query engine, used version from May 2014, available at: https://github.com/anapsid/anapsid
-* FedX query engine, used version 3.0, available at: http://www.fluidops.com/downloads/collateral/FedX%203.0.zip
+* FedX query engine, used version 3.1, available at: https://www.fluidops.com/downloads/collateral/FedX%203.1.zip
 * Jena, used version 2.11
-* Waterloo SPARQL Diversity Test Suite (WatDiv), used version v0.5 available at: http://db.uwaterloo.ca/watdiv/
-* Fuseki, used version 1.1.1, available at http://jena.apache.org/documentation/serving\_data/#download-fuseki1
-* Daw index generator, available at https://github.com/momo54/FedraDawIndex
-* Java HDT library, available at http://www.rdfhdt.org/manual-of-the-java-hdt-library/#download
-* HDT Fuseki, available at https://github.com/rdfhdt/hdt-java/tree/master/hdt-fuseki
+* Virtuoso Open Source 7.2.1, available at https://github.com/openlink/virtuoso- opensource/
+releases/tag/v7.2.1
 * Apache HttpComponents Client library, used version 4.3.5, available at https://hc.apache.org/
 * RDFLib python Library, available at https://github.com/RDFLib/rdflib
 * sparqlwrapper, available at https://github.com/rdflib/sparqlwrapper
+* Java HDT library, available at http://www.rdfhdt.org/manual-of-the-java-hdt-library/#download
+* Fuseki, used version 1.1.1, available at http://jena.apache.org/documentation/serving\_data/#download-fuseki1
+* HDT Fuseki, available at https://github.com/rdfhdt/hdt-java/tree/master/hdt-fuseki
 
-Complete the file scripts/setVariables.sh with the path to each of the requirements, and variables fedrahome and host with the values of fedra folder absolute path and the address of the machine to host the endpoints (including 'http://').
+Complete the file scripts/setVariables.sh with the path to each of the requirements, and variable lilachome with the values of lilac folder absolute path.
+To set the variables, execute: 
+source ${lilachome}/setVariables.sh
+To compile the code, execute:
+source ${lilachome}/scripts/compile.sh
 
-* Use the HDT library to uncompress the hdt files endpointX.nt in each federation folder at $fedrahome/data/
+Experiments were carried out using the Grid’5000 testbed, supported by a scientific interest group hosted by Inria and including CNRS, RENATER and several Universities as well as other organizations (see https: //www.grid5000.fr).
+
+We relied on command "uniq $OAR_NODEFILE" that returns the list of machines available for the process. To execute the code in other environment, delete lines 8-10 in file scripts/execute0.sh, and include file ${lilachome}/data/${federation}Setup/hosts with the addresses of the machines available for the experiment, one per line.
+We also relied on command the "oarsh" to connect to the different machines in the setup to launch the endpoints and proxies, and the client. To execute the code in other environment, replace "oarsh" by the appropriated command at the files:
+scripts/endFederation.sh
+scripts/execute0.sh
+scripts/runAllClients.sh
+scripts/script0.sh
+scripts/startFederation.sh
+
+
+* Use the HDT library to uncompress the hdt files ${lilachome}/data/${federation}Setup/endpointX.hdt in each federation folder at $lilachome/data/
+
 
 * Include FedX files:
 ```
-mv $fedrahome/engines/FedXFiles/*.java $fedXPath/src/com/fluidops/fedx/optimizer/
-mv $fedrahome/engines/build.xml $fedXPath/
+mv $lilachome/engines/FedXFiles/BoundJoinConversionIteration.java $fedXPath/src/com/fluidops/fedx/evaluation/iterator/
+mv $lilachome/engines/FedXFiles/CheckStatementPattern.java $fedXPath/src/com/fluidops/fedx/algebra/
+mv $lilachome/engines/FedXFiles/ControlledWorkerBoundJoin.java $fedXPath/src/com/fluidops/fedx/evaluation/join/
+mv $lilachome/engines/FedXFiles/ExclusiveGroup.java $fedXPath/src/com/fluidops/fedx/algebra/
+mv $lilachome/engines/FedXFiles/QueryStringUtil.java $fedXPath/src/com/fluidops/fedx/util/
+mv $lilachome/engines/FedXFiles/SkipStatementPattern.java $fedXPath/src/com/fluidops/fedx/algebra/
+mv $lilachome/engines/FedXFiles/SparqlFederationEvalStrategy.java $fedXPath/src/com/fluidops/fedx/evaluation/
+mv $lilachome/engines/FedXFiles/SparqlFederationEvalStrategyWithValues.java $fedXPath/src/com/fluidops/fedx/evaluation/
+mv $lilachome/engines/FedXFiles/SynchronousBoundJoin.java $fedXPath/src/com/fluidops/fedx/evaluation/join/
+mv $lilachome/engines/FedXFiles/*.java $fedXPath/src/com/fluidops/fedx/optimizer/
+mv $lilachome/engines/build.xml $fedXPath/
 cd $fedXPath
 ant jar
 ```
 
 * Include ANAPSID files:
 ```
-mv $fedrahome/engines/AnapsidFiles/*.py $anapsidPath/ANAPSID/Decomposer/
-mv $fedrahome/engines/AnapsidFiles/run_anapsid $anapsidPath/scripts/
+mv $lilachome/engines/AnapsidFiles/*.py $anapsidPath/ANAPSID/Decomposer/
+mv $lilachome/engines/AnapsidFiles/run_anapsid $anapsidPath/scripts/
 ```
-
-Experiments reported at https://sites.google.com/site/fedrasourceselection can be reproduced using $fedrahome/scripts/script.sh
-
+Experiments reported in the paper can be reproduced with the script: scripts/executeAll.sh, after the data have been loaded in the Virtoso endpoints using the script: scripts/loadDataVirtuosoEndpoints.sh.
+ 

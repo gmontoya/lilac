@@ -6,14 +6,14 @@ availability=0
 strategy="FEDERATION" 
 firstProxyPort=3130
 engines="ANAPSID"
-sourceSelectionStrategy="FedraQR Fedra"
+sourceSelectionStrategy="LILAC Fedra"
 action=justExecute
 # justSelect justExecute justReplicate all
-queriesToExecute=${fedrahome}/data/watDiv100Setup/queriesToExecute
-#${fedrahome}/data/watDiv100Setup/queriesToExecute
+queriesToExecute=${lilachome}/data/watDiv100Setup/queriesToExecute
+#${lilachome}/data/watDiv100Setup/queriesToExecute
 pePort=8900
 peProxyPort=3100
-setupFolder=${fedrahome}/data/watDiv100Setup
+setupFolder=${lilachome}/data/watDiv100Setup
 host=`./getHost.sh $setupFolder/hosts 3040`
 host=http://$host
 if [ "$action" = "justSelect" ]; then

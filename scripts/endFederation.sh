@@ -8,5 +8,5 @@ while read -u 3 host pid; do
   address=${host#http://}
   #echo "address: $address"
   #echo "pid: $pid"
-  oarsh $address "${fedrahome}/scripts/endProxy.sh ${pid}"
+  oarsh $address "${lilachome}/scripts/endProxy.sh ${pid}"
 done 3< "$file"

@@ -172,7 +172,7 @@ public class AddStatementSourceVisitor extends QueryModelVisitorBase<Optimizatio
                 int max = 0;
                 // From the alternative sources for a fragment, take the one that will incur in more joins
                 for (Endpoint sAux : ss) {
-                    int size = endpoints.get(sAux) != null ? FedraQueryRewriter.getConnected(sp, endpoints.get(sAux)).size()-1 : 0;
+                    int size = endpoints.get(sAux) != null ? LilacDecomposer.getConnected(sp, endpoints.get(sAux)).size()-1 : 0;
                     if ((s == null) || (size > max)) {
                         max = size;
                         s = sAux;
@@ -191,7 +191,7 @@ public class AddStatementSourceVisitor extends QueryModelVisitorBase<Optimizatio
                 } else {
                     ts.retainAll(endpoints.get(s));
                 }
-                HashSet<StatementPattern> c = FedraQueryRewriter.getConnected(sp, endpoints.get(s));
+                HashSet<StatementPattern> c = LilacDecomposer.getConnected(sp, endpoints.get(s));
                 List<ExclusiveStatement> tl = new ArrayList<ExclusiveStatement>();
                 for (StatementPattern t : c) {
                     tl.add(new ExclusiveStatement(t, n, queryInfo));
@@ -225,7 +225,7 @@ public class AddStatementSourceVisitor extends QueryModelVisitorBase<Optimizatio
 
         ArrayList<HashSet<StatementPattern>> connected = new ArrayList<HashSet<StatementPattern>>();
         for (StatementPattern t : triples) {
-            HashSet<StatementPattern> c = FedraQueryRewriter.getConnected(t, triples);
+            HashSet<StatementPattern> c = LilacDecomposer.getConnected(t, triples);
             //System.out.println("connected: "+c);
             ArrayList<HashSet<StatementPattern>> toRemove = new ArrayList<HashSet<StatementPattern>>();
             boolean add = true;

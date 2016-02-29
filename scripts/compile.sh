@@ -1,10 +1,10 @@
 #!/bin/bash
 
 p=`pwd`
-cd ${fedrahome}/proxy
+cd ${lilachome}/proxy
 javac  -cp .:${httpcomponentsClientPath}/lib/* SingleEndpointProxy2.java
 
-cd ${fedrahome}/code
+cd ${lilachome}/code
 javac -cp .:${jenaPath}/lib/* *.java
 
 cd $p

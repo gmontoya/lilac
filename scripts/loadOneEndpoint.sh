@@ -7,7 +7,7 @@ i=$4
 
 port=$((${offset}+3030))
 
-cmdA="ld_dir('${fedrahome}/data/${federation}Setup/', 'endpoint${port}.nt', 'http://${federation}Endpoint${suffix}');"
+cmdA="ld_dir('${lilachome}/data/${federation}Setup/', 'endpoint${port}.nt', 'http://${federation}Endpoint${suffix}');"
 cmdB="rdf_loader_run();"
 cmdC="checkpoint;"
 p=$(($i+1111))
@@ -15,7 +15,7 @@ p=$(($i+1111))
 isql_cmd="isql ${p} dba"
 isql_pwd="dba"
 
-${isql_cmd} ${isql_pwd} << EOF &> /home/gmontoya/tmp/linking.log
+${isql_cmd} ${isql_pwd} << EOF &> /tmp/linking.log
     $cmdA
     $cmdB
     $cmdC

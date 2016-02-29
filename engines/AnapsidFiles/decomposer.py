@@ -16,7 +16,7 @@ from Tree import Node, Leaf
 from utils import *
 from services import Service, Argument, Triple, Filter, Optional, UnionBlock, JoinBlock, Query
 from FedraSourceSelection import FedraSourceSelection
-from FedraQueryRewriter import FedraQueryRewriter, getConnected
+from LilacDecomposer import LilacDecomposer, getConnected
 
 from DawSourceSelection import DawSourceSelection
 
@@ -91,14 +91,14 @@ def decomposeJoinBlock(jb, l, genPred, prefixes, decomposition, c):
             sss = props['SourceSelectionStrategy']
         else:
             sss = 'engine'
-        if (sss == 'FedraQR'):
-            fqr = FedraQueryRewriter(tl, l, props, prefixes)
+        if (sss == 'LILAC'):
+            fqr = LilacDecomposer(tl, l, props, prefixes)
             fqr.performSourceSelection()
             selectedSources = fqr.getSelectedSources()
             options = fqr.getOptions()
-            #print 'FedraQR selected sources: \n'+str(selectedSources)
-            #print 'FedraQR options: \n'+str(options)
-            gs = getGroupsFedraQR(l, tl, prefixes, selectedSources, options)
+            #print 'LILAC selected sources: \n'+str(selectedSources)
+            #print 'LILAC options: \n'+str(options)
+            gs = getGroupsLILAC(l, tl, prefixes, selectedSources, options)
             #print 'groups fedra: '+str(gs)
         else:
             if (sss == 'Fedra'):
@@ -144,7 +144,7 @@ def decomposeJoinBlock(jb, l, genPred, prefixes, decomposition, c):
 def updateFilters(node,filters):
    return UnionBlock(node.triples,filters)
 
-def getGroupsFedraQR(l, tl, prefixes, selectedSources, options):
+def getGroupsLILAC(l, tl, prefixes, selectedSources, options):
     union = set()
     exclusive = set()
     covered = set()

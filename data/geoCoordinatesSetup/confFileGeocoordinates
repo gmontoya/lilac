@@ -1,10 +1,10 @@
 debugQueryPlan=true
-cacheLocation=$fedrahome/data/geoCoordinatesSetup/cache.db
-EndpointsFile=$fedrahome/data/geoCoordinatesSetup/fedraFiles/endpoints
-FragmentsSources=$fedrahome/data/geoCoordinatesSetup/fedraFiles/fragmentsSources
-FragmentsDefinitionFolder=$fedrahome/data/geoCoordinatesSetup/fedraFiles/fragments
-PredicateIndex=$fedrahome/data/geoCoordinatesSetup/fedraFiles/predicateIndex
+cacheLocation=$lilachome/data/geoCoordinatesSetup/cache.db
+EndpointsFile=$lilachome/data/geoCoordinatesSetup/fedraFiles/endpoints
+FragmentsSources=$lilachome/data/geoCoordinatesSetup/fedraFiles/fragmentsSources
+FragmentsDefinitionFolder=$lilachome/data/geoCoordinatesSetup/fedraFiles/fragments
+PredicateIndex=$lilachome/data/geoCoordinatesSetup/fedraFiles/predicateIndex
 Random=false
-SourceSelectionStrategy=FedraQR
+SourceSelectionStrategy=LILAC
 Threshold=0
-DawIndex=$fedrahome/data/geoCoordinatesSetup/dawIndex.ttl
+DawIndex=$lilachome/data/geoCoordinatesSetup/dawIndex.ttl

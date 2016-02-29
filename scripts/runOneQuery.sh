@@ -25,9 +25,9 @@ queryFileB=`mktemp`
 p=`pwd`
 to=1800
 
-source ${fedrahome}/scripts/export.sh
+source ${lilachome}/scripts/export.sh
 n=`shuf -i 1-100 -n 1`
-cd ${fedrahome}/code
+cd ${lilachome}/code
 ntp=`java -cp .:${jenaPath}/lib/* obtainTriples $queryFile | wc -l`
 shape=`java -cp .:${jenaPath}/lib/* getQueryShape $queryFile`
 cd $p
@@ -56,7 +56,7 @@ if [ "$strategy" = "FEDERATION" ]; then
       bash ./updateFederation.sh $queryFile http://${address}:${localPort}/ds $ldfServer $configFile $federationFile $newFederationFile $anapsidFederationFile $newAnapsidFederationFile $updatesFile http://${address}:${localProxyPort}/ds ${publicEndpoint}
     fi
     if [ "$engine" = "FedX11" ] && [ "$action" != "justReplicate" ]; then
-        cd ${fedrahome}/code
+        cd ${lilachome}/code
         source $configFile
         rm $tmpFile
         for i in `seq 1 2`; do
@@ -88,7 +88,7 @@ if [ "$strategy" = "FEDERATION" ]; then
             x=`less $tmpFile`
             ./processJSONAnswer.sh $queryAnswer $groundTruth > $tmpFile
             y=`less $tmpFile`
-            cd ${fedrahome}/code
+            cd ${lilachome}/code
             nss=`java -cp ".:${jenaPath}/lib/*" VisitorCountTriples $queryFileB`
             echo "$x $y $nss $ntp $shape"
         else
@@ -137,20 +137,20 @@ if [ "$strategy" = "FEDERATION" ]; then
         fi
     fi
     if [ "$engine" = "ANAPSID11" ] && [ "$action" != "justReplicate" ]; then
-        cd ${fedrahome}/code
+        cd ${lilachome}/code
         source $configFile
         /usr/bin/time -f "%e %S %U" java -cp ".:${jenaPath}/lib/*" fedra2 $queryFile $FragmentsDefinitionFolder $EndpointsFile $FragmentsSources $Random $queryFileB $availableSources 2> $tmpFile
         sst=`tail -n 1 $tmpFile`
-        cd ${fedrahome}
+        cd ${lilachome}
         m=`free | awk 'NR==2{printf "%s", $2 }'`
         m=`echo "scale=0; $m*9/10" | bc`
         (ulimit -m $m; ulimit -v $m; /usr/bin/time -f "$query $sst %e %S %U %P %t %M" timeout -s 12 ${to}s ${anapsidPath}/scripts/run_anapsid -e $newAnapsidFederationFile -q $queryFileB  -s False -p b -o True -d SSGM -a True -w False -r True -f $queryAnswer -k b > $planFile 2> $tmpFile) 
         #/usr/bin/time -f "$query $sst %e %S %U %P %t %M" timeout -s 12 ${to}s ${anapsidPath}/scripts/run_anapsid -e $newAnapsidFederationFile -q $queryFileB  -s False -p b -o True -d SSGM -a True -w False -r True -f $queryAnswer -k b > $planFile 2> $tmpFile
         x=`less $tmpFile`
-        cd ${fedrahome}/scripts
+        cd ${lilachome}/scripts
         ./processANAPSIDAnswer.sh $queryAnswer $groundTruth > $tmpFile
         y=`less $tmpFile`
-        cd ${fedrahome}/code
+        cd ${lilachome}/code
         nss=`java -cp ".:${jenaPath}/lib/*" VisitorCountTriples $planFile`
         echo "$x $y $nss $ntp $shape"
         cd $p
@@ -161,16 +161,16 @@ if [ "$strategy" = "FEDERATION" ]; then
         else
           decomposition=b
         fi
-        cd ${fedrahome}
+        cd ${lilachome}
         m=`free | awk 'NR==2{printf "%s", $2 }'`
         m=`echo "scale=0; $m/3.43" | bc`
         rm $queryAnswer $planFile $tmpFile
         (ulimit -m $m; ulimit -v $m; /usr/bin/time -f "$query %e %S %U %P %t %M" timeout -s 12 ${to}s ${anapsidPath}/scripts/run_anapsid -e $newAnapsidFederationFile -q $queryFile -c $configFile -s False -p ${decomposition} -o False -d SSGM -a True -w False -r True -f $queryAnswer -k b > $planFile 2> $tmpFile)
         x=`less $tmpFile`
-        cd ${fedrahome}/scripts
+        cd ${lilachome}/scripts
         ./processANAPSIDAnswer.sh $queryAnswer $groundTruth > $tmpFile
         y=`less $tmpFile`
-        cd ${fedrahome}/code
+        cd ${lilachome}/code
         #echo "planFile: $planFile"
         #cat $planFile
         nss=`java -cp ".:${jenaPath}/lib/*" VisitorCountTriples $planFile`

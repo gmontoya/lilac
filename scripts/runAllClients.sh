@@ -66,9 +66,9 @@ for strategy in $strategies; do
         if [ "$strategy" = "FEDERATION" ] || [ "$strategy" = "PUBLIC" ]; then
           if [ "$action" != "justReplicate" ] && [ "$action" != "justSelect" ]; then
             p=`pwd`
-            cd ${fedrahome}/scripts
+            cd ${lilachome}/scripts
             address=`./getHost.sh $setupFolder/hosts 3040`
-            cd ${fedrahome}/proxy
+            cd ${lilachome}/proxy
             java -cp .:${httpcomponentsClientPath}/lib/* SingleEndpointProxy2 $address ${publicEndpointPort} ${publicEndpointProxyPort} > $tmpFilePEP &
             pidPEProxy=$!
             cd $p
@@ -80,12 +80,12 @@ for strategy in $strategies; do
             port=$(($firstPort+$i))
             proxyPort=$(($firstProxyPort+$i))
             p=`pwd`
-            cd ${fedrahome}/scripts
+            cd ${lilachome}/scripts
             address=`./getHost.sh $setupFolder/hosts $port`
             host=http://$address
             cd $p
             graph=http://${federation}Endpoint${i}
-            oarsh $address "${fedrahome}/scripts/runClient.sh $strategy $queriesFile \"${l[i]}\" $port $ldfServer ${federationFile} $availability $answersFolder $publicEndpoint $engine $configFile $hdtFile $anapsidFederationFile ${updatesFile}${port} ${proxyPort} ${action} ${address} ${setupFolder}/output${label}${numberClients}Client$port ${graph} > ${tmpFile}" 
+            oarsh $address "${lilachome}/scripts/runClient.sh $strategy $queriesFile \"${l[i]}\" $port $ldfServer ${federationFile} $availability $answersFolder $publicEndpoint $engine $configFile $hdtFile $anapsidFederationFile ${updatesFile}${port} ${proxyPort} ${action} ${address} ${setupFolder}/output${label}${numberClients}Client$port ${graph} > ${tmpFile}" 
             pid=`cat $tmpFile`
             spids="$spids $pid"
         done
@@ -128,17 +128,17 @@ for strategy in $strategies; do
             pidFE=`head -n $n $file | tail -n 1`
             n=$(($n-1))
             tmpFileNR=`head -n $n $file | tail -n 1`
-            proxyAddress=`${fedrahome}/scripts/getHost.sh $setupFolder/hosts $port`
+            proxyAddress=`${lilachome}/scripts/getHost.sh $setupFolder/hosts $port`
             if [ "$action" != "justReplicate" ] && [ "$action" != "justSelect" ]; then
                 #echo "killing proxy with pid: $pidProxy in machine $proxyAddress"
-                oarsh $proxyAddress "${fedrahome}/scripts/endProxy.sh $pidProxy"
+                oarsh $proxyAddress "${lilachome}/scripts/endProxy.sh $pidProxy"
                 sleep 2s
                 #cat $tmpFileNR  
                 #echo "end of tmpFileNR: $tmpFileNR"              
                 cat $tmpFileNR >> $file
             fi
             if [ "$action" = "all" ]; then
-                oarsh $proxyAddress "${fedrahome}/scripts/endProxy.sh $pidFE"
+                oarsh $proxyAddress "${lilachome}/scripts/endProxy.sh $pidFE"
                 rm ${setupFolder}/fedraFiles/views/view*
                 cp ${setupFolder}/fedraFilesBkp/* ${setupFolder}/fedraFiles/
                 cp ${setupFolder}/federation.ttl.bkp ${setupFolder}/federation.ttl

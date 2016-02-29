@@ -6,13 +6,13 @@ availability=0
 strategy="FEDERATION" #"FEDERATION LDF PUBLIC"
 firstProxyPort=3130
 engines="ANAPSID"
-sourceSelectionStrategy="FedraQR Fedra DAW engine" 
+sourceSelectionStrategy="LILAC Fedra DAW engine" 
 action=justSelect
 # justSelect justExecute justReplicate all
-queriesToExecute=${fedrahome}/data/diseasomeSetup/queriesToExecute
+queriesToExecute=${lilachome}/data/diseasomeSetup/queriesToExecute
 pePort=8900
 peProxyPort=3100
-setupFolder=${fedrahome}/data/diseasomeSetup
+setupFolder=${lilachome}/data/diseasomeSetup
 host=`./getHost.sh $setupFolder/hosts 3040`
 host=http://$host
 if [ "$action" = "justSelect" ]; then

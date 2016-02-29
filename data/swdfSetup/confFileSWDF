@@ -1,10 +1,10 @@
 debugQueryPlan=true
-cacheLocation=$fedrahome/data/swdfSetup/cache.db
-EndpointsFile=$fedrahome/data/swdfSetup/fedraFiles/endpoints
-FragmentsSources=$fedrahome/data/swdfSetup/fedraFiles/fragmentsSources
-FragmentsDefinitionFolder=$fedrahome/data/swdfSetup/fedraFiles/fragments
-PredicateIndex=$fedrahome/data/swdfSetup/fedraFiles/predicateIndex
+cacheLocation=$lilachome/data/swdfSetup/cache.db
+EndpointsFile=$lilachome/data/swdfSetup/fedraFiles/endpoints
+FragmentsSources=$lilachome/data/swdfSetup/fedraFiles/fragmentsSources
+FragmentsDefinitionFolder=$lilachome/data/swdfSetup/fedraFiles/fragments
+PredicateIndex=$lilachome/data/swdfSetup/fedraFiles/predicateIndex
 Random=false
 SourceSelectionStrategy=Fedra
 Threshold=0
-DawIndex=$fedrahome/data/swdfSetup/dawIndex.ttl
+DawIndex=$lilachome/data/swdfSetup/dawIndex.ttl

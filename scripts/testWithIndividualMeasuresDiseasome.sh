@@ -2,16 +2,16 @@
 
 strategies="FEDERATION"
 numClients=10
-queriesFile=${fedrahome}/data/diseasomeSetup/queriesB
+queriesFile=${lilachome}/data/diseasomeSetup/queriesB
 numQueries=100
 firstPort=8890
-answersFile=${fedrahome}/data/diseasomeSetup/answers
+answersFile=${lilachome}/data/diseasomeSetup/answers
 engines="ANAPSID"
 firstProxyPort=3130
-sourceSelectionStrategy="FedraQR Fedra DAW engine"
-setupFolder=${fedrahome}/data/diseasomeSetup
+sourceSelectionStrategy="LILAC Fedra DAW engine"
+setupFolder=${lilachome}/data/diseasomeSetup
 hdtFile=$setupFolder/federationData.hdt
 federation=Diseasome
-queriesToExecute=${fedrahome}/data/diseasomeSetup/queriesToExecute
+queriesToExecute=${lilachome}/data/diseasomeSetup/queriesToExecute
 
 ./testWithIndividualMeasures.sh "${strategies}" ${numClients} ${queriesFile} ${numQueries} ${firstPort} ${answersFile} "${engines}" ${hdtFile} ${firstProxyPort} "${sourceSelectionStrategy}" $setupFolder $federation "${queriesToExecute}"

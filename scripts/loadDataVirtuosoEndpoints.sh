@@ -1,9 +1,9 @@
 #!/bin/bash
 
-federations="linkedMDB geoCoordinates watDiv100"
+federations="diseasome swdf watDiv linkedMDB geoCoordinates watDiv100"
 export PATH=.:${virtuosoPath}/bin:$PATH
 
-for i in `seq 4 9`; do
+for i in `seq 0 9`; do
   for f in $federations; do    
     mkdir ${virtuosoPath}/var/lib/virtuoso/${f}${i}
     cp -r ${virtuosoPath}/var/lib/virtuoso/db/* ${virtuosoPath}/var/lib/virtuoso/${f}${i}/
@@ -18,7 +18,7 @@ for i in `seq 4 9`; do
     virtuoso-t -f > output 2> error &
     pid=$!
     sleep 2m
-    cd ${fedrahome}/scripts
+    cd ${lilachome}/scripts
     ./loadOneEndpoint.sh $f $i $i $i
     echo "${f}${i} loaded"
     kill $pid

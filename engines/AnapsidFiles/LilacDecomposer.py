@@ -257,7 +257,7 @@ class TriplePatternFragment:
     def __repr__(self):
         return '<'+str(self.triple)+', '+str(self.dataset)+', '+str(self.endpoints)+'>'
 
-class FedraQueryRewriter:
+class LilacDecomposer:
 
     def __init__(self, tl, el, props, ps):
         self.tripleList = []

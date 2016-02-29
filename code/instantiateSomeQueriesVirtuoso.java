@@ -15,7 +15,6 @@ import com.hp.hpl.jena.sparql.engine.http.QueryEngineHTTP;
 import com.hp.hpl.jena.graph.Triple;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.graph.Node;
-// java -cp ".:/home/montoya/fedra/apache-jena-2.11.0/lib/*" generateSomeRandomViews http://172.16.8.1:9373/sparql /home/montoya/dbpediaQueriesInstantions2012/ /home/montoya/dbpediaSetup/viewsSize1 1
 class instantiateSomeQueriesVirtuoso {
 
     public static void main (String args[]) throws Exception {

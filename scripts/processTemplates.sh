@@ -26,7 +26,7 @@ while [ $r -gt 0 ]; do
 
   cd ${watdivPath}/bin/Release
   ./watdiv -q ${model} ${oneTmp} $queryCount $recurrenceFactor > ${queriesTmp}
-  cd ${fedrahome}/scripts
+  cd ${lilachome}/scripts
   # number of lines in the queries file
   r=`wc -l ${queriesTmp} | cut -f1 -d' '`
   while [ $r -gt 0 ]; do

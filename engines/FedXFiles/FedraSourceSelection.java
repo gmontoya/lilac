@@ -37,8 +37,6 @@ import com.hp.hpl.jena.sparql.expr.ExprList;
 import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.util.Locator;*/
 
-// javac -cp ".:/Users/montoya-g/Downloads/apache-jena-2.11.0/lib/*" fedra.java
-// java -cp ".:/Users/montoya-g/Downloads/apache-jena-2.11.0/lib/*" fedra testing/three/query1.sparql testing/three/endpointDescription testing/three/publicEndpoints testing/three/containedIn testing/three/origin /Users/montoya-g/Dropbox/presentations/federatedExecution/testing/three/viewsDefinition/
 class FedraSourceSelection {
 
     private TupleExpr query;

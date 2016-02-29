@@ -10,7 +10,7 @@ cd ${virtuosoPath}/var/lib/virtuoso/${f}${i}
 virtuoso-t -f > output 2> error &
 pid=$!
 sleep 2m
-cd ${fedrahome}/scripts
+cd ${lilachome}/scripts
 for j in `seq 0  9`; do
     ./loadOneEndpoint.sh $f $i $j 0
     echo "${f}${j} loaded"

@@ -6,13 +6,13 @@ availability=0
 strategy="FEDERATION"
 firstProxyPort=3130
 engines="ANAPSID"
-sourceSelectionStrategy="FedraQR Fedra DAW engine"
+sourceSelectionStrategy="LILAC Fedra DAW engine"
 action=justSelect
 # justSelect justExecute justReplicate all
-queriesToExecute=${fedrahome}/data/geoCoordinatesSetup/queriesToExecute
+queriesToExecute=${lilachome}/data/geoCoordinatesSetup/queriesToExecute
 pePort=8900
 peProxyPort=3100
-setupFolder=${fedrahome}/data/geoCoordinatesSetup
+setupFolder=${lilachome}/data/geoCoordinatesSetup
 host=`./getHost.sh $setupFolder/hosts 3040`
 host=http://$host
 if [ "$action" = "justSelect" ]; then
