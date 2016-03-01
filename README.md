@@ -60,4 +60,10 @@ mv $lilachome/engines/AnapsidFiles/*.py $anapsidPath/ANAPSID/Decomposer/
 mv $lilachome/engines/AnapsidFiles/run_anapsid $anapsidPath/scripts/
 ```
 Experiments reported in the paper can be reproduced with the script: scripts/executeAll.sh, after the data have been loaded in the Virtoso endpoints using the script: scripts/loadDataVirtuosoEndpoints.sh.
- 
+
+Note the GeoCoordinates federation (replace HOST by the machine address of one the available machine):
+A virtuoso endpoint that provides access to all the accessible fragments in the federation should be deployed using the script: scripts/loadDataAllVirtuosoEndpoints.sh
+This is required to correctly compute the soundness and correctness of the obtained answers as the answers that include real number are returned with different precision by Virtuoso and Fuseki endpoints.
+This endpoint should be launched using the script: ${lilachome}/scripts/startOneEndpoint.sh geoCoordinates All HOST
+The answers produced using the script: scripts/produceAnswersVirtuoso.sh ${lilachome}/data/geoCoordinatesSetup/queriesToExecute ${lilac home}/data/geoCoordinatesSetup/queries HOST 8890 ${lilachome}/data/geoCoordinatesSetup/answersVirtuoso/
+After the answers have been produced, the endpoint execution can be ended.
