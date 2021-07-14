@@ -8,15 +8,15 @@ cd ${lilachome}/scripts
 
 #./useVirtuosoEndpoints.sh
 ./restore.sh $federation
-./setHosts.sh $federation
+./setHosts.sh $federation 3130 3100
 
 #./restoreFederation.sh 3030 3039 ${federation}Setup > $outputRestore
 ./startFederation.sh ${federation} > $outputRestore
-
+sed -i".bkp" 's/action=[0-9A-Za-z ]*/action=justExecute/' test${Federation}.sh
 ./testWithIndividualMeasures${Federation}.sh > outputTestWithIndividualMeasures${Federation}
 
 sed -i".bkp" 's/action=[0-9A-Za-z ]*/action=justSelect/' test${Federation}.sh
-sed -i".bkp" 's/action=[0-9A-Za-z ]*/action=justSelect/' testWithIndividualMeasures${Federation}.sh
+#sed -i".bkp" 's/action=[0-9A-Za-z ]*/action=justSelect/' testWithIndividualMeasures${Federation}.sh
 
 cd ${lilachome}/scripts
 ./restore.sh $federation
