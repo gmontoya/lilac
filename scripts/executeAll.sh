@@ -1,6 +1,8 @@
 #!/bin/bash
 
 cd ${lilachome}/scripts/
+./save.sh
+cd ${lilachome}/scripts/
 ./execute0.sh watDiv WatDiv
 cd ${lilachome}/scripts/
 ./execute0.sh diseasome Diseasome
