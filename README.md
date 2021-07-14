@@ -30,7 +30,6 @@ We also relied on command the "oarsh" to connect to the different machines in th
 scripts/endFederation.sh
 scripts/execute0.sh
 scripts/runAllClients.sh
-scripts/script0.sh
 scripts/startFederation.sh
 
 
