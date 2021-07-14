@@ -50,6 +50,14 @@ for i in  `seq 0 $last`; do
     fi
 done
 
+if [ "$action" = "all" ] && [[ "$strategies" == *"FEDERATION"* ]]; then
+    rm -fr ${setupFolder}/fedraFilesBkp
+    mkdir ${setupFolder}/fedraFilesBkp
+    cp -r ${setupFolder}/fedraFiles/* ${setupFolder}/fedraFilesBkp/
+    cp ${setupFolder}/federation.ttl ${setupFolder}/federation.ttl.bkp
+    cp ${setupFolder}/endpointsDescription ${setupFolder}/endpointsDescription.bkp
+fi
+
 for strategy in $strategies; do
     spids=""
     #for port in `seq $firstPort $lastPort`; do
@@ -140,7 +148,7 @@ for strategy in $strategies; do
             if [ "$action" = "all" ]; then
                 oarsh $proxyAddress "${lilachome}/scripts/endProxy.sh $pidFE"
                 rm ${setupFolder}/fedraFiles/views/view*
-                cp ${setupFolder}/fedraFilesBkp/* ${setupFolder}/fedraFiles/
+                cp -r ${setupFolder}/fedraFilesBkp/* ${setupFolder}/fedraFiles/
                 cp ${setupFolder}/federation.ttl.bkp ${setupFolder}/federation.ttl
                 cp ${setupFolder}/endpointsDescription.bkp ${setupFolder}/endpointsDescription
             fi
