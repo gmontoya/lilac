@@ -9,7 +9,10 @@ watdivPath=${watdivPath}
 fedXPath=${fedXPath}
 jenaPath=${jenaPath}
 anapsidPath=${anapsidPath}
-variables="lilachome fusekiPath dawIndexGeneratorPath fusekiHDTPath httpcomponentsClientPath watdivPath fedXPath jenaPath anapsidPath"
+virtuosoPath=${virtuosoPath}
+hdtJavaPath=${hdtJavaPath}
+
+variables="lilachome fusekiPath dawIndexGeneratorPath fusekiHDTPath httpcomponentsClientPath watdivPath fedXPath jenaPath anapsidPath virtuosoPath hdtJavaPath"
 
 for v in $variables; do
     sed -i "s,\${$v},${!v},g" *.sh
