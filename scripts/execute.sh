@@ -23,6 +23,5 @@ cd ${lilachome}/scripts
 ./setHosts.sh $federation 8890 8900
 
 ./testWithIndividualMeasures${Federation}.sh >> outputTestWithIndividualMeasures${Federation}
-./removeLinks.sh $federation
 ./endFederation.sh $outputRestore
 
