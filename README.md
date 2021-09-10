@@ -48,7 +48,7 @@ mv $lilachome/engines/FedXFiles/SparqlFederationEvalStrategy.java $fedXPath/src/
 mv $lilachome/engines/FedXFiles/SparqlFederationEvalStrategyWithValues.java $fedXPath/src/com/fluidops/fedx/evaluation/
 mv $lilachome/engines/FedXFiles/SynchronousBoundJoin.java $fedXPath/src/com/fluidops/fedx/evaluation/join/
 mv $lilachome/engines/FedXFiles/*.java $fedXPath/src/com/fluidops/fedx/optimizer/
-mv $lilachome/engines/build.xml $fedXPath/
+mv $lilachome/engines/FedXFiles/build.xml $fedXPath/
 cd $fedXPath
 ant jar
 ```
