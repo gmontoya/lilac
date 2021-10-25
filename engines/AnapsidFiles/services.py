@@ -223,7 +223,10 @@ class Query(object):
         #print 'inside getJoinVars'
         #print 'self.body: '+str(self.body)
         join_vars = getJoinVarsUnionBlock(self.body)
-        join_vars = [ v for v in join_vars if join_vars.count(v) > 1]
+        ## the following statement was commented out on October 18th 2021 by gmontoya
+        ## reason: it does not compute correctly the join variables when there is more than one join/union block
+        ##    to account for a variable number of nested join and union blocks the check is moved to getJoinVarsJoinBlock
+        ##join_vars = [ v for v in join_vars if join_vars.count(v) > 1]
 
         return set(join_vars)
 
@@ -260,49 +263,66 @@ class Query(object):
             return " "
 
 def getJoinVarsUnionBlock(ub):
-    join_vars = []
+    ## the following statements were modified on October 18th 2021 by gmontoya
+    ## reason: to correctly compute the join variables, they will be stored in a set and the multiple
+    ##  occurrences of a variable is considered to add a new join variable in a JoinBlock
+    ##  existing join variables are preserved through union and join blocks
+    join_vars = set()
     #print 'inside getJoinVarsUnionBlock'
     #print ub
     for jb in ub.triples:
         #print 'jb: '+str(jb)
         #print 'type(jb): '+str(type(jb))
-        join_vars.extend(getJoinVarsJoinBlock(jb))
+        join_vars = join_vars | getJoinVarsJoinBlock(jb)
 
     return join_vars
 
 def getJoinVarsJoinBlock(jb):
-
-    join_vars = []
+    ## the following statements were modified on October 18th 2021 by gmontoya
+    ## reason: to correctly compute the join variables, they will be stored in a set and the multiple
+    ##  occurrences of a variable is considered to add a new join variable
+    ##  existing join variables are preserved through union and join blocks
+    join_vars = set()
     #print 'inside getJoinVarsJoinBlock'
     #print jb
+    variables = []
     for bgp in jb.triples:
         #print 'bgp: '+str(bgp)
         #print 'type(bgp): '+str(type(bgp))
-        jv = []
+        jv = set()
+        vs = set()
         #b = False
         if isinstance(bgp, Triple):
             if not bgp.subject.constant:
-                jv.append(bgp.subject.name)
+                vs = vs | { bgp.subject.name }
             if not bgp.theobject.constant:
-                jv.append(bgp.theobject.name)
+                vs = vs | { bgp.theobject.name }
         elif isinstance(bgp, Service):
-            jv.extend(getJoinVarsUnionBlock(bgp.triples))
+            jv = jv | getJoinVarsUnionBlock(bgp.triples)
+            vs = vs | set(bgp.triples.getVars())
             #b = True
         elif isinstance(bgp, Optional):
-            jv.extend(getJoinVarsUnionBlock(bgp.bgg))
+            jv = jv | getJoinVarsUnionBlock(bgp.bgg)
+            vs = vs | set(bgp.bgg.getVars())
         elif isinstance(bgp, UnionBlock):
-            jv.extend(getJoinVarsUnionBlock(bgp))
+            jv = jv | getJoinVarsUnionBlock(bgp)
+            vs = vs | set(bgp.getVars())
             #b = True
         elif isinstance(bgp, JoinBlock): # added on June 2nd, 2015 to correctly compute join vars for queries with SERVICE clauses
-            jv.extend(getJoinVarsJoinBlock(bgp))
+            jv = jv | getJoinVarsJoinBlock(bgp)
+            vs = vs | set(bgp.getVars())
         #else:
         #    print bgp
         #if b:
         #    jv = list(set(jv))
         #print 'jv: '+str(jv)
-        join_vars.extend(jv)
+        join_vars = join_vars | jv
         #print 'join_vars: '+str(join_vars)
+        variables.extend(list(vs))
+        #print 'variables: '+str(variables)
     #join_vars = [ v for v in join_vars if join_vars.count(v) > 1]
+    join_vars = join_vars | set([ v for v in variables if variables.count(v) > 1])
+    #print 'join_vars__: '+str(join_vars)
     return join_vars
 
 def aux(e,x, op):

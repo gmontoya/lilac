@@ -116,7 +116,7 @@ def decomposeJoinBlock(jb, l, genPred, prefixes, decomposition, c):
                     dss.performSourceSelection()
                     selectedSources = dss.getSelectedSources()
                     replace = True
-                    print 'DAW selected sources: \n'+str(selectedSources)
+                    ##print 'DAW selected sources: \n'+str(selectedSources)
                 #print 'selected sources: '+str(selectedSources)
             gs = getGroups(l, tl, genPred, prefixes, decomposition, c, selectedSources, replace)
         #print l
@@ -723,7 +723,12 @@ def assignEndpointM(tl, l, genPred, prefixes, c, selectedSources, replace):
     for sg in ts:
         ps = list(selectedSources[sg]) #['<'+ss+'>' for ss in selectedSources[sg]] #search(l, sg, prefixes)
         eps0 = ps
-        ll = [ (k,m) for (k,m) in l if k in eps0 ]
+        ## the following statement was commented out (and replaced by the one in the following line) on October 15th 2021 by gmontoya
+        ## reason: this statement was added in the version available in LILAC's repository, but even if 
+        ## it makes sense to consider only those endpoints that according to the catalog include triples with that predicate
+        ## that changes ANAPSID's strategy and it is better to keep it as is is
+        ##ll = [ (k,m) for (k,m) in l if k in eps0 ]
+        ll = list(l)
         ps1 = []
         if (not (getUri(sg.predicate, prefixes) in genPred)) and sg.predicate.constant:
            ps1 = domainProviders(ll, sg.predicate, genPred, prefixes)
@@ -1071,8 +1076,12 @@ def decompose(qString, eFile, decomposition, contact):
         return None
     query.body = groups
     #print type(groups)
-    query.join_vars = query.getJoinVars()
+    ## the following statement was commented out on October 18th 2021 by gmontoya
+    ## reason: join variables can be used as they were in the posed query
+    ##query.join_vars = query.getJoinVars()
+    #print 'query.join_vars: '
     #print query.join_vars
+    #print 'query.getJoinVars(): '
     #print query.getJoinVars()
     logger.info('Decomposition Obtained')
     logger.info(query)
