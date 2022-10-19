@@ -1,0 +1,127 @@
+http://xmlns.com/foaf/0.1/name view35 view161 view160 view37 view202 view144 view55 view86
+http://xmlns.com/foaf/0.1/page view430 view359 view341 view413 view387 view317 view335 view402 view371 view350 view243 view306 view53 view143 view398 view394
+http://purl.org/NET/c4dm/event.owl#agent view42 view51
+http://www.w3.org/2002/12/cal/ical#summary view211
+http://swrc.ontoware.org/ontology#title view373 view356 view446 view441
+http://swrc.ontoware.org/ontology#author view117 view153 view180 view24 view121
+http://data.semanticweb.org/ns/swc/ontology#moderates view242 view148
+http://swrc.ontoware.org/ontology#editor view32
+http://data.semanticweb.org/ns/swc/ontology#hasRelatedDocument view47 view20
+http://www.w3.org/2002/12/cal/ical#date view410
+http://www.w3.org/2002/12/cal/icaltzid#location view254 view392 view384 view324 view460 view248 view380 view376
+http://swrc.ontoware.org/ontology#isbn view150 view277
+http://www.w3.org/2002/12/cal/icaltzd#dtend view397
+http://vocab.deri.ie/rooms#contains view427
+http://data.semanticweb.org/ns/swc/ontology#hasTopic view146 view46 view21
+http://data.semanticweb.org/ns/swc/ontology#heldBy view62 view17 view45 view7 view48 view8
+http://xmlns.com/foaf/0.1/firstName view85 view205 view39 view282 view297 view204 view321 view56 view323 view29 view273 view246
+http://data.semanticweb.org/ns/swc/ontology#homepage view362
+http://www.w3.org/2000/01/rdf-schema#isDefinedBy view419
+http://www.w3.org/2002/12/cal/ical#description view405 view299 view414 view470
+http://purl.org/dc/elements/1.1/description view206 view309
+http://data.semanticweb.org/ns/swc/ontology#isPartOf view173 view259 view227 view276 view232
+http://swrc.ontoware.org/ontology#url view264 view138
+http://xmlns.com/foaf/0.1/based_near view36
+http://data.semanticweb.org/ns/swc/ontology#hasRelatedEvent view157 view19
+http://purl.org/NET/c4dm/event.owl#place view26
+http://purl.org/dc/terms/creator view316 view314 view244 view234 view241 view58 view220 view315 view312
+http://data.semanticweb.org/ns/swc/ontology#affiliation view218 view34
+http://data.semanticweb.org/ns/swc/ontology#hasAcronym view353 view383 view453 view425 view452 view442 view457 view345 view322
+http://xmlns.com/foaf/0.1/status view142 view89 view65 view76
+http://www.w3.org/2002/12/cal/ical#dtend view83
+http://xmlns.com/foaf/0.1/homepage view131 view33 view102 view166 view2
+http://www.w3.org/2002/12/cal/ical#dateTime view343 view278
+http://data.semanticweb.org/ns/swc/ontology#relatedToEvent view15
+http://data.semanticweb.org/ns/swc/ontology#paperList view187
+http://www.cs.vu.nl/~mcaklein/onto/swrc_ext/2005/05#authorList view4 view22
+http://www.w3.org/2004/02/skos/core#broader view258 view428 view301 view431
+http://xmlns.com/foaf/0.1/maker view233 view23 view289 view63 view182 view222 view230 view267 view118 view174 view139 view268
+http://data.semanticweb.org/ns/swc/ontology#url view43 view407 view423
+http://swrc.ontoware.org/ontology#address view298
+http://xmlns.com/foaf/0.1/familyName view421 view379 view435 view389 view429 view84 view363 view294 view340 view251 view432 view459 view216 view464 view420 view462 view372 view382 view436 view49 view212 view320
+http://www.w3.org/1999/02/22-rdf-syntax-ns#_10 view92 view226 view270
+http://www.w3.org/1999/02/22-rdf-syntax-ns#_11 view5
+http://swrc.ontoware.org/ontology#pages view124
+http://xmlns.com/foaf/0.1/member view40 view74 view141 view186 view82
+http://data.semanticweb.org/ns/swc/ontology#speaker view275 view60
+http://data.semanticweb.org/ns/swc/ontology#panelist view10
+http://www.w3.org/1999/02/22-rdf-syntax-ns#_16 view290
+http://www.w3.org/2002/07/owl#sameAs view52 view64
+http://www.w3.org/1999/02/22-rdf-syntax-ns#_17 view403 view280 view272
+http://www.w3.org/1999/02/22-rdf-syntax-ns#_18 view305 view195
+http://www.w3.org/1999/02/22-rdf-syntax-ns#_19 view147
+http://data.semanticweb.org/ns/swc/ontology#hasPart view3
+http://www.w3.org/1999/02/22-rdf-syntax-ns#_12 view101
+http://www.w3.org/1999/02/22-rdf-syntax-ns#_13 view197 view287 view399
+http://purl.org/ontology/bibo/editorList view159
+http://www.w3.org/1999/02/22-rdf-syntax-ns#_14 view193 view214 view291
+http://www.w3.org/1999/02/22-rdf-syntax-ns#_15 view260 view215
+http://data.semanticweb.org/ns/swc/ontology#isRoleAt view41
+http://purl.org/dc/elements/1.1/creator view125 view140 view189 view72 view175 view158
+http://www.w3.org/2002/12/cal/ical#dtstart view327 view269 view300
+http://www.w3.org/2002/12/cal/icaltzid#description view409 view385 view449
+http://data.semanticweb.org/ns/swc/ontology#isSubEventOf view210 view106 view188 view61 view105 view171
+http://data.semanticweb.org/ns/swc/ontology#hasLocation view27 view30
+http://data.semanticweb.org/ns/swc/ontology#holdsRole view6
+http://purl.org/dc/terms/title view358 view391 view370 view351 view221 view448 view461
+http://www.w3.org/1999/02/22-rdf-syntax-ns#_20 view285 view271
+http://www.w3.org/2002/12/cal/icaltzd#url view386 view396 view31
+http://www.w3.org/2000/01/rdf-schema#label view14
+http://xmlns.com/foaf/0.1/lastName view109 view134 view130 view136 view67 view115
+http://swrc.ontoware.org/ontology#abstract view199 view179 view99 view73 view190
+http://www.w3.org/1999/02/22-rdf-syntax-ns#_21 view196 view292
+http://www.w3.org/2004/02/skos/core#prefLabel view132 view104 view181 view127 view111 view162
+http://purl.org/dc/elements/1.1/title view418 view120 view352 view369 view313 view168 view245
+http://sw.deri.org/2005/08/conf/cfp.owl#involved view224
+http://www.w3.org/2002/12/cal/icaltzid#summary view333 view433 view415 view443 view247 view367 view451 view444 view365 view426 view348 view437 view390 view357
+http://www.w3.org/2002/12/cal/icaltzid#dtstart view328 view169 view445 view467 view336 view330 view438 view466 view366 view447 view368
+http://www.w3.org/2000/01/rdf-schema#subClassOf view302
+http://purl.org/dc/terms/subject view100 view439 view471 view412 view411 view465 view334 view440 view191 view219
+http://data.semanticweb.org/ns/swc/ontology#givesKeynoteTalk view59
+http://www.w3.org/2002/12/cal/ical#tzid view434 view374 view279
+http://www.w3.org/2002/12/cal/ical#duration view349 view240 view326 view307 view416 view360 view463 view332 view318 view361
+http://swrc.ontoware.org/ontology#affiliation view11
+http://purl.org/ontology/bibo/authorList view114 view12 view177
+http://www.w3.org/2002/12/cal/ical#url view239
+http://www.w3.org/2000/01/rdf-schema#seeAlso view119 view250 view87 view223 view1 view237
+http://www.w3.org/2002/12/cal/icaltzid#dtend view249 view337 view393 view325 view170 view329 view377 view255 view381 view364 view331
+http://data.semanticweb.org/ns/swc/ontology#hasLogo view450 view401
+http://www.w3.org/1999/02/22-rdf-syntax-ns#type view81 view164
+http://xmlns.com/foaf/0.1/workplaceHomepage view38 view229 view54 view203
+http://purl.org/NET/c4dm/event.owl#time view167 view261
+http://data.semanticweb.org/ns/swc/ontology#completeGraph view107
+http://purl.org/dc/elements/1.1/subject view456 view113 view395 view137 view375 view93 view25 view354 view454 view263 view283
+http://data.semanticweb.org/ns/swc/ontology#isPanelistAt view9 view88 view112
+http://swrc.ontoware.org/ontology#year view122 view151
+http://www.w3.org/2002/12/cal/icaltzd#dtstart view346
+http://swrc.ontoware.org/ontology#booktitle view406 view319 view303
+http://data.semanticweb.org/ns/swc/ontology#partOf view424
+http://www.w3.org/1999/02/22-rdf-syntax-ns#_9 view404 view355 view200 view304 view378 view208 view69 view274 view95
+http://data.semanticweb.org/ns/swc/ontology#isLocationFor view75
+http://www.w3.org/1999/02/22-rdf-syntax-ns#_7 view90 view13 view126 view178 view71 view185
+http://www.w3.org/1999/02/22-rdf-syntax-ns#_8 view281 view209 view97 view155 view80
+http://www.w3.org/2000/01/rdf-schema#comment view108
+http://www.w3.org/1999/02/22-rdf-syntax-ns#_5 view91 view96
+http://purl.org/NET/c4dm/timeline.owl#end view468 view422 view344 view417
+http://www.w3.org/1999/02/22-rdf-syntax-ns#_6 view207 view194 view286 view94 view154 view78 view176 view152 view184
+http://data.semanticweb.org/ns/swc/ontology#moderator view265 view256 view149
+http://www.w3.org/1999/02/22-rdf-syntax-ns#_3 view66 view77 view70
+http://xmlns.com/foaf/0.1/primaryTopic view400
+http://www.w3.org/1999/02/22-rdf-syntax-ns#_4 view79 view28
+http://www.w3.org/1999/02/22-rdf-syntax-ns#_1 view198 view236 view288 view308
+http://www.w3.org/2002/12/cal/icaltzd#location view408 view458
+http://www.w3.org/1999/02/22-rdf-syntax-ns#_2 view68
+http://xmlns.com/foaf/0.1/mbox view469
+http://www.w3.org/2003/01/geo/wgs84_pos#lat view235
+http://data.semanticweb.org/ns/swc/ontology#hasProgramme view228
+http://swrc.ontoware.org/ontology#keywords view455 view201 view253
+http://data.semanticweb.org/ns/swc/ontology#isSuperEventOf view238
+http://xmlns.com/foaf/0.1/givenName view163 view284 view295 view262 view156
+http://www.cs.vu.nl/~mcaklein/onto/swrc_ext/2005/05#editorList view339 view342 view388 view338
+http://xmlns.com/foaf/0.1/family_name view103 view252 view213 view165 view217 view110 view225 view50 view135 view192 view129 view266 view296
+http://data.semanticweb.org/ns/swc/ontology#hasRole view16 view44
+http://swrc.ontoware.org/ontology#month view145 view98 view123
+http://purl.org/NET/c4dm/timeline.owl#start view347
+http://xmlns.com/foaf/0.1/made view18
+http://xmlns.com/foaf/0.1/mbox_sha1sum view128 view57 view133
+http://xmlns.com/foaf/0.1/topic view310 view293 view257 view172 view311 view231 view116 view183

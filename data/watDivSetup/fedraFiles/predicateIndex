@@ -1,0 +1,61 @@
+http://www.geonames.org/ontology#parentCountry view43 view37
+http://ogp.me/ns#title view18
+http://schema.org/language view103 view87 view104 view101 view105 view82 view96
+http://purl.org/stuff/rev#rating view93
+http://purl.org/goodrelations/serialNumber view25
+http://schema.org/jobTitle view72
+http://schema.org/keywords view81
+http://schema.org/contentSize view51
+http://purl.org/stuff/rev#text view90 view88 view76
+http://db.uwaterloo.ca/~galuc/wsdbm/purchaseFor view16
+http://schema.org/url view79
+http://purl.org/goodrelations/validFrom view26
+http://purl.org/ontology/mo/performed_in view23 view44
+http://schema.org/openingHours view67
+http://purl.org/ontology/mo/performer view97
+http://purl.org/stuff/rev#totalVotes view106
+http://schema.org/email view71
+http://purl.org/stuff/rev#hasReview view55 view70 view78 view8
+http://schema.org/award view98 view21 view53 view86
+http://purl.org/goodrelations/name view75
+http://schema.org/employee view39
+http://schema.org/faxNumber view84
+http://xmlns.com/foaf/familyName view91
+http://db.uwaterloo.ca/~galuc/wsdbm/subscribes view42 view77 view73
+http://purl.org/goodrelations/includes view3
+http://db.uwaterloo.ca/~galuc/wsdbm/likes view46 view52
+http://db.uwaterloo.ca/~galuc/wsdbm/hasGenre view13
+http://schema.org/contentRating view48 view34
+http://schema.org/caption view47
+http://schema.org/nationality view63 view57
+http://xmlns.com/foaf/age view38 view36 view10
+http://schema.org/editor view40
+http://purl.org/stuff/rev#title view20 view99
+http://schema.org/description view7
+http://schema.org/text view31
+http://xmlns.com/foaf/homepage view35 view65 view74 view54 view59
+http://db.uwaterloo.ca/~galuc/wsdbm/gender view41
+http://schema.org/datePublished view6
+http://schema.org/birthDate view33
+http://db.uwaterloo.ca/~galuc/wsdbm/makesPurchase view14
+http://purl.org/dc/terms/Location view56 view60
+http://www.w3.org/1999/02/22-rdf-syntax-ns#type view17 view19 view12 view32 view29 view30
+http://schema.org/aggregateRating view49
+http://purl.org/ontology/mo/opus view100 view95
+http://db.uwaterloo.ca/~galuc/wsdbm/hits view80
+http://schema.org/paymentAccepted view68
+http://purl.org/goodrelations/description view102
+http://ogp.me/ns#tag view1 view2
+http://schema.org/eligibleQuantity view27
+http://purl.org/stuff/rev#reviewer view89 view94
+http://purl.org/goodrelations/validThrough view5
+http://schema.org/priceValidUntil view69
+http://purl.org/goodrelations/price view11
+http://schema.org/eligibleRegion view62 view45 view66 view28 view50
+http://purl.org/goodrelations/offers view4 view24
+http://db.uwaterloo.ca/~galuc/wsdbm/purchaseDate view22 view15
+http://db.uwaterloo.ca/~galuc/wsdbm/userId view64
+http://schema.org/author view85 view92
+http://schema.org/telephone view58
+http://schema.org/expires view83
+http://xmlns.com/foaf/givenName view9 view61

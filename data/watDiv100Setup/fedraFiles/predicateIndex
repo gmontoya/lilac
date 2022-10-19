@@ -1,0 +1,69 @@
+http://www.geonames.org/ontology#parentCountry view93 view76
+http://ogp.me/ns#title view3
+http://schema.org/language view65 view14 view64 view59
+http://purl.org/stuff/rev#rating view35
+http://purl.org/goodrelations/serialNumber view13
+http://schema.org/jobTitle view50
+http://schema.org/keywords view20
+http://schema.org/contentSize view19
+http://purl.org/stuff/rev#text view36 view97
+http://db.uwaterloo.ca/~galuc/wsdbm/purchaseFor view7
+http://schema.org/url view124 view122 view116
+http://purl.org/goodrelations/validFrom view2
+http://purl.org/ontology/mo/performed_in view91 view90 view66 view98 view29
+http://schema.org/openingHours view109 view103 view79 view86
+http://schema.org/publisher view43 view99
+http://purl.org/ontology/mo/performer view101
+http://purl.org/stuff/rev#totalVotes view118
+http://schema.org/email view33
+http://purl.org/stuff/rev#hasReview view25
+http://schema.org/award view108
+http://schema.org/employee view120 view46 view11
+http://schema.org/faxNumber view82
+http://xmlns.com/foaf/familyName view119 view104 view123 view110 view111 view41
+http://db.uwaterloo.ca/~galuc/wsdbm/subscribes view56
+http://purl.org/goodrelations/includes view1
+http://schema.org/contactPoint view81
+http://db.uwaterloo.ca/~galuc/wsdbm/likes view22
+http://db.uwaterloo.ca/~galuc/wsdbm/hasGenre view21
+http://schema.org/contentRating view18
+http://schema.org/caption view17
+http://schema.org/nationality view55
+http://xmlns.com/foaf/age view62 view89 view70 view92 view75 view69
+http://purl.org/stuff/rev#title view37
+http://schema.org/editor view114
+http://schema.org/description view5
+http://schema.org/text view6
+http://xmlns.com/foaf/homepage view23 view51 view73
+http://db.uwaterloo.ca/~galuc/wsdbm/gender view40 view34
+http://schema.org/datePublished view88
+http://schema.org/birthDate view107
+http://db.uwaterloo.ca/~galuc/wsdbm/makesPurchase view47 view72 view49
+http://purl.org/dc/terms/Location view38 view32
+http://www.w3.org/1999/02/22-rdf-syntax-ns#type view4 view16 view28 view10
+http://schema.org/aggregateRating view80
+http://purl.org/ontology/mo/opus view78
+http://db.uwaterloo.ca/~galuc/wsdbm/hits view125 view94 view61 view95 view121
+http://ogp.me/ns#tag view27 view9 view15 view8
+http://purl.org/goodrelations/description view85
+http://schema.org/paymentAccepted view84
+http://purl.org/ontology/mo/artist view39
+http://schema.org/eligibleQuantity view45
+http://purl.org/stuff/rev#reviewer view113 view63 view117 view115 view112
+http://purl.org/goodrelations/validThrough view60
+http://schema.org/legalName view83
+http://schema.org/priceValidUntil view53
+http://purl.org/goodrelations/price view30
+http://schema.org/eligibleRegion view26
+http://purl.org/goodrelations/offers view77 view68 view12 view52 view24 view71 view44
+http://db.uwaterloo.ca/~galuc/wsdbm/purchaseDate view48
+http://db.uwaterloo.ca/~galuc/wsdbm/userId view57
+http://schema.org/actor view102
+http://schema.org/trailer view42
+http://schema.org/producer view58
+http://purl.org/ontology/mo/release view100
+http://schema.org/author view74
+http://schema.org/telephone view87
+http://purl.org/ontology/mo/record_number view106 view105 view96
+http://schema.org/expires view31
+http://xmlns.com/foaf/givenName view54 view67

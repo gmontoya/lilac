@@ -1,0 +1,18 @@
+http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/associatedGene view42 view17 view66 view36 view13 view77 view1 view71 view32 view5 view59 view41
+http://www.w3.org/2002/07/owl#sameAs view16
+http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/classDegree view51
+http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/class view23 view14 view25 view29 view49
+http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/bio2rdfSymbol view84 view98 view92 view76
+http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/name view63 view9 view33 view55 view18 view61 view34
+http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/chromosomalLocation view62 view37 view54 view70 view28 view50 view8
+http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/omimPage view40 view45 view21 view79 view69 view53 view73 view80 view6
+http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/degree view27 view60
+http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/hgncIdPage view85 view90 view101 view94 view96
+http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/geneId view91 view93
+http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/diseaseSubtypeOf view81 view47 view89 view39 view88 view74 view87 view83 view22 view78 view56 view64 view3 view30 view86 view10
+http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/possibleDrug view35 view19 view26 view52 view48 view31
+http://www.w3.org/2000/01/rdf-schema#label view7 view2
+http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/omim view65 view58 view68 view72 view12 view75 view24 view44
+http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/size view82 view15
+http://www.w3.org/1999/02/22-rdf-syntax-ns#type view4 view38 view20 view43 view46 view67 view57 view11
+http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/hgncId view100 view102 view97 view99 view95
