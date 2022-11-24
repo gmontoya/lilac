@@ -32,7 +32,7 @@ for i in `seq 1 $n`; do
 done
 
 l=`cat ${queriesToExecute}_0_bkp`
-./produceAnswer.sh "$l" "$queriesFile" "$hdtFile" "${firstProxyPort}" "$answersFolder"
+${lilachome}/scripts/produceAnswer.sh "$l" "$queriesFile" "$hdtFile" "${firstProxyPort}" "$answersFolder"
 
 sed -i".bkp" "s,queriesToExecute=[0-9a-zA-Z_/\.\$]*,queriesToExecute=${queriesToExecute}," test${federation}.sh
 
@@ -48,7 +48,7 @@ while [ "$n" -lt "$numberQueries" ]; do
             for ss in $sourceSelectionStrategy; do    
                 label="$engine${ss}${strategy}"
                 f=${setupFolder}/output${label}${numberClients}Client
-                x=`./getIRNCFederation.sh ${f} ${firstPort} ${lastPort}`
+                x=`${lilachome}/scripts/getIRNCFederation.sh ${f} ${firstPort} ${lastPort}`
                 y=`grep "query${q}" ${f}${firstPort}`
                 z="$y $x"
                 (echo "$z") >> ${f}

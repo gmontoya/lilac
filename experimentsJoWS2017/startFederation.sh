@@ -3,6 +3,10 @@ f=$1
 folder=${lilachome}/data/${f}Setup
 tmpFile=`mktemp`
 
+p=`pwd`
+
+cd ${lilachome}/scripts
+
 for i in `seq 0 9`; do
     port=$(($i+8890))
     address=`./getHost.sh $folder/hosts $port`
@@ -17,3 +21,5 @@ for i in `seq 0 9`; do
 done
 
 cat $tmpFile
+
+cd $p

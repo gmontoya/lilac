@@ -45,7 +45,7 @@ for i in  `seq 0 $last`; do
         l[${i}]=`shuf -i 1-$N -n $numberQueries`
         (echo "${l[i]}") > ${queriesToExecute}_${i}
         if [ "$action" != "justReplicate" ]; then
-            ./produceAnswer.sh "${l[i]}" "$queriesFile" "$hdtFile" "${firstProxyPort}" "$answersFolder"
+            ${lilachome}/scripts/produceAnswer.sh "${l[i]}" "$queriesFile" "$hdtFile" "${firstProxyPort}" "$answersFolder"
         fi
     fi
 done
@@ -74,8 +74,7 @@ for strategy in $strategies; do
         if [ "$strategy" = "FEDERATION" ] || [ "$strategy" = "PUBLIC" ]; then
           if [ "$action" != "justReplicate" ] && [ "$action" != "justSelect" ]; then
             p=`pwd`
-            cd ${lilachome}/scripts
-            address=`./getHost.sh $setupFolder/hosts 3040`
+            address=`${lilachome}/scripts/getHost.sh $setupFolder/hosts 3040`
             cd ${lilachome}/proxy
             java -cp .:${httpcomponentsClientPath}/lib/* SingleEndpointProxy2 $address ${publicEndpointPort} ${publicEndpointProxyPort} > $tmpFilePEP &
             pidPEProxy=$!
@@ -88,8 +87,7 @@ for strategy in $strategies; do
             port=$(($firstPort+$i))
             proxyPort=$(($firstProxyPort+$i))
             p=`pwd`
-            cd ${lilachome}/scripts
-            address=`./getHost.sh $setupFolder/hosts $port`
+            address=`${lilachome}/scripts/getHost.sh $setupFolder/hosts $port`
             host=http://$address
             cd $p
             graph=http://${federation}Endpoint${i}
@@ -153,13 +151,13 @@ for strategy in $strategies; do
                 cp ${setupFolder}/endpointsDescription.bkp ${setupFolder}/endpointsDescription
             fi
             if [ "$action" != "justExecute" ] && [ "$action" != "justSelect" ]; then
-                updateTime=`./processUpdateFile.sh ${updatesFile}${port}`
+                updateTime=`${lilachome}/scripts/processUpdateFile.sh ${updatesFile}${port}`
                 (echo "$updateTime") >> $file
                 rm ${updatesFile}${port}
             fi
           done
           if [ "$action" = "justReplicate" ]; then
-              dawIndexGenerationTime=`./generateFederationDawIndex.sh $setupFolder $firstPort $lastPort $firstProxyPort`
+              dawIndexGenerationTime=`${lilachome}/scripts/generateFederationDawIndex.sh $setupFolder $firstPort $lastPort $firstProxyPort`
               echo "$dawIndexGenerationTime"
           fi
         fi
