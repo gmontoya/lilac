@@ -1,28 +1,38 @@
 @prefix fluid: <http://fluidops.org/config#>.
 
-<HOST:3100> fluid:store "SPARQLEndpoint";
-fluid:SPARQLEndpoint "HOST:3100/sparql".
+<http://localhost:8900> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "http://localhost:8900/sparql";
+fluid:supportsASKQueries "false" .
 
-<HOST:3130/ds> fluid:store "SPARQLEndpoint";
-fluid:SPARQLEndpoint "HOST:3130/ds/sparql".
+<http://localhost:8897/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "http://localhost:8897/sparql";
+fluid:supportsASKQueries "false" .
 
-<HOST:3136/ds> fluid:store "SPARQLEndpoint";
-fluid:SPARQLEndpoint "HOST:3136/ds/sparql".
+<http://localhost:8896/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "http://localhost:8896/sparql";
+fluid:supportsASKQueries "false" .
 
-<HOST:3131/ds> fluid:store "SPARQLEndpoint";
-fluid:SPARQLEndpoint "HOST:3131/ds/sparql".
+<http://localhost:8890/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "http://localhost:8890/sparql";
+fluid:supportsASKQueries "false" .
 
-<HOST:3139/ds> fluid:store "SPARQLEndpoint";
-fluid:SPARQLEndpoint "HOST:3139/ds/sparql".
+<http://localhost:8891/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "http://localhost:8891/sparql";
+fluid:supportsASKQueries "false" .
 
-<HOST:3134/ds> fluid:store "SPARQLEndpoint";
-fluid:SPARQLEndpoint "HOST:3134/ds/sparql".
+<http://localhost:8893/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "http://localhost:8893/sparql";
+fluid:supportsASKQueries "false" .
 
-<HOST:3138/ds> fluid:store "SPARQLEndpoint";
-fluid:SPARQLEndpoint "HOST:3138/ds/sparql".
+<http://localhost:8899/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "http://localhost:8899/sparql";
+fluid:supportsASKQueries "false" .
 
-<HOST:3137/ds> fluid:store "SPARQLEndpoint";
-fluid:SPARQLEndpoint "HOST:3137/ds/sparql".
+<http://localhost:8894/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "http://localhost:8894/sparql";
+fluid:supportsASKQueries "false" .
 
-<HOST:3133/ds> fluid:store "SPARQLEndpoint";
-fluid:SPARQLEndpoint "HOST:3133/ds/sparql".
+<http://localhost:8898/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "http://localhost:8898/sparql";
+fluid:supportsASKQueries "false" .
+

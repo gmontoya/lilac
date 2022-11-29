@@ -8,7 +8,7 @@ p=`pwd`
 
 for port in `seq $firstPort $last`; do
      cd ${lilachome}/scripts
-     address=`./getHost.sh $folder/hosts $port`
+     address=`${lilachome}/experimentsJoWS2017/getHost.sh $folder/hosts $port`
      host=http://$address
      oarsh $address "${lilachome}/scripts/restoreOneEndpoint.sh $port $host $folder"
 done

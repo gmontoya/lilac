@@ -7,7 +7,7 @@ i=$4
 
 port=$((${offset}+3030))
 
-cmdA="ld_dir('${lilachome}/data/${federation}Setup/', 'endpoint${port}.nt', 'http://${federation}Endpoint${suffix}');"
+cmdA="ld_dir('$lilachome/data/${federation}Setup/', 'endpoint${port}.nt', 'http://${federation}Endpoint${suffix}');"
 cmdB="rdf_loader_run();"
 cmdC="checkpoint;"
 p=$(($i+1111))

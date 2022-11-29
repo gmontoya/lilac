@@ -1,0 +1,36 @@
+@prefix :        <#> .
+@prefix fuseki:  <http://jena.apache.org/fuseki#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tdb:     <http://jena.hpl.hp.com/2008/tdb#> .
+@prefix ja:      <http://jena.hpl.hp.com/2005/11/Assembler#> .
+@prefix hdt: <http://www.rdfhdt.org/fuseki#> .
+
+[] rdf:type fuseki:Server ;
+   fuseki:services (
+     <#service1>
+   ) .
+
+[]   ja:loadClass "org.rdfhdt.hdtjena.HDTGraphAssembler" .
+
+hdt:HDTGraph rdfs:subClassOf ja:Graph .
+
+<#service1> rdf:type fuseki:Service ;
+     # URI of the dataset -- http://host:port/ds
+  fuseki:name                     "ds" ;
+
+  # SPARQL query services e.g. http://host:port/ds/sparql?query=...
+  fuseki:serviceQuery             "sparql" ;
+  fuseki:serviceQuery             "query" ;
+  # SPARQL Update service -- http://host:port/ds/update?request=...
+  fuseki:serviceUpdate            "update" ;   # SPARQL query service -- /ds/update
+  fuseki:dataset           <#dataset> .
+
+  <#dataset> rdf:type ja:RDFDataset ;
+  rdfs:label "Dataset" ;
+  ja:defaultGraph <#graph1> .
+
+  <#graph1> rdfs:label "RDF Graph1 from HDT file" ;
+  rdf:type hdt:HDTGraph ;
+  hdt:fileName "$lilachome/data/geoCoordinatesSetup/federationData.hdt" .

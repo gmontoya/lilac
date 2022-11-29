@@ -74,7 +74,7 @@ for strategy in $strategies; do
         if [ "$strategy" = "FEDERATION" ] || [ "$strategy" = "PUBLIC" ]; then
           if [ "$action" != "justReplicate" ] && [ "$action" != "justSelect" ]; then
             p=`pwd`
-            address=`${lilachome}/scripts/getHost.sh $setupFolder/hosts 3040`
+            address=`${lilachome}/experimentsJoWS2017/getHost.sh $setupFolder/hosts 3040`
             cd ${lilachome}/proxy
             java -cp .:${httpcomponentsClientPath}/lib/* SingleEndpointProxy2 $address ${publicEndpointPort} ${publicEndpointProxyPort} > $tmpFilePEP &
             pidPEProxy=$!
@@ -87,11 +87,11 @@ for strategy in $strategies; do
             port=$(($firstPort+$i))
             proxyPort=$(($firstProxyPort+$i))
             p=`pwd`
-            address=`${lilachome}/scripts/getHost.sh $setupFolder/hosts $port`
+            address=`${lilachome}/experimentsJoWS2017/getHost.sh $setupFolder/hosts $port`
             host=http://$address
             cd $p
             graph=http://${federation}Endpoint${i}
-            oarsh $address "${lilachome}/scripts/runClient.sh $strategy $queriesFile \"${l[i]}\" $port $ldfServer ${federationFile} $availability $answersFolder $publicEndpoint $engine $configFile $hdtFile $anapsidFederationFile ${updatesFile}${port} ${proxyPort} ${action} ${address} ${setupFolder}/output${label}${numberClients}Client$port ${graph} > ${tmpFile}" 
+            oarsh $address "${lilachome}/scripts/runClient.sh $strategy $queriesFile \"${l[i]}\" $port $ldfServer ${federationFile} $availability $answersFolder $publicEndpoint $engine $configFile $federation $anapsidFederationFile ${updatesFile}${port} ${proxyPort} ${action} ${address} ${setupFolder}/output${label}${numberClients}Client$port ${graph} > ${tmpFile}" 
             pid=`cat $tmpFile`
             spids="$spids $pid"
         done
@@ -134,7 +134,7 @@ for strategy in $strategies; do
             pidFE=`head -n $n $file | tail -n 1`
             n=$(($n-1))
             tmpFileNR=`head -n $n $file | tail -n 1`
-            proxyAddress=`${lilachome}/scripts/getHost.sh $setupFolder/hosts $port`
+            proxyAddress=`${lilachome}/experimentsJoWS2017/getHost.sh $setupFolder/hosts $port`
             if [ "$action" != "justReplicate" ] && [ "$action" != "justSelect" ]; then
                 #echo "killing proxy with pid: $pidProxy in machine $proxyAddress"
                 oarsh $proxyAddress "${lilachome}/scripts/endProxy.sh $pidProxy"

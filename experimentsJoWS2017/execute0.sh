@@ -8,6 +8,6 @@ tmpFile=`mktemp`
 uniq $OAR_NODEFILE > $tmpFile
 
 tail -n +1 $tmpFile | head -n 11 > ${lilachome}/data/${federation}Setup/hosts
-address=`./getHost.sh ${lilachome}/data/${federation}Setup/hosts 3040`
+address=`${lilachome}/experimentsJoWS2017/getHost.sh ${lilachome}/data/${federation}Setup/hosts 3040`
 oarsh $address "${lilachome}/experimentsJoWS2017/execute.sh ${federation} ${Federation}"
 

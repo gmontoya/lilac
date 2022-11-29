@@ -14,9 +14,9 @@ tmpFile=`mktemp`
 for qn in $l; do
     if [ ! -f $answersFolder/query${qn} ]; then
         (head -n "$qn" "$queriesFile" | tail -n 1) > $queryFile
-        cd ${fusekiPath}
+        cd $fusekiPath/bin
         ./s-query --service http://${host}:${localPort}/sparql --file=${queryFile} --output=json > "$answersFolder/query${qn}"
-        cd ${lilachome}/scripts
+        cd $lilachome/scripts
         python formatJSONFile.py "$answersFolder/query${qn}" > "$tmpFile"
         LANG=En_US sort "$tmpFile" > "$answersFolder/query${qn}"
     fi

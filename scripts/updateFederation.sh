@@ -45,8 +45,8 @@ parse() {
 
 action() {
   ldf-client $ldfServer $constructQuery > ${fragment}.n3
-  cd ${lilachome}/code
-  java -cp .:${jenaPath}/lib/* LoadFragment2 ${fragment}.n3 ${fusekiEndpoint}/update > $tmpFile
+  cd $lilachome/code
+  java -cp .:$jenaPath/lib/* LoadFragment2 ${fragment}.n3 ${fusekiEndpoint}/update > $tmpFile
   #cat $tmpFile
   #echo "n: $n"
   #echo "configFile: $configFile"
@@ -57,10 +57,12 @@ action() {
   if [ "$k" -eq 0 ]; then
     (echo "") >> $federationFile
     (echo "<$proxy> fluid:store \"SPARQLEndpoint\";") >> $federationFile
-    (echo "fluid:SPARQLEndpoint \"${proxy}/sparql\".") >> $federationFile
+    (echo "fluid:SPARQLEndpoint \"${proxy}/sparql\";") >> $federationFile
+    (echo "fluid:supportsASKQueries \"false\" .") >> $federationFile
     (echo "") >> $newFederationFile
     (echo "<$proxy> fluid:store \"SPARQLEndpoint\";") >> $newFederationFile
-    (echo "fluid:SPARQLEndpoint \"${proxy}/sparql\".") >> $newFederationFile
+    (echo "fluid:SPARQLEndpoint \"${proxy}/sparql\";") >> $newFederationFile
+    (echo "fluid:supportsASKQueries \"false\" .") >> $newFederationFile
   fi
   updateAnapsidDescriptions
   #echo "thread: $$ after updating fedra files"
@@ -105,15 +107,15 @@ n=`grep "fluid:SPARQLEndpoint" ${newFederationFile} | wc -l | sed 's/^[ ^t]*//' 
 
 source $configFile
 p=`pwd`
-cd ${lilachome}/code
-java -cp .:${jenaPath}/lib/* obtainTriples $queryFile > $planFile
+cd $lilachome/code
+java -cp .:$jenaPath/lib/* obtainTriples $queryFile > $planFile
 while read line; do 
     triple="${line}"
     query="CONSTRUCT WHERE { $triple }"
     #echo "$query"
     (echo "$query") > $constructQuery
-    cd ${lilachome}/code
-    numReplicas=`java -cp .:${jenaPath}/lib/* countRelevantFragments $constructQuery ${FragmentsDefinitionFolder} ${EndpointsFile}`
+    cd $lilachome/code
+    numReplicas=`java -cp .:$jenaPath/lib/* countRelevantFragments $constructQuery ${FragmentsDefinitionFolder} ${EndpointsFile}`
     #echo "numReplicas: ${numReplicas}"
     if [ "${numReplicas}" -lt "$threshold" ]; then
         action

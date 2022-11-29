@@ -18,7 +18,7 @@ for i in `seq 0 9`; do
     virtuoso-t -f > output 2> error &
     pid=$!
     sleep 2m
-    cd ${lilachome}/scripts
+    cd $lilachome/scripts
     ./loadOneEndpoint.sh $f $i $i $i
     echo "${f}${i} loaded"
     kill $pid

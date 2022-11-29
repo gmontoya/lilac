@@ -26,8 +26,8 @@ for i in `seq 0 $last`; do
     else 
         graph=""
     fi
-    cd ${lilachome}/scripts
-    address=`./getHost.sh ${lilachome}/data/${federation}Setup/hosts $localPort`
+    #cd ${lilachome}/scripts
+    address=`${lilachome}/experimentsJoWS2017/getHost.sh ${lilachome}/data/${federation}Setup/hosts $localPort`
     echo $address
     oarsh $address "${lilachome}/scripts/startOneProxy.sh ${address} ${localPort} ${localProxyPort} ${tmpFile}_$i ${graph}" 
 done
@@ -38,8 +38,8 @@ else
     graph=""
 fi
 
-cd ${lilachome}/scripts
-address=`./getHost.sh ${lilachome}/data/${federation}Setup/hosts 3040`
+#cd ${lilachome}/scripts
+address=`${lilachome}/experimentsJoWS2017/getHost.sh ${lilachome}/data/${federation}Setup/hosts 3040`
 echo $address
 oarsh $address "${lilachome}/scripts/startOneProxy.sh ${address} ${pePort} ${peProxyPort} ${tmpFile}_pe"
 

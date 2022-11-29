@@ -25,19 +25,20 @@ queryFileB=`mktemp`
 p=`pwd`
 to=1800
 
-source ${lilachome}/scripts/export.sh
+##source $lilachome/scripts/export.sh
 n=`shuf -i 1-100 -n 1`
-cd ${lilachome}/code
-ntp=`java -cp .:${jenaPath}/lib/* obtainTriples $queryFile | wc -l`
-shape=`java -cp .:${jenaPath}/lib/* getQueryShape $queryFile`
+cd $lilachome/code
+ntp=`java -cp .:$jenaPath/lib/* obtainTriples $queryFile | wc -l`
+shape=`java -cp .:$jenaPath/lib/* getQueryShape $queryFile`
 cd $p
 #echo "new fed file: $newFederationFile"
 if [ $n -gt $availability ]; then
     #echo "removing public endpoint, value of n: $n"
-    pep=${publicEndpoint%%/sparql}
-    grep -iv "$pep" $federationFile > $newFederationFile
+    ##pep=${publicEndpoint%%/sparql}
+    ##grep -iv "$pep" $federationFile > $newFederationFile
+    $lilachome/scripts/removeEndpoint.sh $federationFile ${publicEndpoint} > $newFederationFile
     #grep -i "$pep" $federationFile > $tmpFileB
-    grep -iv "<${publicEndpoint}>" $anapsidFederationFile > $newAnapsidFederationFile
+    grep -iv "<${publicEndpoint}>" $anapsidFederationFile > $newAnapsidFederationFile    
     #grep -i "<${publicEndpoint}>" $anapsidFederationFile > $tmpFileC
 else 
     cp $federationFile $newFederationFile
@@ -56,23 +57,23 @@ if [ "$strategy" = "FEDERATION" ]; then
       bash ./updateFederation.sh $queryFile http://${address}:${localPort}/ds $ldfServer $configFile $federationFile $newFederationFile $anapsidFederationFile $newAnapsidFederationFile $updatesFile http://${address}:${localProxyPort}/ds ${publicEndpoint}
     fi
     if [ "$engine" = "FedX11" ] && [ "$action" != "justReplicate" ]; then
-        cd ${lilachome}/code
+        cd $lilachome/code
         source $configFile
-        rm $tmpFile
+        rm -f $tmpFile
         for i in `seq 1 2`; do
-            /usr/bin/time -f "%e %S %U" java -cp ".:${jenaPath}/lib/*" fedra2 $queryFile $FragmentsDefinitionFolder $EndpointsFile $FragmentsSources $Random $queryFileB $availableSources 2> $tmpFile
+            /usr/bin/time -f "%e %S %U" java -cp ".:$jenaPath/lib/*" fedra2 $queryFile $FragmentsDefinitionFolder $EndpointsFile $FragmentsSources $Random $queryFileB $availableSources 2> $tmpFile
         done
         #echo "query with service"
         #echo $queryFileB
         sst=`tail -n 1 $tmpFile` 
-        cd ${fedXPath}
-        rm $cacheLocation
+        cd $fedXPath
+        rm -f  $cacheLocation
         /usr/bin/time -f "$query $sst %e %S %U %P %t %M" timeout ${to} ./cli.sh  -d $newFederationFile -f JSON -folder results @q $queryFileB > $planFile 2> $tmpFile
-        #cat ${fedXPath}/results/results/q_1.json
-        if [ -f "${fedXPath}/results/results/q_1.json" ]; then
-            mv ${fedXPath}/results/results/q_1.json $queryAnswer
+        #cat $fedXPath/results/results/q_1.json
+        if [ -f "$fedXPath/results/results/q_1.json" ]; then
+            mv $fedXPath/results/results/q_1.json $queryAnswer
         else
-            rm $queryAnswer
+            rm -f $queryAnswer
             touch $queryAnswer
         fi
         #echo "query plan"
@@ -88,8 +89,8 @@ if [ "$strategy" = "FEDERATION" ]; then
             x=`less $tmpFile`
             ./processJSONAnswer.sh $queryAnswer $groundTruth > $tmpFile
             y=`less $tmpFile`
-            cd ${lilachome}/code
-            nss=`java -cp ".:${jenaPath}/lib/*" VisitorCountTriples $queryFileB`
+            cd $lilachome/code
+            nss=`java -cp ".:$jenaPath/lib/*" VisitorCountTriples $queryFileB`
             echo "$x $y $nss $ntp $shape"
         else
             echo "$query ERROR"
@@ -102,15 +103,16 @@ if [ "$strategy" = "FEDERATION" ]; then
         else
             planOnly=""
         fi
-        cd ${fedXPath}
+        cd $fedXPath
         source $configFile
-        rm $cacheLocation
-        rm ${fedXPath}/results/results/*
+        rm -f $cacheLocation
+        rm -f $fedXPath/results/results/*
+	echo "./cli.sh $planOnly -c $configFile -d $newFederationFile -f JSON -folder results @q $queryFile > $planFile 2> $tmpFile"
         /usr/bin/time -f "$query %e %S %U %P %t %M" timeout ${to} ./cli.sh $planOnly -c $configFile -d $newFederationFile -f JSON -folder results @q $queryFile > $planFile 2> $tmpFile
-        if [ -f "${fedXPath}/results/results/q_1.json" ]; then
-              mv ${fedXPath}/results/results/q_1.json $queryAnswer
+        if [ -f "$fedXPath/results/results/q_1.json" ]; then
+              mv $fedXPath/results/results/q_1.json $queryAnswer
         else
-              rm $queryAnswer
+              rm -f $queryAnswer
               touch $queryAnswer
         fi
         z=`grep "^ERROR:" $tmpFile`
@@ -137,21 +139,21 @@ if [ "$strategy" = "FEDERATION" ]; then
         fi
     fi
     if [ "$engine" = "ANAPSID11" ] && [ "$action" != "justReplicate" ]; then
-        cd ${lilachome}/code
+        cd $lilachome/code
         source $configFile
-        /usr/bin/time -f "%e %S %U" java -cp ".:${jenaPath}/lib/*" fedra2 $queryFile $FragmentsDefinitionFolder $EndpointsFile $FragmentsSources $Random $queryFileB $availableSources 2> $tmpFile
+        /usr/bin/time -f "%e %S %U" java -cp ".:$jenaPath/lib/*" fedra2 $queryFile $FragmentsDefinitionFolder $EndpointsFile $FragmentsSources $Random $queryFileB $availableSources 2> $tmpFile
         sst=`tail -n 1 $tmpFile`
-        cd ${lilachome}
+        cd $lilachome
         m=`free | awk 'NR==2{printf "%s", $2 }'`
         m=`echo "scale=0; $m*9/10" | bc`
-        (ulimit -m $m; ulimit -v $m; /usr/bin/time -f "$query $sst %e %S %U %P %t %M" timeout -s 12 ${to}s ${anapsidPath}/scripts/run_anapsid -e $newAnapsidFederationFile -q $queryFileB  -s False -p b -o True -d SSGM -a True -w False -r True -f $queryAnswer -k b > $planFile 2> $tmpFile) 
-        #/usr/bin/time -f "$query $sst %e %S %U %P %t %M" timeout -s 12 ${to}s ${anapsidPath}/scripts/run_anapsid -e $newAnapsidFederationFile -q $queryFileB  -s False -p b -o True -d SSGM -a True -w False -r True -f $queryAnswer -k b > $planFile 2> $tmpFile
+        (ulimit -m $m; ulimit -v $m; /usr/bin/time -f "$query $sst %e %S %U %P %t %M" timeout -s 12 ${to}s $anapsidPath/scripts/run_anapsid -e $newAnapsidFederationFile -q $queryFileB  -s False -p b -o True -d SSGM -a True -w False -r True -f $queryAnswer -k b > $planFile 2> $tmpFile) 
+        #/usr/bin/time -f "$query $sst %e %S %U %P %t %M" timeout -s 12 ${to}s $anapsidPath/scripts/run_anapsid -e $newAnapsidFederationFile -q $queryFileB  -s False -p b -o True -d SSGM -a True -w False -r True -f $queryAnswer -k b > $planFile 2> $tmpFile
         x=`less $tmpFile`
-        cd ${lilachome}/scripts
+        cd $lilachome/scripts
         ./processANAPSIDAnswer.sh $queryAnswer $groundTruth > $tmpFile
-        y=`less $tmpFile`
-        cd ${lilachome}/code
-        nss=`java -cp ".:${jenaPath}/lib/*" VisitorCountTriples $planFile`
+        y=`less $tmpFile`        
+        cd $lilachome/code
+        nss=`java -cp ".:$jenaPath/lib/*" VisitorCountTriples $planFile`
         echo "$x $y $nss $ntp $shape"
         cd $p
     fi
@@ -161,19 +163,19 @@ if [ "$strategy" = "FEDERATION" ]; then
         else
           decomposition=b
         fi
-        cd ${lilachome}
+        cd $lilachome
         m=`free | awk 'NR==2{printf "%s", $2 }'`
         m=`echo "scale=0; $m/3.43" | bc`
-        rm $queryAnswer $planFile $tmpFile
-        (ulimit -m $m; ulimit -v $m; /usr/bin/time -f "$query %e %S %U %P %t %M" timeout -s 12 ${to}s ${anapsidPath}/scripts/run_anapsid -e $newAnapsidFederationFile -q $queryFile -c $configFile -s False -p ${decomposition} -o False -d SSGM -a True -w False -r True -f $queryAnswer -k b > $planFile 2> $tmpFile)
+        rm -f $queryAnswer $planFile $tmpFile
+        (ulimit -m $m; ulimit -v $m; /usr/bin/time -f "$query %e %S %U %P %t %M" timeout -s 12 ${to}s $anapsidPath/scripts/run_anapsid -e $newAnapsidFederationFile -q $queryFile -c $configFile -s False -p ${decomposition} -o False -d SSGM -a True -w False -r True -f $queryAnswer -k b > $planFile 2> $tmpFile)
         x=`less $tmpFile`
-        cd ${lilachome}/scripts
+        cd $lilachome/scripts
         ./processANAPSIDAnswer.sh $queryAnswer $groundTruth > $tmpFile
         y=`less $tmpFile`
-        cd ${lilachome}/code
+        cd $lilachome/code
         #echo "planFile: $planFile"
         #cat $planFile
-        nss=`java -cp ".:${jenaPath}/lib/*" VisitorCountTriples $planFile`
+        nss=`java -cp ".:$jenaPath/lib/*" VisitorCountTriples $planFile`
         echo "$x $y $nss $ntp $shape"
         cd $p
     fi 
@@ -191,7 +193,7 @@ if [ "$strategy" = "PUBLIC" ]; then
       x="0 0% 0 0"
 
     else 
-      cd ${fusekiPath}
+      cd $fusekiPath/bin
       /usr/bin/time -f "$query %e %S %U %P %t %M" timeout ${to} ./s-query --service ${publicEndpoint} --file=${queryFile} --output=json > $queryAnswer 2> $tmpFile
       x=`less $tmpFile`
     fi
@@ -201,7 +203,7 @@ if [ "$strategy" = "PUBLIC" ]; then
     echo "$x $y $ntp $shape"
 fi
 if [ "$strategy" = "LOCAL" ]; then
-    cd ${fusekiPath}
+    cd $fusekiPath/bin
     /usr/bin/time -f "$query %e %S %U %P %t %M" timeout ${to} ./s-query --service http://localhost:${localPort}/ds/query --file=${queryFile} --output=json > $queryAnswer 2> $tmpFile
     x=`less $tmpFile`
     cd $p

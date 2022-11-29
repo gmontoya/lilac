@@ -9,7 +9,7 @@ answersFolder=$8
 publicEndpoint=$9
 engine=${10}
 configFile=${11}
-hdtFile=${12}
+federation=${12}
 anapsidFederationFile=${13}
 updatesFile=${14}
 proxyPort=${15}
@@ -18,7 +18,7 @@ address=${17}
 output=${18}
 graph=${19}
 
-${lilachome}/scripts/runAllQueries.sh $strategy $queriesFile "${queries}" $port $ldfServer ${federationFile} $availability $answersFolder $publicEndpoint $engine $configFile $hdtFile $anapsidFederationFile ${updatesFile} ${proxyPort} ${action} ${address} ${graph} > ${output} &
+$lilachome/scripts/runAllQueries.sh $strategy $queriesFile "${queries}" $port $ldfServer ${federationFile} $availability $answersFolder $publicEndpoint $engine $configFile $federation $anapsidFederationFile ${updatesFile} ${proxyPort} ${action} ${address} ${graph} > ${output} &
 pid=$!
 
 echo $pid

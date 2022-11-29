@@ -6,7 +6,7 @@ answer=$3
 
 echo "inside makeQuery: server: $server . query: $query . answer: $answer ."
 
-cd ${fusekiPath}
+cd $fusekiPath/bin
 ./s-query --service $server/ds/query --file=${query} --output=json > $answer
 
 

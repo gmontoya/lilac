@@ -9,7 +9,7 @@ cd ${lilachome}/scripts
 
 for i in `seq 0 9`; do
     port=$(($i+8890))
-    address=`./getHost.sh $folder/hosts $port`
+    address=`${lilachome}/experimentsJoWS2017/getHost.sh $folder/hosts $port`
     host=http://$address
     oarsh $address "${lilachome}/scripts/startOneEndpoint.sh $f $i $host > ${tmpFile}_$i"
 done
