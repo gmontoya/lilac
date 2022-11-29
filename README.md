@@ -31,7 +31,7 @@ Libraries
 Obtaining Libraries
 -------------------
 
-* Set the variable `JAVA\_HOME`, for example:
+* Set the variable `JAVA_HOME`, for example:
 
 `$ export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64`
 
@@ -145,11 +145,11 @@ To execute one query, you can rely on the existing commands from FedX and ANAPSI
 
 `$ cd $fedXPath`
 
-`$ ./cli.sh -c $configFile -d $federationDescriptionFile -f JSON -folder results @q $queryStringFile`
+`$ ./cli.sh -c configFile -d federationDescriptionFile -f JSON -folder results @q queryStringFile`
 
-where $configFile corresponds to a configuration file such as $lilachome/data/diseasomeSetup/confFile with values at least for the parameters: EndpointsFile, FragmentsSources, FragmentsDefinitionFolder, PredicateIndex, SourceSelectionStrategy, Random
+where configFile corresponds to a configuration file such as $lilachome/data/diseasomeSetup/confFile with values at least for the parameters: EndpointsFile, FragmentsSources, FragmentsDefinitionFolder, PredicateIndex, SourceSelectionStrategy, Random
 
-$federationDescriptionFile is a FedX federation description and $queryStringFile is a text file that contains the query to execute
+federationDescriptionFile is a FedX federation description and queryStringFile is a text file that contains the query to execute
 
 About the parameters: 
 
@@ -177,10 +177,10 @@ Random - a boolean value in { true, false } using true allows to possibly select
 
 `$ cd $anapsidPath/scripts`
 
-`$ run_anapsid -e $anapsidFederationDescriptionFile -q $queryStringFile -c $configFile -s False -p ${decomposition} -o False -d SSGM -a True -w False -r True -f $queryAnswer -k b
+`$ run_anapsid -e anapsidFederationDescriptionFile -q queryStringFile -c configFile -s False -p decomposition -o False -d SSGM -a True -w False -r True -f queryAnswer -k b
 
-where $configFile corresponds to a configuration file such as $lilachome/data/diseasomeSetup/confFile with values at least for the parameters: EndpointsFile, FragmentsSources, FragmentsDefinitionFolder, PredicateIndex, SourceSelectionStrategy, Random ( as described above )
+where configFile corresponds to a configuration file such as $lilachome/data/diseasomeSetup/confFile with values at least for the parameters: EndpointsFile, FragmentsSources, FragmentsDefinitionFolder, PredicateIndex, SourceSelectionStrategy, Random ( as described above )
 
-$anapsidFederationDescriptionFile is an anapsid federation description, $queryStringFile is a text file that contains the query to execute, ${decomposition} is either 'd' or 'b', 'd' states that source selection and decomposition is required without the execution and 'b' states for query execution, $queryAnswer is the location where the query answer is stored
+anapsidFederationDescriptionFile is an anapsid federation description, queryStringFile is a text file that contains the query to execute, decomposition is either 'd' or 'b', 'd' states that source selection and decomposition is required without the execution and 'b' states for query execution, queryAnswer is the location where the query answer is stored
 
 
