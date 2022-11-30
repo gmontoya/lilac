@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#suffix=3030
 federations="diseasome swdf watDiv linkedMDB geoCoordinates watDiv100"
 
 # for 64GB available

@@ -1,8 +1,7 @@
 #!/bin/bash
 
 
-federations="imdb"
-#"diseasome swdf watDiv linkedMDB geoCoordinates watDiv100"
+federations="diseasome swdf watDiv linkedMDB geoCoordinates watDiv100"
 
 for federation in ${federations}; do
   ./restartSingleEndpointContainer.sh $federation

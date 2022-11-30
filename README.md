@@ -69,11 +69,11 @@ Compilation
 Endpoints
 ---------
 
-* Virtuoso endpoints can be set up using the scripts:
+* A federation of Virtuoso endpoints can be set up using the scripts:
 
-`$ cd lilachome/scripts`
+`$ cd scripts`
 
-`# creates the dockers for all the federations`
+`# creates the dockers for all the endpoints in the federations`
 
 `$ ./createDockers.sh`
 
@@ -89,29 +89,67 @@ Endpoints
 
 `$ ./loadDataDockers.sh`
 
-* Testing the endpoints have been set up in ports 8890-8899 (for diseasome, a federation with 10 endpoints):
+The endpoints have been set up in ports 8890-8899 (for diseasome, a federation with 10 endpoints)
 
-`# start the endpoints in the federation`
+* Additionally, a Virtuoso endpoint that serves all the triples available in the federation is used in the experiments to compute the completeness of query answers. It can be set up using the scripts:
+
+`$ cd scripts`
+
+`# creates the dockers for all the federations`
+
+`# some values in the script can be changed according to the resources available, e.g., `NumberOfBuffers`, `MaxDirtyBuffers`, `ResultSetMaxRows`
+
+`$ ./createSingleEndpointContainers.sh`
+
+`# uncompress the hdt files ${lilachome}/data/${federation}Setup/federationData.hdt in each federation folder at $lilachome/data/`
+
+`$ ./uncompressFederationData.sh`
+
+`# creates isql files to load the .nt files available as a single endpoint with all the triples in the federation 
+
+`$ ./createLoadFilesSingleEndpoint.sh`
+
+`# loads the data into one endpoint per federation, relies on the dockers and files created by the previous two scripts`
+
+`$ ./loadDataSingleEndpointContainers.sh`
+
+The endpoints have been set up in ports 8900 (for diseasome, a federation with 10 endpoints)
+
+* Testing the endpoints have been set up well
+
+`$ cd scripts`
+
+`# start the endpoints in the federation (federation endpoints)`
 
 `$ ./restartDockers.sh diseasome`
 
-`$ cd $lilachome/lib/apache-jena-2.11.0/bin`
+`# start the single endpoint that contains all the triples the federation`
 
-`# get the predicates of the triples available through endpoint 8890`
+`$ ./restartSingleEndpointContainer.sh diseasome`
+
+`$ cd ../lib/apache-jena-2.11.0/bin`
+
+`# get the predicates of the triples available through one endpoint, e.g., http://localhost:8890/sparql`
 
 `$ ./rsparql --service=http://localhost:8890/sparql "SELECT DISTINCT ?p WHERE { ?s ?p ?o }"`
 
-`# get the number of the triples available through endpoint 8890`
+`# get the number of the triples available through one endpoint, e.g., http://localhost:8890/sparql`
 
 `$ ./rsparql --service=http://localhost:8890/sparql "SELECT (COUNT(*) AS ?c) WHERE { ?s ?p ?o }"`
 
-`# get a sample of the triples available through endpoint 8890`
+`# get a sample of the triples available through one endpoint, e.g., http://localhost:8890/sparql`
 
 `$ ./rsparql --service=http://localhost:8890/sparql "SELECT * WHERE { ?s ?p ?o } LIMIT 10"`
 
-`# stop the endpoints in the federation`
+`# stop the endpoints in the federation (federation endpoints)`
+
+`$ cd ../../../scripts/`
 
 `$ ./stopDockers.sh diseasome`
+
+`# stop the single endpoint that contains all the triples the federation`
+
+`$ ./stopSingleEndpointContainer.sh diseasome`
 
 Experiments
 -----------
@@ -121,6 +159,10 @@ Experiments
 `scripts/testWithIndividualMeasures.sh`
 
 `data/diseasomeSetup/confFile`
+
+`# changing the value of limit can speed up the computation of query answers, but it should be within reasonable limits allowed by the resources available (ResultSetMaxRows) for the endpoint`
+
+`scripts/getCompleteAnswerSingleEndpoint.sh`
 
 * Execute experiments,e.g., for the diseasome federation
 

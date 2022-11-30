@@ -13,10 +13,11 @@ cd $lilachome/scripts
 ./restore.sh $federation
 ./setHosts.sh $federation ${firstProxyPort} ${peProxyPort}
 
-##./setupTest.sh ${federation} ${Federation}
+./setupTest.sh ${federation} ${Federation}
 
 ./restartDockers.sh ${federation}
 
+##echo "./testWithIndividualMeasures.sh ${federation} ${Federation} ${queriesToExecute} \"justExecute\""
 ./testWithIndividualMeasures.sh ${federation} ${Federation} ${queriesToExecute} "justExecute" > outputTestWithIndividualMeasures${Federation}
 
 cd $lilachome/scripts
@@ -25,6 +26,6 @@ cd $lilachome/scripts
 
 #source ${confFile}
 
-##./testWithIndividualMeasures.sh ${federation} ${Federation} ${queriesToExecute} "justSelect" >> outputTestWithIndividualMeasures${Federation}
+./testWithIndividualMeasures.sh ${federation} ${Federation} ${queriesToExecute} "justSelect" >> outputTestWithIndividualMeasures${Federation}
 
 ./stopDockers.sh ${federation}
