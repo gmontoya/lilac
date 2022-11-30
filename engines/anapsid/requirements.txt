@@ -1,4 +1,0 @@
-ply==3.4
-requests
-sparqlwrapper
-rdflib
