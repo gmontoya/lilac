@@ -61,7 +61,7 @@ Compilation
 
 * To compile the code, execute:
 
-`$ cd ${lilachome}/scripts`
+`$ cd lilachome/scripts`
 
 `$ source compile.sh`
 
@@ -70,6 +70,8 @@ Endpoints
 ---------
 
 * Virtuoso endpoints can be set up using the scripts:
+
+`$ cd lilachome/scripts`
 
 `# creates the dockers for all the federations`
 
@@ -87,11 +89,9 @@ Endpoints
 
 `$ ./loadDataDockers.sh`
 
-* Endpoints have been set up in ports 8890-8899 (for a federation with 10 endpoints)
+* Testing the endpoints have been set up in ports 8890-8899 (for diseasome, a federation with 10 endpoints):
 
-* (Shallow) Check that the endpoints have been correctly set:
-
-`# start the federation`
+`# start the endpoints in the federation`
 
 `$ ./restartDockers.sh diseasome`
 
@@ -109,14 +109,14 @@ Endpoints
 
 `$ ./rsparql --service=http://localhost:8890/sparql "SELECT * WHERE { ?s ?p ?o } LIMIT 10"`
 
-`# stop the federation`
+`# stop the endpoints in the federation`
 
 `$ ./stopDockers.sh diseasome`
 
 Experiments
 -----------
 
-`$ cd $lilachome/scripts`
+`$ cd scripts`
 
 * Save the current state of the federations
 
@@ -126,12 +126,13 @@ Experiments
 
 `$ ./useVirtuosoEndpoints.sh`
 
-* Check or update the parameters of the experiment, e.g., for the diseasome federation
+* Check or update the parameters of the experiment, e.g., for the diseasome federation, revise or update the files
 
-`$ vim testWithIndividualMeasures.sh`
-`$ vim $lilachome/data/diseasomeSetup/confFile`
+`scripts/testWithIndividualMeasures.sh`
 
-* Execute experiments with one federation,e.g., for the diseasome federation
+`data/diseasomeSetup/confFile`
+
+* Execute experiments,e.g., for the diseasome federation
 
 `$ ./execute.sh diseasome Diseasome`
 
@@ -143,44 +144,43 @@ To execute one query, you can rely on the existing commands from FedX and ANAPSI
 
 * For FedX and LILAC/Fedra
 
-`$ cd $fedXPath`
+`$ cd engines/fedX`
 
 `$ ./cli.sh -c configFile -d federationDescriptionFile -f JSON -folder results @q queryStringFile`
 
-where configFile corresponds to a configuration file such as $lilachome/data/diseasomeSetup/confFile with values at least for the parameters: EndpointsFile, FragmentsSources, FragmentsDefinitionFolder, PredicateIndex, SourceSelectionStrategy, Random
+where `configFile` corresponds to a configuration file such as `$lilachome/data/diseasomeSetup/confFile` with values at least for the parameters: `EndpointsFile`, `FragmentsSources`, `FragmentsDefinitionFolder`, `PredicateIndex`, `SourceSelectionStrategy`, `Random`  ( as described below )
 
-federationDescriptionFile is a FedX federation description and queryStringFile is a text file that contains the query to execute
-
-About the parameters: 
-
-EndpointsFile - a text file with a line for each fragment that states the endpoints in the federation that have replicated the fragment
-
-An example for the diseasome federation can be found at $lilachome/data/diseasomeSetup/fedraFiles/endpoints
-
-FragmentsSources - a text file with a line for each fragment that state the public endpoint from where it was replicated
-
-An example for the diseasome federation can be found at $lilachome/data/diseasomeSetup/fedraFiles/fragmentsSources
-
-FragmentsDefinitionFolder - a folder that contains one file for each fragment with its description as a CONSTRUCT query
-
-An example for the diseasome federation can be found at $lilachome/data/diseasomeSetup/fedraFiles/fragments
-
-PredicateIndex - a text file with a line for each predicate that states the fragments replicated in the federation that include triples with that predicate
-
-An example for the diseasome federation can be found at $lilachome/data/diseasomeSetup/fedraFiles/predicateIndex
-
-SourceSelectionStrategy - a string with the source selection strategy to use. Supported values: LILAC, Fedra, DAW, engine. engine sets the source selection to FedX's
-
-Random - a boolean value in { true, false } using true allows to possibly select different endpoints to evaluate triple patterns, when multiple candidate endpoints seem to provide the same benefits (e.g., have triples with the same number of relevant predicates
+`federationDescriptionFile` is a FedX federation description (an example can be found at `$lilachome/data/diseasomeSetup/federation.ttl`) and `queryStringFile` is a text file that contains the query to execute
 
 * For ANAPSID and LILAC/Fedra
 
 `$ cd $anapsidPath/scripts`
 
-`$ run_anapsid -e anapsidFederationDescriptionFile -q queryStringFile -c configFile -s False -p decomposition -o False -d SSGM -a True -w False -r True -f queryAnswer -k b
+`$ run_anapsid -e anapsidFederationDescriptionFile -q queryStringFile -c configFile -s False -p decomposition -o False -d SSGM -a True -w False -r True -f queryAnswer -k b`
 
-where configFile corresponds to a configuration file such as $lilachome/data/diseasomeSetup/confFile with values at least for the parameters: EndpointsFile, FragmentsSources, FragmentsDefinitionFolder, PredicateIndex, SourceSelectionStrategy, Random ( as described above )
+where `configFile` corresponds to a configuration file such as `$lilachome/data/diseasomeSetup/confFile` with values at least for the parameters: `EndpointsFile`, `FragmentsSources`, `FragmentsDefinitionFolder`, `PredicateIndex`, `SourceSelectionStrategy`, `Random`  ( as described below )
 
-anapsidFederationDescriptionFile is an anapsid federation description, queryStringFile is a text file that contains the query to execute, decomposition is either 'd' or 'b', 'd' states that source selection and decomposition is required without the execution and 'b' states for query execution, queryAnswer is the location where the query answer is stored
+`anapsidFederationDescriptionFile` is an anapsid federation description (an example can be found at `$lilachome/data/diseasomeSetup/endpointsDescription`), `queryStringFile` is a text file that contains the query to execute, `decomposition` is either `d` or `b`, `d` states that source selection and decomposition is required without the execution and `b` states for query execution, `queryAnswer` is the location where the query answer is stored
 
+* About the parameters in the configuration file 
+
+`EndpointsFile` - a text file with a line for each fragment that states the endpoints in the federation that have replicated the fragment
+
+An example for the diseasome federation can be found at `$lilachome/data/diseasomeSetup/fedraFiles/endpoints`
+
+`FragmentsSources` - a text file with a line for each fragment that state the public endpoint from where it was replicated
+
+An example for the diseasome federation can be found at `$lilachome/data/diseasomeSetup/fedraFiles/fragmentsSources`
+
+`FragmentsDefinitionFolder` - a folder that contains one file for each fragment with its description as a CONSTRUCT query
+
+An example for the diseasome federation can be found at `$lilachome/data/diseasomeSetup/fedraFiles/fragments`
+
+`PredicateIndex` - a text file with a line for each predicate that states the fragments replicated in the federation that include triples with that predicate
+
+An example for the diseasome federation can be found at `$lilachome/data/diseasomeSetup/fedraFiles/predicateIndex`
+
+`SourceSelectionStrategy` - a string with the source selection strategy to use. Supported values: `LILAC`, `Fedra`, `DAW`, `engine`. engine sets the source selection to FedX's
+
+`Random` - a boolean value in { `true`, `false` } using true allows to possibly select different endpoints to evaluate triple patterns, when multiple candidate endpoints seem to provide the same benefits (e.g., have triples with the same number of relevant predicates
 
