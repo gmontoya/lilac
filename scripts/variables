@@ -1,0 +1,13 @@
+lilachome=/home/gmontoya/lilac
+dawIndexGeneratorPath=/home/gmontoya/FedraDawIndex
+dockerEndpointFolder=/home/gmontoya/endpoints
+
+httpcomponentsClientPath=/home/gmontoya/lilac/lib
+fedXPath=/home/gmontoya/lilac/engines/fedX
+anapsidPath=/home/gmontoya/lilac/engines/anapsid
+
+jenaPath=/home/gmontoya/lilac/lib/apache-jena-2.11.0
+fusekiPath=/home/gmontoya/lilac/lib/apache-jena-fuseki-2.6.0
+hdtJavaPath=/home/gmontoya/lilac/lib/hdt-java
+
+variables="dawIndexGeneratorPath dockerEndpointFolder fedXPath jenaPath anapsidPath fusekiPath hdtJavaPath httpcomponentsClientPath lilachome"
