@@ -97,7 +97,7 @@ The endpoints have been set up in ports 8890-8899 (for diseasome, a federation w
 
 `# creates the dockers for all the federations`
 
-`# some values in the script can be changed according to the resources available, e.g., `NumberOfBuffers`, `MaxDirtyBuffers`, `ResultSetMaxRows`
+`# some values in the script can be changed according to the resources available, e.g., NumberOfBuffers, MaxDirtyBuffers, ResultSetMaxRows`
 
 `$ ./createSingleEndpointContainers.sh`
 
@@ -105,7 +105,7 @@ The endpoints have been set up in ports 8890-8899 (for diseasome, a federation w
 
 `$ ./uncompressFederationData.sh`
 
-`# creates isql files to load the .nt files available as a single endpoint with all the triples in the federation 
+`# creates isql files to load the .nt files available as a single endpoint with all the triples in the federation`
 
 `$ ./createLoadFilesSingleEndpoint.sh`
 
@@ -113,7 +113,7 @@ The endpoints have been set up in ports 8890-8899 (for diseasome, a federation w
 
 `$ ./loadDataSingleEndpointContainers.sh`
 
-The endpoints have been set up in ports 8900 (for diseasome, a federation with 10 endpoints)
+The endpoints have been set up with port 8900 (for diseasome, a federation with 10 endpoints)
 
 * Testing the endpoints have been set up well
 
