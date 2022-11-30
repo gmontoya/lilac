@@ -1,6 +1,6 @@
 @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 [] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> sd:Service ;
-sd:endpointUrl <HOST:3130/ds/sparql> 
+sd:endpointUrl <HOST:3130/sparql> 
  ;
   sd:capability [
       sd:predicate <http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/omim> ;
@@ -76,7 +76,7 @@ sd:endpointUrl <HOST:3130/ds/sparql>
 .
 @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 [] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> sd:Service ;
-sd:endpointUrl <HOST:3131/ds/sparql> 
+sd:endpointUrl <HOST:3131/sparql> 
  ;
   sd:capability [
       sd:predicate <http://www.w3.org/2000/01/rdf-schema#label> ;
@@ -184,7 +184,7 @@ sd:endpointUrl <HOST:3131/ds/sparql>
 .
 @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 [] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> sd:Service ;
-sd:endpointUrl <HOST:3132/ds/sparql> 
+sd:endpointUrl <HOST:3132/sparql> 
  ;
   sd:capability [
       sd:predicate <http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/omim> ;
@@ -228,7 +228,7 @@ sd:endpointUrl <HOST:3132/ds/sparql>
 .
 @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 [] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> sd:Service ;
-sd:endpointUrl <HOST:3133/ds/sparql> 
+sd:endpointUrl <HOST:3133/sparql> 
  ;
   sd:capability [
       sd:predicate <http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/hgncId> ;
@@ -256,7 +256,7 @@ sd:endpointUrl <HOST:3133/ds/sparql>
 .
 @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 [] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> sd:Service ;
-sd:endpointUrl <HOST:3134/ds/sparql> 
+sd:endpointUrl <HOST:3134/sparql> 
  ;
   sd:capability [
       sd:predicate <http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/size> ;
@@ -356,7 +356,7 @@ sd:endpointUrl <HOST:3134/ds/sparql>
 .
 @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 [] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> sd:Service ;
-sd:endpointUrl <HOST:3135/ds/sparql> 
+sd:endpointUrl <HOST:3135/sparql> 
  ;
   sd:capability [
       sd:predicate <http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/hgncId> ;
@@ -448,7 +448,7 @@ sd:endpointUrl <HOST:3135/ds/sparql>
 .
 @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 [] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> sd:Service ;
-sd:endpointUrl <HOST:3136/ds/sparql> 
+sd:endpointUrl <HOST:3136/sparql> 
  ;
   sd:capability [
       sd:predicate <http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/hgncId> ;
@@ -524,7 +524,7 @@ sd:endpointUrl <HOST:3136/ds/sparql>
 .
 @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 [] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> sd:Service ;
-sd:endpointUrl <HOST:3137/ds/sparql> 
+sd:endpointUrl <HOST:3137/sparql> 
  ;
   sd:capability [
       sd:predicate <http://www.w3.org/2000/01/rdf-schema#label> ;
@@ -560,7 +560,7 @@ sd:endpointUrl <HOST:3137/ds/sparql>
 .
 @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 [] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> sd:Service ;
-sd:endpointUrl <HOST:3138/ds/sparql> 
+sd:endpointUrl <HOST:3138/sparql> 
  ;
   sd:capability [
       sd:predicate <http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/hgncId> ;
@@ -612,7 +612,7 @@ sd:endpointUrl <HOST:3138/ds/sparql>
 .
 @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 [] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> sd:Service ;
-sd:endpointUrl <HOST:3139/ds/sparql> 
+sd:endpointUrl <HOST:3139/sparql> 
  ;
   sd:capability [
       sd:predicate <http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/size> ;

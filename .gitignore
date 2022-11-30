@@ -1,0 +1,14 @@
+*.class
+data/*Setup/answers/
+data/*Setup/cache.db
+data/*Setup/endpoint*.nt
+data/*Setup/*hdt.index*
+data/*Setup/load*.isql
+data/*Setup/output*
+data/*Setup/queriesToExecute_?
+data/*Setup/queriesToExecute_??
+lib/apache-jena-2.11.0/
+lib/apache-jena-fuseki-2.6.0/
+lib/hdt-java/
+parsetab.py
+scripts/output*
