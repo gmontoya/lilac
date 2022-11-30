@@ -1,0 +1,20 @@
+view1 HOST:3130/sparql HOST:3100/sparql
+view2 HOST:3130/sparql HOST:3100/sparql
+view5 HOST:3136/sparql HOST:3100/sparql
+view7 HOST:3139/sparql HOST:3100/sparql
+view8 HOST:3139/sparql HOST:3100/sparql
+view9 HOST:3134/sparql HOST:3100/sparql
+view10 HOST:3134/sparql HOST:3100/sparql
+view11 HOST:3134/sparql HOST:3100/sparql
+view3 HOST:3136/sparql HOST:3100/sparql HOST:3130/sparql
+view4 HOST:3136/sparql HOST:3100/sparql HOST:3130/sparql
+view13 HOST:3130/sparql HOST:3100/sparql
+view14 HOST:3138/sparql HOST:3100/sparql
+view6 HOST:3131/sparql HOST:3100/sparql HOST:3137/sparql
+view15 HOST:3130/sparql HOST:3100/sparql
+view16 HOST:3138/sparql HOST:3100/sparql
+view17 HOST:3139/sparql HOST:3100/sparql
+view18 HOST:3136/sparql HOST:3100/sparql
+view19 HOST:3138/sparql HOST:3100/sparql
+view20 HOST:3139/sparql HOST:3100/sparql
+view12 HOST:3130/sparql HOST:3100/sparql HOST:3133/sparql

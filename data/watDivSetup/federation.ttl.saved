@@ -1,0 +1,46 @@
+@prefix fluid: <http://fluidops.org/config#>.
+
+<HOST:3100> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "HOST:3100/sparql";
+fluid:supportsASKQueries "false" .
+
+<HOST:3137/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "HOST:3137/sparql";
+fluid:supportsASKQueries "false" .
+
+<HOST:3136/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "HOST:3136/sparql";
+fluid:supportsASKQueries "false" .
+
+<HOST:3130/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "HOST:3130/sparql";
+fluid:supportsASKQueries "false" .
+
+<HOST:3131/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "HOST:3131/sparql";
+fluid:supportsASKQueries "false" .
+
+<HOST:3133/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "HOST:3133/sparql";
+fluid:supportsASKQueries "false" .
+
+<HOST:3135/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "HOST:3135/sparql";
+fluid:supportsASKQueries "false" .
+
+<HOST:3139/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "HOST:3139/sparql";
+fluid:supportsASKQueries "false" .
+
+<HOST:3132/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "HOST:3132/sparql";
+fluid:supportsASKQueries "false" .
+
+<HOST:3134/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "HOST:3134/sparql";
+fluid:supportsASKQueries "false" .
+
+<HOST:3138/ds> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "HOST:3138/sparql";
+fluid:supportsASKQueries "false" .
+

@@ -1,0 +1,9 @@
+<HOST:3100/sparql> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2003/01/geo/wgs84_pos#long> <http://www.georss.org/georss/point> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> .
+<HOST:3131/sparql> <http://www.georss.org/georss/point> . 
+<HOST:3134/sparql> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> <http://www.w3.org/2003/01/geo/wgs84_pos#long> . 
+<HOST:3130/sparql> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> <http://www.w3.org/2003/01/geo/wgs84_pos#long> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.georss.org/georss/point> . 
+<HOST:3137/sparql> <http://www.georss.org/georss/point> . 
+<HOST:3138/sparql> <http://www.georss.org/georss/point> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> . 
+<HOST:3139/sparql> <http://www.w3.org/2003/01/geo/wgs84_pos#long> <http://www.georss.org/georss/point> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> . 
+<HOST:3136/sparql> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2003/01/geo/wgs84_pos#long> <http://www.georss.org/georss/point> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> . 
+<HOST:3133/sparql> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> . 

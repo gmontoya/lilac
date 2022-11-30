@@ -116,16 +116,6 @@ Endpoints
 Experiments
 -----------
 
-`$ cd scripts`
-
-* Save the current state of the federations
-
-`$ ./save.sh`
-
-* Use Virtuoso endpoints
-
-`$ ./useVirtuosoEndpoints.sh`
-
 * Check or update the parameters of the experiment, e.g., for the diseasome federation, revise or update the files
 
 `scripts/testWithIndividualMeasures.sh`
@@ -133,6 +123,8 @@ Experiments
 `data/diseasomeSetup/confFile`
 
 * Execute experiments,e.g., for the diseasome federation
+
+`$ cd scripts`
 
 `$ ./execute.sh diseasome Diseasome`
 
